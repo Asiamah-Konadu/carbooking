@@ -39,7 +39,7 @@ export default function Listings({ searchParams, navigateToDetail, addToast }: L
   // Filters State
   const [selectedType, setSelectedType] = useState<string>(searchParams.serviceType);
   const [cityFilter, setCityFilter] = useState<string>(searchParams.city);
-  const [priceRange, setPriceRange] = useState<number>(1000);
+  const [priceRange, setPriceRange] = useState<number>(6000);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const toggleFavorite = (e: React.MouseEvent, id: string, title: string) => {
@@ -132,7 +132,7 @@ export default function Listings({ searchParams, navigateToDetail, addToast }: L
     if (listing.serviceType === 'HOTEL' && listing.hotelDetails) {
       return (
         <span>
-          <span style={{ color: 'var(--accent-gold)', fontWeight: 800, fontSize: '1.15rem' }}>${listing.hotelDetails.pricePerNight}</span>
+          <span style={{ color: 'var(--accent-gold)', fontWeight: 800, fontSize: '1.15rem' }}>GH₵{listing.hotelDetails.pricePerNight}</span>
           <span style={{ color: 'var(--text-gray)', fontSize: '0.8rem' }}> / night</span>
         </span>
       );
@@ -143,7 +143,7 @@ export default function Listings({ searchParams, navigateToDetail, addToast }: L
       const unit = isRental ? 'day' : 'hour';
       return (
         <span>
-          <span style={{ color: 'var(--accent-gold)', fontWeight: 800, fontSize: '1.15rem' }}>${price}</span>
+          <span style={{ color: 'var(--accent-gold)', fontWeight: 800, fontSize: '1.15rem' }}>GH₵{price}</span>
           <span style={{ color: 'var(--text-gray)', fontSize: '0.8rem' }}> / {unit}</span>
         </span>
       );
@@ -152,7 +152,7 @@ export default function Listings({ searchParams, navigateToDetail, addToast }: L
       return (
         <span>
           <span style={{ color: 'var(--text-white)', fontWeight: 700 }}>{listing.diningDetails.cuisineType}</span>
-          <span style={{ color: 'var(--text-gray)', fontSize: '0.75rem', display: 'block' }}>Avg. ${listing.diningDetails.averageCost} for 2</span>
+          <span style={{ color: 'var(--text-gray)', fontSize: '0.75rem', display: 'block' }}>Avg. GH₵{listing.diningDetails.averageCost} for 2</span>
         </span>
       );
     }
@@ -237,7 +237,7 @@ export default function Listings({ searchParams, navigateToDetail, addToast }: L
             <Search size={15} style={{ position: 'absolute', left: '0.9rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-gray)' }} />
             <input 
               type="text" 
-              placeholder="Search by keywords (e.g. Suite, Ferrari, Tasting)..." 
+              placeholder="Search by keywords (e.g. Kempinski, Land Cruiser, Buka)..." 
               className="input-field" 
               style={{ paddingLeft: '2.4rem', height: '38px', fontSize: '0.88rem' }}
               value={searchQuery}
@@ -252,11 +252,11 @@ export default function Listings({ searchParams, navigateToDetail, addToast }: L
             )}
           </div>
 
-          <div style={{ position: 'relative', width: '160px' }}>
+          <div style={{ position: 'relative', width: '180px' }}>
             <MapPin size={15} style={{ position: 'absolute', left: '0.9rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-gray)' }} />
             <input 
               type="text" 
-              placeholder="Filter City..." 
+              placeholder="Filter City (Accra, Kumasi)..." 
               className="input-field" 
               style={{ paddingLeft: '2.4rem', height: '38px', fontSize: '0.88rem' }}
               value={cityFilter}
@@ -299,13 +299,13 @@ export default function Listings({ searchParams, navigateToDetail, addToast }: L
               <span style={{ color: 'var(--text-gray)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.6px', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <SlidersHorizontal size={14} style={{ color: 'var(--accent-gold)' }} /> Maximum Rate Filter
               </span>
-              <span style={{ color: 'var(--accent-gold)', fontWeight: 800, fontSize: '1rem' }}>${priceRange} / item</span>
+              <span style={{ color: 'var(--accent-gold)', fontWeight: 800, fontSize: '1rem' }}>GH₵{priceRange.toLocaleString()} / item</span>
             </div>
             <input 
               type="range" 
-              min={50} 
-              max={1500} 
-              step={25}
+              min={100} 
+              max={10000} 
+              step={100}
               style={{ accentColor: 'var(--accent-gold)', width: '100%', cursor: 'pointer', height: '6px' }}
               value={priceRange}
               onChange={(e) => setPriceRange(parseInt(e.target.value))}
@@ -334,7 +334,7 @@ export default function Listings({ searchParams, navigateToDetail, addToast }: L
                 <p style={{ color: 'var(--text-gray)', fontSize: '0.9rem', marginBottom: '1.5rem' }}>Try broadening your search keywords, city filter, or increasing the max price.</p>
                 <button 
                   className="btn btn-secondary" 
-                  onClick={() => { setSelectedType('ALL'); setCityFilter(''); setSearchQuery(''); setPriceRange(1500); }}
+                  onClick={() => { setSelectedType('ALL'); setCityFilter(''); setSearchQuery(''); setPriceRange(10000); }}
                 >
                   Reset All Filters
                 </button>
@@ -550,8 +550,8 @@ export default function Listings({ searchParams, navigateToDetail, addToast }: L
                 }}>
                   {getServiceIcon(item.serviceType)}
                   <span style={{ fontSize: '0.78rem', fontWeight: 800, color: isHovered ? 'var(--accent-gold)' : 'var(--text-white)' }}>
-                    {item.serviceType === 'HOTEL' && item.hotelDetails ? `$${item.hotelDetails.pricePerNight}` :
-                     (item.serviceType === 'CAR_RENTAL' || item.serviceType === 'PRIVATE_DRIVER') && item.carDetails ? `$${item.carDetails.pricePerDay || item.carDetails.pricePerHour}` :
+                    {item.serviceType === 'HOTEL' && item.hotelDetails ? `GH₵${item.hotelDetails.pricePerNight}` :
+                     (item.serviceType === 'CAR_RENTAL' || item.serviceType === 'PRIVATE_DRIVER') && item.carDetails ? `GH₵${item.carDetails.pricePerDay || item.carDetails.pricePerHour}` :
                      item.serviceType === 'RESTAURANT' && item.diningDetails ? `Table` : 'Spot'}
                   </span>
                 </div>

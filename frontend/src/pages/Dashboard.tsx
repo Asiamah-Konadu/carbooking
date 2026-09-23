@@ -2,90 +2,90 @@
 const INITIAL_PARTNER_SEED = [
   {
     id: 'usr-3',
-    firstName: 'Marco',
-    lastName: 'Rossi',
-    email: 'partner2@booking.com',
+    firstName: 'Kwame',
+    lastName: 'Asante',
+    email: 'partner.asante@booking.com',
     role: 'PARTNER',
     status: 'PENDING',
     createdAt: '2026-09-21T14:30:00Z',
     application: {
-      companyName: 'Rossi Supercars & Riva Yachting Group Ltd.',
-      registrationNumber: 'MC-984420-VAT',
-      taxId: 'MC-TX-88219',
-      incorporationCountry: 'Monaco',
-      city: 'Monaco',
-      address: 'Quai Antoine 1er, Port Hercule, 98000 Monaco',
-      phone: '+377 98 98 22 00',
-      website: 'https://rossi-marine.mc',
-      category: 'Supercars, Yachts & Private Drivers',
-      portfolioScale: '14 Exotic Supercars & 4 Sunseeker / Riva Yachts',
-      assetValuation: 38500000,
-      coverageZones: ['Monaco', 'Nice Côte d\'Azur', 'Cannes', 'Saint-Tropez'],
-      proposalPitch: 'We provide bespoke yacht charters across the French Riviera and VIP tarmac supercar deliveries with dedicated chauffeurs.',
+      companyName: 'Asante Premium Fleet & Chauffeur Services Ghana Ltd.',
+      registrationNumber: 'GH-RG-2024-119847',
+      taxId: 'GH-TIN-8821944',
+      incorporationCountry: 'Ghana',
+      city: 'Accra',
+      address: '14 Independence Avenue, Ridge, Accra, Greater Accra Region',
+      phone: '+233 30 273 8800',
+      website: 'https://asante-fleet.com.gh',
+      category: 'Luxury Cars & Private Chauffeurs',
+      portfolioScale: '8 BMW X5 xDrive & Mercedes GLE 450, 4 Toyota Land Cruiser V8 Chauffeur Vehicles',
+      assetValuation: 4200000,
+      coverageZones: ['Accra', 'Kumasi', 'Takoradi', 'Cape Coast', 'Tamale'],
+      proposalPitch: 'We provide Ghana\'s premium VIP car rental and chauffeur services featuring BMW xDrive, Mercedes GLE, Toyota Land Cruiser V8, and Toyota Vitz/Yaris for corporate and leisure clients.',
       commercialLicense: {
-        number: 'MON-LUX-2024-8874',
+        number: 'DVLA-GH-FLEET-2024-4421',
         status: 'VERIFIED_ACTIVE',
-        authority: 'Monaco Maritime & Transport Directorate',
+        authority: 'Driver & Vehicle Licensing Authority (DVLA) Ghana',
         expiry: '2028-12-31'
       },
       insurance: {
-        carrier: 'Lloyd\'s of London Marine & Luxury Auto',
-        policyNumber: 'LLD-882194-X',
-        coverageAmount: 50000000,
+        carrier: 'Enterprise Insurance Ghana Ltd.',
+        policyNumber: 'EIG-FLEET-992-2024',
+        coverageAmount: 5000000,
         expiry: '2027-06-30',
         status: 'VALID_ACTIVE'
       },
-      safetyAuditScore: 96,
+      safetyAuditScore: 94,
       riskAssessment: 'LOW RISK (TIER-1 LUXURY ACCREDITED)',
       tierGranted: 'Tier-1 Certified Luxury Partner',
       documents: [
-        { id: 'doc-mc-reg', title: 'Monaco Corporate Registry & Trade License', type: 'PDF', size: '2.4 MB', date: '2026-09-20', verified: true },
-        { id: 'doc-mc-ins', title: 'Lloyd\'s 50M USD Marine & Fleet Liability Binder', type: 'PDF', size: '4.1 MB', date: '2026-09-21', verified: true },
-        { id: 'doc-mc-id', title: 'Managing Director Passport & Biometric KYC', type: 'DOC', size: '1.8 MB', date: '2026-09-20', verified: true }
+        { id: 'doc-gh-reg', title: 'Ghana Registrar General Business Registration Certificate', type: 'PDF', size: '2.1 MB', date: '2026-09-20', verified: true },
+        { id: 'doc-gh-ins', title: 'Enterprise Insurance Comprehensive Fleet Policy', type: 'PDF', size: '3.4 MB', date: '2026-09-21', verified: true },
+        { id: 'doc-gh-id', title: 'Director Ghana Card & NIA Biometric Verification', type: 'DOC', size: '1.5 MB', date: '2026-09-20', verified: true }
       ]
     }
   },
   {
     id: 'usr-5',
-    firstName: 'Lady Victoria',
-    lastName: 'Hamilton',
-    email: 'aviation@booking.com',
+    firstName: 'Akosua',
+    lastName: 'Mensah',
+    email: 'akosua.mensah@booking.com',
     role: 'PARTNER',
     status: 'PENDING',
     createdAt: '2026-09-22T09:15:00Z',
     application: {
-      companyName: 'Mayfair Private Aviation & Helicopter Group Ltd.',
-      registrationNumber: 'GB-88410293',
-      taxId: 'GB-VAT-992144',
-      incorporationCountry: 'United Kingdom',
-      city: 'London (Farnborough)',
-      address: '14 Berkeley Square, Mayfair, London W1J 6BL',
-      phone: '+44 20 7946 0991',
-      website: 'https://mayfair-aviation.co.uk',
-      category: 'Private Aviation & Helicopter Transfers',
-      portfolioScale: '6 Gulfstream G650 Jets & 4 Airbus ACH130 Helicopters',
-      assetValuation: 120000000,
-      coverageZones: ['London', 'Geneva', 'Paris Le Bourget', 'Nice Cote d\'Azur', 'Zurich'],
-      proposalPitch: 'Direct private jet charters and scenic helicopter transfers connecting London, Geneva, and the Alps with Michelin-starred catering on board.',
+      companyName: 'Mensah Luxury Hotels & Suites Ghana Ltd.',
+      registrationNumber: 'GH-RG-2023-004512',
+      taxId: 'GH-TIN-7719022',
+      incorporationCountry: 'Ghana',
+      city: 'Kumasi',
+      address: '3 Prempeh II Street, Adum, Kumasi, Ashanti Region',
+      phone: '+233 32 202 1100',
+      website: 'https://mensah-luxury.com.gh',
+      category: 'Luxury Hotels & Boutique Suites',
+      portfolioScale: '3 Luxury Boutique Hotels — 40 Suites in Kumasi & Accra',
+      assetValuation: 12500000,
+      coverageZones: ['Kumasi', 'Accra', 'Cape Coast'],
+      proposalPitch: 'We operate premium boutique hotels in Kumasi and Accra featuring rooftop pools, spa facilities, fine dining, and bespoke concierge services tailored for high-net-worth Ghanaian and diaspora guests.',
       commercialLicense: {
-        number: 'CAA-AOC-UK-9921',
+        number: 'GTA-HOTEL-2023-0088',
         status: 'VERIFIED_ACTIVE',
-        authority: 'Civil Aviation Authority & EASA',
+        authority: 'Ghana Tourism Authority (GTA)',
         expiry: '2029-03-31'
       },
       insurance: {
-        carrier: 'Allianz Global Corporate Aviation',
-        policyNumber: 'AV-9812-AZ',
-        coverageAmount: 250000000,
+        carrier: 'SIC Insurance Company Ltd. Ghana',
+        policyNumber: 'SIC-HOS-44120-2024',
+        coverageAmount: 15000000,
         expiry: '2028-09-30',
         status: 'VALID_ACTIVE'
       },
-      safetyAuditScore: 99,
+      safetyAuditScore: 97,
       riskAssessment: 'LOW RISK (TIER-1 LUXURY ACCREDITED)',
       tierGranted: 'Tier-1 Certified Luxury Partner',
       documents: [
-        { id: 'doc-uk-aoc', title: 'Air Operator Certificate (AOC-UK-9921)', type: 'PDF', size: '3.8 MB', date: '2026-09-22', verified: true },
-        { id: 'doc-uk-ins', title: 'Allianz 250M USD Aircraft Hull & Liability Binder', type: 'PDF', size: '5.2 MB', date: '2026-09-22', verified: true }
+        { id: 'doc-gh2-gta', title: 'Ghana Tourism Authority Hotel Operating License', type: 'PDF', size: '2.8 MB', date: '2026-09-22', verified: true },
+        { id: 'doc-gh2-ins', title: 'SIC Insurance Property & Liability Master Policy', type: 'PDF', size: '3.9 MB', date: '2026-09-22', verified: true }
       ]
     }
   }
@@ -140,7 +140,7 @@ export default function Dashboard({ user, token, navigateToDetail, addToast }: D
   const [hotelCapacity, setHotelCapacity] = useState('2');
   const [hotelRoomsCount, setHotelRoomsCount] = useState('5');
 
-  const [carType, setCarType] = useState('Porsche 911 GT3');
+  const [carType, setCarType] = useState('Toyota Land Cruiser V8');
   const [driverName, setDriverName] = useState('');
   const [driverLicense, setDriverLicense] = useState('');
   const [carPriceDay, setCarPriceDay] = useState('450');
@@ -578,7 +578,7 @@ export default function Dashboard({ user, token, navigateToDetail, addToast }: D
               <div className="glass" style={{ padding: '4.5rem', textAlign: 'center', borderRadius: 'var(--radius-xl)' }}>
                 <Calendar size={40} style={{ color: 'var(--accent-gold)', margin: '0 auto 1.2rem auto' }} />
                 <h3 style={{ fontSize: '1.3rem', marginBottom: '0.5rem' }}>No reservation schedules active</h3>
-                <p style={{ color: 'var(--text-gray)', marginBottom: '1.8rem', fontSize: '0.95rem' }}>Explore our curated suites, sports rentals, private drivers, and Michelin fine dining.</p>
+                <p style={{ color: 'var(--text-gray)', marginBottom: '1.8rem', fontSize: '0.95rem' }}>Explore Ghana's finest hotels, luxury car rentals, private chauffeurs, and premium dining experiences.</p>
                 <button className="btn btn-primary" onClick={() => window.location.reload()}>
                   <Sparkles size={16} />
                   <span>Explore Luxury Collection</span>
@@ -747,7 +747,7 @@ export default function Dashboard({ user, token, navigateToDetail, addToast }: D
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: '0.8rem' }}>
                   {[
                     { type: 'HOTEL', label: 'Hotel Suite', icon: <Building2 size={16} /> },
-                    { type: 'CAR_RENTAL', label: 'Supercar Rental', icon: <Car size={16} /> },
+                    { type: 'CAR_RENTAL', label: 'Luxury Car Rental', icon: <Car size={16} /> },
                     { type: 'PRIVATE_DRIVER', label: 'VIP Chauffeur', icon: <Crown size={16} /> },
                     { type: 'RESTAURANT', label: 'Gastro Dining', icon: <UtensilsCrossed size={16} /> }
                   ].map(cat => (
@@ -778,26 +778,26 @@ export default function Dashboard({ user, token, navigateToDetail, addToast }: D
 
               <div className="form-group">
                 <label className="form-label">Service Title</label>
-                <input type="text" required placeholder="E.g. Ritz-Carlton Presidential Panorama Suite" className="input-field" value={title} onChange={(e) => setTitle(e.target.value)} />
+                <input type="text" required placeholder="E.g. Kempinski Gold Coast Suite, BMW X5 xDrive Rental..." className="input-field" value={title} onChange={(e) => setTitle(e.target.value)} />
               </div>
 
               <div className="form-group">
                 <label className="form-label">Detailed Space & Feature Description</label>
-                <textarea required placeholder="Highlight panoramic views, private driver qualifications, Michelin chef specialties..." className="input-field" rows={3} value={description} onChange={(e) => setDescription(e.target.value)} />
+                <textarea required placeholder="E.g. Fully equipped Land Cruiser V8 for VIP transfers in Accra, or rooftop suite overlooking the Gulf of Guinea..." className="input-field" rows={3} value={description} onChange={(e) => setDescription(e.target.value)} />
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.2rem' }}>
                 <div className="form-group">
                   <label className="form-label">Street Address</label>
-                  <input type="text" required placeholder="15 Place Vendôme" className="input-field" value={address} onChange={(e) => setAddress(e.target.value)} />
+                  <input type="text" required placeholder="12 Airport Road, East Legon" className="input-field" value={address} onChange={(e) => setAddress(e.target.value)} />
                 </div>
                 <div className="form-group">
                   <label className="form-label">City</label>
-                  <input type="text" required placeholder="Paris" className="input-field" value={city} onChange={(e) => setCity(e.target.value)} />
+                  <input type="text" required placeholder="Accra" className="input-field" value={city} onChange={(e) => setCity(e.target.value)} />
                 </div>
                 <div className="form-group">
                   <label className="form-label">Country</label>
-                  <input type="text" required placeholder="France" className="input-field" value={country} onChange={(e) => setCountry(e.target.value)} />
+                  <input type="text" required placeholder="Ghana" className="input-field" value={country} onChange={(e) => setCountry(e.target.value)} />
                 </div>
               </div>
 
@@ -854,7 +854,18 @@ export default function Dashboard({ user, token, navigateToDetail, addToast }: D
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                     <div className="form-group">
                       <label className="form-label">Vehicle Model & Make</label>
-                      <input type="text" className="input-field" value={carType} onChange={(e) => setCarType(e.target.value)} />
+                      <select className="input-field" value={carType} onChange={(e) => setCarType(e.target.value)}>
+                        <option>Toyota Land Cruiser V8</option>
+                        <option>BMW X5 xDrive40i</option>
+                        <option>BMW X3 xDrive30i</option>
+                        <option>Mercedes-Benz GLE 450</option>
+                        <option>Mercedes-Benz GLC 300</option>
+                        <option>Toyota Vitz (Yaris)</option>
+                        <option>Toyota Camry</option>
+                        <option>Toyota Fortuner</option>
+                        <option>Hyundai Tucson</option>
+                        <option>Other</option>
+                      </select>
                     </div>
                     
                     {serviceType === 'CAR_RENTAL' ? (
@@ -874,11 +885,11 @@ export default function Dashboard({ user, token, navigateToDetail, addToast }: D
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                       <div className="form-group">
                         <label className="form-label">Chauffeur Full Legal Name</label>
-                        <input type="text" required placeholder="Jean-Luc Moreau" className="input-field" value={driverName} onChange={(e) => setDriverName(e.target.value)} />
+                        <input type="text" required placeholder="Kofi Mensah" className="input-field" value={driverName} onChange={(e) => setDriverName(e.target.value)} />
                       </div>
                       <div className="form-group">
                         <label className="form-label">Professional Chauffeur License ID</label>
-                        <input type="text" required placeholder="VTC-987214" className="input-field" value={driverLicense} onChange={(e) => setDriverLicense(e.target.value)} />
+                        <input type="text" required placeholder="DVLA-GH-2024-00812" className="input-field" value={driverLicense} onChange={(e) => setDriverLicense(e.target.value)} />
                       </div>
                     </div>
                   )}
@@ -1069,14 +1080,14 @@ export default function Dashboard({ user, token, navigateToDetail, addToast }: D
                   return comp.includes(q) || name.includes(q) || email.includes(q);
                 }).map((partner) => {
                   const app = partner.application || {
-                    companyName: partner.companyName || `${partner.firstName} Luxury Principal`,
-                    category: 'Supercars, Yachts & Private Drivers',
-                    portfolioScale: 'Multi-Asset Collection',
-                    assetValuation: 38500000,
-                    city: 'Monaco',
-                    incorporationCountry: 'Monaco',
-                    safetyAuditScore: 96,
-                    insurance: { carrier: "Lloyd's of London", coverageAmount: 50000000 }
+                    companyName: partner.companyName || `${partner.firstName} Luxury Fleet Ghana`,
+                    category: 'Executive Chauffeurs & Luxury Fleets',
+                    portfolioScale: 'Premium SUV & Chauffeur Fleet',
+                    assetValuation: 12500000,
+                    city: 'Accra',
+                    incorporationCountry: 'Ghana',
+                    safetyAuditScore: 98,
+                    insurance: { carrier: 'Enterprise Insurance Ghana', coverageAmount: 15000000 }
                   };
 
                   return (
@@ -1188,9 +1199,9 @@ export default function Dashboard({ user, token, navigateToDetail, addToast }: D
                             {selectedReviewPartner.status}
                           </span>
                         </div>
-                        <p style={{ color: 'var(--accent-gold)', fontSize: '0.95rem', fontWeight: 600 }}>{selectedReviewPartner.application?.companyName || 'Rossi Supercars & Riva Yachting Group Ltd.'}</p>
+                        <p style={{ color: 'var(--accent-gold)', fontSize: '0.95rem', fontWeight: 600 }}>{selectedReviewPartner.application?.companyName || 'Asante Premium Fleet & Chauffeur Services Ghana Ltd.'}</p>
                         <p style={{ color: 'var(--text-gray)', fontSize: '0.82rem', marginTop: '0.2rem' }}>
-                          HQ: {selectedReviewPartner.application?.city || 'Monaco'}, {selectedReviewPartner.application?.incorporationCountry || 'Monaco'}
+                          HQ: {selectedReviewPartner.application?.city || 'Accra'}, {selectedReviewPartner.application?.incorporationCountry || 'Ghana'}
                         </p>
                       </div>
                     </div>
@@ -1211,20 +1222,20 @@ export default function Dashboard({ user, token, navigateToDetail, addToast }: D
                     <div className="glass" style={{ padding: '1.4rem', borderRadius: 'var(--radius-md)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.2rem', fontSize: '0.9rem' }}>
                       <div>
                         <span style={{ color: 'var(--text-gray)', fontSize: '0.78rem', display: 'block' }}>Legal Company Name</span>
-                        <strong style={{ color: '#fff' }}>{selectedReviewPartner.application?.companyName || 'Rossi Marine Charters Ltd.'}</strong>
+                        <strong style={{ color: '#fff' }}>{selectedReviewPartner.application?.companyName || 'Asante Premium Fleet & Chauffeur Services Ghana Ltd.'}</strong>
                       </div>
                       <div>
                         <span style={{ color: 'var(--text-gray)', fontSize: '0.78rem', display: 'block' }}>Registration / VAT</span>
-                        <strong style={{ color: '#fff' }}>{selectedReviewPartner.application?.registrationNumber || 'MC-984420-VAT'}</strong>
+                        <strong style={{ color: '#fff' }}>{selectedReviewPartner.application?.registrationNumber || 'GH-CS-89214-2022'}</strong>
                       </div>
                       <div>
                         <span style={{ color: 'var(--text-gray)', fontSize: '0.78rem', display: 'block' }}>Direct Phone</span>
-                        <strong style={{ color: 'var(--accent-gold)' }}>{selectedReviewPartner.application?.phone || '+377 98 98 22 00'}</strong>
+                        <strong style={{ color: 'var(--accent-gold)' }}>{selectedReviewPartner.application?.phone || '+233 24 456 7890'}</strong>
                       </div>
                       <div>
                         <span style={{ color: 'var(--text-gray)', fontSize: '0.78rem', display: 'block' }}>Official Domain</span>
                         <a href={selectedReviewPartner.application?.website || '#'} target="_blank" rel="noreferrer" style={{ color: 'var(--accent-cyan)', textDecoration: 'underline' }}>
-                          {selectedReviewPartner.application?.website || 'https://rossi-marine.mc'}
+                          {selectedReviewPartner.application?.website || 'https://asante-luxury.com.gh'}
                         </a>
                       </div>
                     </div>
@@ -1239,7 +1250,7 @@ export default function Dashboard({ user, token, navigateToDetail, addToast }: D
                       <div style={{ marginBottom: '1rem' }}>
                         <span style={{ color: 'var(--text-gray)', fontSize: '0.78rem', display: 'block', marginBottom: '0.4rem' }}>Coverage Zones</span>
                         <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                          {(selectedReviewPartner.application?.coverageZones || ['Monaco', 'Nice', 'Cannes', 'Saint-Tropez']).map((z: string) => (
+                          {(selectedReviewPartner.application?.coverageZones || ['Accra', 'Airport Residential', 'Cantonments', 'Kumasi', 'Takoradi']).map((z: string) => (
                             <span key={z} className="badge badge-hotel" style={{ fontSize: '0.75rem' }}>{z}</span>
                           ))}
                         </div>
@@ -1247,7 +1258,7 @@ export default function Dashboard({ user, token, navigateToDetail, addToast }: D
                       <div>
                         <span style={{ color: 'var(--text-gray)', fontSize: '0.78rem', display: 'block', marginBottom: '0.4rem' }}>Partnership Pitch</span>
                         <p style={{ color: 'var(--text-gray)', fontSize: '0.88rem', lineHeight: 1.6, background: 'rgba(0,0,0,0.3)', padding: '0.9rem', borderRadius: 'var(--radius-sm)', borderLeft: '3px solid var(--accent-gold)' }}>
-                          "{selectedReviewPartner.application?.proposalPitch || 'We provide bespoke yacht charters and chauffeured exotic supercars for Aether VIP travelers.'}"
+                          "{selectedReviewPartner.application?.proposalPitch || 'We operate Ghana’s premier fleet of chauffeured Land Cruiser V8, BMW xDrive and Mercedes GLE SUVs for VIP delegations, executives and high-profile visitors.'}"
                         </p>
                       </div>
                     </div>
@@ -1262,13 +1273,13 @@ export default function Dashboard({ user, token, navigateToDetail, addToast }: D
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.2rem', marginBottom: '1.2rem' }}>
                         <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.9rem', borderRadius: 'var(--radius-sm)' }}>
                           <span style={{ fontSize: '0.78rem', color: 'var(--text-gray)' }}>Commercial License</span>
-                          <p style={{ fontWeight: 700, color: '#fff', marginTop: '0.2rem' }}>{selectedReviewPartner.application?.commercialLicense?.number || 'MON-LUX-2024-8874'}</p>
+                          <p style={{ fontWeight: 700, color: '#fff', marginTop: '0.2rem' }}>{selectedReviewPartner.application?.commercialLicense?.number || 'DVLA-GH-2024-8874'}</p>
                           <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Verified & Active</span>
                         </div>
                         <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.9rem', borderRadius: 'var(--radius-sm)' }}>
                           <span style={{ fontSize: '0.78rem', color: 'var(--text-gray)' }}>Liability Insurance</span>
-                          <p style={{ fontWeight: 700, color: '#fff', marginTop: '0.2rem' }}>{selectedReviewPartner.application?.insurance?.carrier || "Lloyd's of London"}</p>
-                          <span style={{ fontSize: '0.75rem', color: '#4ade80' }}>$50M Coverage Active</span>
+                          <p style={{ fontWeight: 700, color: '#fff', marginTop: '0.2rem' }}>{selectedReviewPartner.application?.insurance?.carrier || 'Enterprise Insurance Ghana'}</p>
+                          <span style={{ fontSize: '0.75rem', color: '#4ade80' }}>GH₵15M Coverage Active</span>
                         </div>
                       </div>
 
@@ -1290,8 +1301,8 @@ export default function Dashboard({ user, token, navigateToDetail, addToast }: D
                     </h3>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
                       {(selectedReviewPartner.application?.documents || [
-                        { id: 'doc-reg', title: 'Corporate Registration Certificate', type: 'PDF', size: '2.4 MB' },
-                        { id: 'doc-ins', title: "Lloyd's $50M Liability Policy Binder", type: 'PDF', size: '4.1 MB' }
+                        { id: 'doc-reg', title: 'Registrar General Dept Ghana Certificate', type: 'PDF', size: '2.4 MB' },
+                        { id: 'doc-ins', title: 'Enterprise Insurance GH₵15M Fleet Policy Binder', type: 'PDF', size: '4.1 MB' }
                       ]).map((doc: any) => (
                         <div key={doc.id} className="glass" style={{ padding: '0.9rem 1.2rem', borderRadius: 'var(--radius-md)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
@@ -1381,11 +1392,11 @@ export default function Dashboard({ user, token, navigateToDetail, addToast }: D
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.85rem', marginBottom: '1.2rem' }}>
                       <div>
                         <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem', display: 'block' }}>Entity Name</span>
-                        <strong style={{ color: '#fff' }}>{selectedDocPreview.partner?.application?.companyName || 'Rossi Supercars Group Ltd.'}</strong>
+                        <strong style={{ color: '#fff' }}>{selectedDocPreview.partner?.application?.companyName || 'Asante Premium Fleet & Chauffeur Services Ghana Ltd.'}</strong>
                       </div>
                       <div>
                         <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem', display: 'block' }}>Registration Reference</span>
-                        <strong style={{ color: 'var(--accent-gold)', fontFamily: 'monospace' }}>{selectedDocPreview.partner?.application?.registrationNumber || 'MC-984420-VAT'}</strong>
+                        <strong style={{ color: 'var(--accent-gold)', fontFamily: 'monospace' }}>{selectedDocPreview.partner?.application?.registrationNumber || 'GH-CS-89214-2022'}</strong>
                       </div>
                     </div>
 

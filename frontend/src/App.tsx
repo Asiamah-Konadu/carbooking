@@ -287,7 +287,7 @@ export default function App() {
             <span style={{ fontWeight: 800, fontSize: '1.2rem' }}>AetherBooking</span>
           </div>
           <p style={{ color: 'var(--text-gray)', fontSize: '0.88rem', maxWidth: '340px', lineHeight: 1.6 }}>
-            The elite multi-service luxury reservation platform. Book top accommodations, sports car rentals, private chauffeurs, and world-class fine dining.
+            Ghana's #1 luxury booking platform. Reserve premium hotels in Accra &amp; Kumasi, ride in a BMW xDrive or Toyota Land Cruiser V8, and discover the finest dining across Ghana.
           </p>
         </div>
         
@@ -472,7 +472,7 @@ export default function App() {
                     </label>
                     <input 
                       type="tel" 
-                      placeholder="+1 (555) 019-2834"
+                      placeholder="+233 24 000 0000"
                       className="input-field" 
                       value={phoneNumber} 
                       onChange={(e) => setPhoneNumber(e.target.value)} 
@@ -502,7 +502,7 @@ export default function App() {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 700, fontSize: '0.88rem', color: role === 'CUSTOMER' ? 'var(--accent-gold)' : 'var(--text-white)' }}>
                           <UserIcon size={14} /> Traveler / Guest
                         </div>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--text-gray)' }}>Reserve suites, cars & fine dining</span>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--text-gray)' }}>Reserve hotels, chauffeured cars & dining in Ghana</span>
                       </div>
 
                       <div 
@@ -522,7 +522,7 @@ export default function App() {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 700, fontSize: '0.88rem', color: role === 'PARTNER' ? 'var(--accent-cyan)' : 'var(--text-white)' }}>
                           <Briefcase size={14} /> Luxury Partner
                         </div>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--text-gray)' }}>List hotels, chauffeur & gastronomy</span>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--text-gray)' }}>List Ghana hotels, car fleets & gastronomy</span>
                       </div>
                     </div>
                   </div>
@@ -536,7 +536,7 @@ export default function App() {
                 <input 
                   type="email" 
                   required 
-                  placeholder="name@luxury-estate.com"
+                  placeholder="name@company.com.gh"
                   className="input-field" 
                   value={email} 
                   onChange={(e) => setEmail(e.target.value)} 

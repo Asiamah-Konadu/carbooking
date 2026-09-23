@@ -215,7 +215,7 @@ export default function Detail({ listingId, user, token, setPage, triggerAuthMod
   const subtotal = calculateSubtotal();
   const unitsCount = calculateDaysOrHours();
   const serviceFee = subtotal > 0 ? Math.round(subtotal * 0.05) : 0;
-  const vipFee = (subtotal > 0 && includeVipProtection) ? 25 : 0;
+  const vipFee = (subtotal > 0 && includeVipProtection) ? 250 : 0;
   const grandTotal = subtotal + serviceFee + vipFee;
 
   const allImages = listing.images && listing.images.length > 0 ? listing.images : [listing.coverImage];
@@ -386,7 +386,7 @@ export default function Detail({ listingId, user, token, setPage, triggerAuthMod
                   <div style={{ color: 'var(--accent-gold)', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8rem', textTransform: 'uppercase', fontWeight: 700, marginBottom: '0.3rem' }}>
                     <DollarSign size={14} /> Average Cost
                   </div>
-                  <div style={{ fontSize: '1.1rem', fontWeight: 800 }}>${listing.diningDetails.averageCost} for two</div>
+                  <div style={{ fontSize: '1.1rem', fontWeight: 800 }}>GH₵{listing.diningDetails.averageCost} for two</div>
                 </div>
 
                 <div style={{ padding: '1rem', background: 'rgba(255,255,255,0.03)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-glass)' }}>
@@ -445,19 +445,19 @@ export default function Detail({ listingId, user, token, setPage, triggerAuthMod
               <div>
                 {listing.serviceType === 'HOTEL' && (
                   <>
-                    <span style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--text-white)' }}>${listing.hotelDetails?.pricePerNight}</span>
+                    <span style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--text-white)' }}>GH₵{listing.hotelDetails?.pricePerNight}</span>
                     <span style={{ color: 'var(--text-gray)', fontSize: '0.88rem' }}> / night</span>
                   </>
                 )}
                 {listing.serviceType === 'CAR_RENTAL' && (
                   <>
-                    <span style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--text-white)' }}>${listing.carDetails?.pricePerDay}</span>
+                    <span style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--text-white)' }}>GH₵{listing.carDetails?.pricePerDay}</span>
                     <span style={{ color: 'var(--text-gray)', fontSize: '0.88rem' }}> / day</span>
                   </>
                 )}
                 {listing.serviceType === 'PRIVATE_DRIVER' && (
                   <>
-                    <span style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--text-white)' }}>${listing.carDetails?.pricePerHour}</span>
+                    <span style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--text-white)' }}>GH₵{listing.carDetails?.pricePerHour}</span>
                     <span style={{ color: 'var(--text-gray)', fontSize: '0.88rem' }}> / hour</span>
                   </>
                 )}
@@ -575,7 +575,7 @@ export default function Detail({ listingId, user, token, setPage, triggerAuthMod
                     <ShieldCheck size={16} style={{ color: includeVipProtection ? 'var(--accent-gold)' : 'var(--text-gray)' }} />
                     <span style={{ fontSize: '0.82rem', fontWeight: 600 }}>VIP Host Protection & Flex-Cancel</span>
                   </div>
-                  <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--accent-gold)' }}>+$25</span>
+                  <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--accent-gold)' }}>+GH₵250</span>
                 </div>
               )}
 
@@ -592,16 +592,16 @@ export default function Detail({ listingId, user, token, setPage, triggerAuthMod
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: 'var(--text-gray)' }}>
                     <span>Base rate ({unitsCount} {listing.serviceType === 'PRIVATE_DRIVER' ? 'hours' : 'days'})</span>
-                    <span style={{ color: 'var(--text-white)' }}>${subtotal.toFixed(2)}</span>
+                    <span style={{ color: 'var(--text-white)' }}>GH₵{subtotal.toFixed(2)}</span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: 'var(--text-gray)' }}>
                     <span>Service & Security Auditing</span>
-                    <span style={{ color: 'var(--text-white)' }}>${serviceFee.toFixed(2)}</span>
+                    <span style={{ color: 'var(--text-white)' }}>GH₵{serviceFee.toFixed(2)}</span>
                   </div>
                   {includeVipProtection && (
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: 'var(--text-gray)' }}>
                       <span>VIP Concierge Coverage</span>
-                      <span style={{ color: 'var(--text-white)' }}>$25.00</span>
+                      <span style={{ color: 'var(--text-white)' }}>GH₵250.00</span>
                     </div>
                   )}
                   <div style={{
@@ -613,7 +613,7 @@ export default function Detail({ listingId, user, token, setPage, triggerAuthMod
                     marginTop: '0.3rem'
                   }}>
                     <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>Total Est. Subtotal</span>
-                    <span style={{ fontSize: '1.35rem', fontWeight: 900, color: 'var(--accent-gold)' }}>${grandTotal.toFixed(2)}</span>
+                    <span style={{ fontSize: '1.35rem', fontWeight: 900, color: 'var(--accent-gold)' }}>GH₵{grandTotal.toFixed(2)}</span>
                   </div>
                 </div>
               )}
