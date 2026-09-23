@@ -1,8 +1,9 @@
 {
   "name": "booking-platform-root",
   "version": "1.0.0",
-  "description": "Monorepo root for MVP multi-service booking platform",
+  "description": "AETHER - Ultra-Luxury Multi-Service Booking Platform",
   "scripts": {
+    "build": "echo 'Deploying static Aether platform'",
     "install:backend": "npm install --prefix backend",
     "install:frontend": "npm install --prefix frontend",
     "install:all": "npm run install:backend && npm run install:frontend",
