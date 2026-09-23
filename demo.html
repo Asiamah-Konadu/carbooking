@@ -407,70 +407,212 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      height: 80px;
+      height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 3rem;
-      background: rgba(7, 7, 11, 0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      padding: 0 2.5rem;
+      background: rgba(7, 7, 11, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-glass);
+      transition: var(--transition-smooth);
     }
 
     .navbar-brand {
-      font-size: 1.5rem;
+      font-size: 1.45rem;
       font-weight: 800;
       letter-spacing: 1px;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.55rem;
       cursor: pointer;
       text-decoration: none;
       color: var(--text-white);
+      flex-shrink: 0;
     }
 
     .navbar-links {
       display: flex;
-      gap: 1.4rem;
+      gap: 0.5rem;
       align-items: center;
+      margin: 0 0.8rem;
     }
 
     .nav-link {
       color: var(--text-gray);
       text-decoration: none;
       font-weight: 500;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       transition: var(--transition-smooth);
       cursor: pointer;
-      padding: 0.5rem 0.9rem;
+      padding: 0.45rem 0.75rem;
       border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       gap: 0.4rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+      border-bottom: 2px solid transparent;
     }
-    .nav-link:hover, .nav-link.active {
+    .nav-link:hover {
       color: var(--text-white);
       background: rgba(255, 255, 255, 0.06);
     }
     .nav-link.active {
       color: var(--accent-gold);
+      background: rgba(245, 158, 11, 0.08);
       border-bottom: 2px solid var(--accent-gold);
       border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      font-weight: 600;
+    }
+
+    .navbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    /* Mobile Menu Toggle Button */
+    .mobile-menu-btn {
+      display: none;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-glass);
+      color: var(--text-white);
+      padding: 0.5rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-smooth);
+    }
+    .mobile-menu-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+
+    /* Mobile Navigation Drawer */
+    .mobile-nav-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-nav-backdrop.open {
+      display: block;
+      opacity: 1;
+    }
+
+    .mobile-nav-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 320px;
+      max-width: 85vw;
+      height: 100vh;
+      background: #0d0d16;
+      border-left: 1px solid var(--border-glass);
+      z-index: 1001;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -10px 0 35px rgba(0, 0, 0, 0.8);
+      overflow-y: auto;
+    }
+    .mobile-nav-drawer.open {
+      transform: translateX(0);
+    }
+
+    .mobile-nav-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid var(--border-glass);
+    }
+    .mobile-nav-close {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-glass);
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      padding: 0.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-fast);
+    }
+    .mobile-nav-close:hover {
+      color: #fff;
+      background: rgba(239, 68, 68, 0.2);
+      border-color: rgba(239, 68, 68, 0.4);
+    }
+
+    .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 0.8rem;
+      gap: 0.35rem;
+      flex: 1;
+    }
+    .mobile-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.8rem 1rem;
+      color: var(--text-gray);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      transition: var(--transition-fast);
+      cursor: pointer;
+    }
+    .mobile-nav-link i, .mobile-nav-link svg {
+      width: 18px;
+      height: 18px;
+    }
+    .mobile-nav-link:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-white);
+    }
+    .mobile-nav-link.active {
+      background: rgba(245, 158, 11, 0.12);
+      color: var(--accent-gold);
+      font-weight: 600;
+      border-left: 3px solid var(--accent-gold);
+    }
+
+    .mobile-nav-footer {
+      padding: 1.2rem 1.5rem;
+      border-top: 1px solid var(--border-glass);
+      background: rgba(14, 14, 23, 0.6);
     }
 
     /* Quick Persona Testing Bar */
     .persona-bar {
       background: linear-gradient(90deg, #12121f 0%, #1e1b4b 50%, #12121f 100%);
       border-bottom: 1px solid rgba(245, 158, 11, 0.25);
-      padding: 0.45rem 2rem;
-      font-size: 0.8rem;
+      padding: 0.45rem 1.5rem;
+      font-size: 0.78rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 101;
-      gap: 1rem;
-      flex-wrap: wrap;
+      gap: 0.6rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
     }
     .persona-pills {
       display: flex;
@@ -741,13 +883,40 @@
     }
 
     /* Responsive */
+    @media (max-width: 1180px) {
+      .navbar {
+        padding: 0 1.25rem;
+      }
+      .navbar-links {
+        display: none !important;
+      }
+      .mobile-menu-btn {
+        display: inline-flex !important;
+      }
+      #currency-select {
+        display: none;
+      }
+    }
     @media (max-width: 980px) {
-      .navbar { padding: 0 1.5rem; }
-      .navbar-links { gap: 0.8rem; }
       .listings-layout { flex-direction: column; height: auto; }
       .listings-sidebar { width: 100%; }
       .listings-map { width: 100%; height: 350px; }
       .detail-layout { padding: 2rem 1.5rem; }
+    }
+    @media (max-width: 640px) {
+      .navbar {
+        padding: 0 1rem;
+        height: 68px;
+      }
+      .navbar-brand {
+        font-size: 1.25rem;
+      }
+      #nav-user-name, #nav-user-role {
+        display: none;
+      }
+      .persona-bar {
+        padding: 0.4rem 0.8rem;
+      }
     }
   </style>
 </head>
@@ -776,22 +945,22 @@
   <!-- ========================================== -->
   <nav class="navbar">
     <a class="navbar-brand font-serif" onclick="navigateTo('home')">
-      <span style="color: var(--accent-gold); font-size: 1.6rem;">✦</span>
+      <span style="color: var(--accent-gold); font-size: 1.5rem;">✦</span>
       <span>AETHER<span style="color: var(--accent-gold)">.</span></span>
     </a>
     
     <div class="navbar-links">
-      <a class="nav-link active" id="nav-home" onclick="navigateTo('home')"><i data-lucide="compass" style="width:16px;height:16px;"></i> Explore</a>
-      <a class="nav-link" id="nav-stays" onclick="quickFilterService('HOTEL')"><i data-lucide="building" style="width:16px;height:16px;"></i> Stays</a>
-      <a class="nav-link" id="nav-fleet" onclick="quickFilterService('CAR')"><i data-lucide="car" style="width:16px;height:16px;"></i> Fleet & Drivers</a>
-      <a class="nav-link" id="nav-dining" onclick="quickFilterService('RESTAURANT')"><i data-lucide="utensils" style="width:16px;height:16px;"></i> Gastronomy</a>
-      <a class="nav-link" id="nav-yachts" onclick="quickFilterService('YACHT')"><i data-lucide="anchor" style="width:16px;height:16px;"></i> Yachts & Jets</a>
-      <a class="nav-link" id="nav-concierge" onclick="navigateTo('concierge')"><i data-lucide="sparkles" style="width:16px;height:16px;color:var(--accent-gold);"></i> VIP Concierge</a>
-      <a class="nav-link" id="nav-destinations" onclick="navigateTo('destinations')"><i data-lucide="globe" style="width:16px;height:16px;"></i> Destinations</a>
-      <a class="nav-link" id="nav-dashboard" onclick="navigateTo('dashboard')" style="display: none;"><i data-lucide="layout-dashboard" style="width:16px;height:16px;"></i> Dashboard</a>
+      <a class="nav-link active" id="nav-home" onclick="navigateTo('home')"><i data-lucide="compass" style="width:15px;height:15px;"></i> Explore</a>
+      <a class="nav-link" id="nav-stays" onclick="quickFilterService('HOTEL')"><i data-lucide="building" style="width:15px;height:15px;"></i> Stays</a>
+      <a class="nav-link" id="nav-fleet" onclick="quickFilterService('CAR')"><i data-lucide="car" style="width:15px;height:15px;"></i> Fleet & Drivers</a>
+      <a class="nav-link" id="nav-dining" onclick="quickFilterService('RESTAURANT')"><i data-lucide="utensils" style="width:15px;height:15px;"></i> Gastronomy</a>
+      <a class="nav-link" id="nav-yachts" onclick="quickFilterService('YACHT')"><i data-lucide="anchor" style="width:15px;height:15px;"></i> Yachts & Jets</a>
+      <a class="nav-link" id="nav-concierge" onclick="navigateTo('concierge')"><i data-lucide="sparkles" style="width:15px;height:15px;color:var(--accent-gold);"></i> VIP Concierge</a>
+      <a class="nav-link" id="nav-destinations" onclick="navigateTo('destinations')"><i data-lucide="globe" style="width:15px;height:15px;"></i> Destinations</a>
+      <a class="nav-link" id="nav-dashboard" onclick="navigateTo('dashboard')" style="display: none;"><i data-lucide="layout-dashboard" style="width:15px;height:15px;"></i> Dashboard</a>
     </div>
 
-    <div style="display: flex; align-items: center; gap: 1rem;">
+    <div class="navbar-actions">
       <!-- Currency selector -->
       <select id="currency-select" class="input-field" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; width: auto; background: rgba(255,255,255,0.05); border-radius: var(--radius-sm);" onchange="updateCurrency(this.value)">
         <option value="USD">USD ($)</option>
@@ -810,20 +979,87 @@
 
       <div id="auth-logged-section" style="display: none; align-items: center; gap: 0.8rem;">
         <div style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;" onclick="navigateTo('dashboard')">
-          <div style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b, #8b5cf6); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; color: #000;" id="user-avatar-initials">
+          <div style="width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b, #8b5cf6); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.88rem; color: #000;" id="user-avatar-initials">
             U
           </div>
           <div style="display: flex; flex-direction: column; text-align: left;">
-            <span style="font-size: 0.85rem; font-weight: 700; line-height: 1;" id="nav-user-name">Alex Admin</span>
-            <span style="font-size: 0.7rem; color: var(--accent-gold);" id="nav-user-role">ADMIN</span>
+            <span style="font-size: 0.82rem; font-weight: 700; line-height: 1.1;" id="nav-user-name">Alex Admin</span>
+            <span style="font-size: 0.68rem; color: var(--accent-gold);" id="nav-user-role">ADMIN</span>
           </div>
         </div>
-        <button class="btn btn-secondary btn-sm" onclick="logout()" title="Log out">
+        <button class="btn btn-secondary btn-sm" onclick="logout()" title="Log out" style="padding: 0.45rem;">
           <i data-lucide="log-out" style="width:14px;height:14px;"></i>
         </button>
       </div>
+
+      <!-- Mobile Menu Toggle Button -->
+      <button class="mobile-menu-btn" id="mobile-menu-toggle" onclick="toggleMobileNav()" aria-label="Toggle navigation menu">
+        <i data-lucide="menu" id="mobile-menu-icon" style="width: 20px; height: 20px;"></i>
+      </button>
     </div>
   </nav>
+
+  <!-- Mobile Navigation Backdrop & Drawer -->
+  <div class="mobile-nav-backdrop" id="mobile-nav-backdrop" onclick="closeMobileNav()"></div>
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <div class="mobile-nav-header">
+      <div class="navbar-brand font-serif" onclick="navigateTo('home'); closeMobileNav();">
+        <span style="color: var(--accent-gold); font-size: 1.4rem;">✦</span>
+        <span>AETHER<span style="color: var(--accent-gold)">.</span></span>
+      </div>
+      <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close menu">
+        <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+      </button>
+    </div>
+    
+    <div class="mobile-nav-links">
+      <a class="mobile-nav-link active" id="mobile-nav-home" onclick="navigateTo('home'); closeMobileNav();"><i data-lucide="compass"></i> Explore</a>
+      <a class="mobile-nav-link" id="mobile-nav-stays" onclick="quickFilterService('HOTEL'); closeMobileNav();"><i data-lucide="building"></i> Stays</a>
+      <a class="mobile-nav-link" id="mobile-nav-fleet" onclick="quickFilterService('CAR'); closeMobileNav();"><i data-lucide="car"></i> Fleet & Drivers</a>
+      <a class="mobile-nav-link" id="mobile-nav-dining" onclick="quickFilterService('RESTAURANT'); closeMobileNav();"><i data-lucide="utensils"></i> Gastronomy</a>
+      <a class="mobile-nav-link" id="mobile-nav-yachts" onclick="quickFilterService('YACHT'); closeMobileNav();"><i data-lucide="anchor"></i> Yachts & Jets</a>
+      <a class="mobile-nav-link" id="mobile-nav-concierge" onclick="navigateTo('concierge'); closeMobileNav();"><i data-lucide="sparkles" style="color:var(--accent-gold);"></i> VIP Concierge</a>
+      <a class="mobile-nav-link" id="mobile-nav-destinations" onclick="navigateTo('destinations'); closeMobileNav();"><i data-lucide="globe"></i> Destinations</a>
+      <a class="mobile-nav-link" id="mobile-nav-dashboard" onclick="navigateTo('dashboard'); closeMobileNav();" style="display: none;"><i data-lucide="layout-dashboard"></i> Dashboard</a>
+    </div>
+
+    <div class="mobile-nav-footer">
+      <div style="display: flex; flex-direction: column; gap: 0.9rem; width: 100%;">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 0.8rem; border-bottom: 1px solid var(--border-glass);">
+          <span style="font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.4rem;">
+            <i data-lucide="coins" style="width: 15px; height: 15px; color: var(--accent-gold);"></i> Currency
+          </span>
+          <select id="mobile-currency-select" class="input-field" style="padding: 0.4rem 0.8rem; font-size: 0.82rem; width: auto; background: rgba(255,255,255,0.06); border-radius: var(--radius-sm);" onchange="updateCurrency(this.value)">
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="AED">AED (د.إ)</option>
+            <option value="JPY">JPY (¥)</option>
+          </select>
+        </div>
+        
+        <div id="mobile-auth-unlogged">
+          <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="closeMobileNav(); openAuthModal('login');">
+            <i data-lucide="log-in" style="width:16px;height:16px;"></i> Sign In
+          </button>
+        </div>
+        <div id="mobile-auth-logged" style="display: none; flex-direction: column; gap: 0.6rem;">
+          <div style="display: flex; align-items: center; gap: 0.7rem; padding: 0.6rem 0.8rem; background: rgba(255,255,255,0.04); border-radius: var(--radius-sm); cursor: pointer;" onclick="navigateTo('dashboard'); closeMobileNav();">
+            <div style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b, #8b5cf6); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; color: #000;" id="mobile-user-avatar-initials">
+              U
+            </div>
+            <div style="display: flex; flex-direction: column;">
+              <span style="font-size: 0.88rem; font-weight: 700;" id="mobile-nav-user-name">Alex Admin</span>
+              <span style="font-size: 0.7rem; color: var(--accent-gold);" id="mobile-nav-user-role">ADMIN</span>
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;" onclick="closeMobileNav(); logout();">
+            <i data-lucide="log-out" style="width:14px;height:14px;"></i> Sign Out
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ========================================== -->
   <!-- PAGE VIEW: HOME                            -->
@@ -2427,6 +2663,13 @@
       if (endInput) endInput.value = nextWeek.toISOString().split('T')[0];
 
       renderNavigationAuth();
+      if (state.selectedCurrency) {
+        const deskCurr = document.getElementById('currency-select');
+        if (deskCurr) deskCurr.value = state.selectedCurrency;
+        const mobCurr = document.getElementById('mobile-currency-select');
+        if (mobCurr) mobCurr.value = state.selectedCurrency;
+      }
+      syncNavbarActiveState();
       renderFeaturedGrid();
       renderDestinationsGrid();
       applyFilterEngine();
@@ -2437,6 +2680,66 @@
     // ----------------------------------------------------
     // NAVIGATION & ROUTING ENGINE
     // ----------------------------------------------------
+    function syncNavbarActiveState() {
+      document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(l => l.classList.remove('active'));
+      let activeId = '';
+      if (state.currentPage === 'home') {
+        activeId = 'nav-home';
+      } else if (state.currentPage === 'concierge') {
+        activeId = 'nav-concierge';
+      } else if (state.currentPage === 'destinations') {
+        activeId = 'nav-destinations';
+      } else if (state.currentPage === 'dashboard') {
+        activeId = 'nav-dashboard';
+      } else if (state.currentPage === 'listings') {
+        if (state.activeFilterType === 'HOTEL') activeId = 'nav-stays';
+        else if (state.activeFilterType === 'CAR' || state.activeFilterType === 'CAR_RENTAL' || state.activeFilterType === 'PRIVATE_DRIVER') activeId = 'nav-fleet';
+        else if (state.activeFilterType === 'RESTAURANT') activeId = 'nav-dining';
+        else if (state.activeFilterType === 'YACHT') activeId = 'nav-yachts';
+        else activeId = 'nav-home';
+      }
+      if (activeId) {
+        const desk = document.getElementById(activeId);
+        if (desk) desk.classList.add('active');
+        const mob = document.getElementById('mobile-' + activeId);
+        if (mob) mob.classList.add('active');
+      }
+    }
+
+    function toggleMobileNav() {
+      const drawer = document.getElementById('mobile-nav-drawer');
+      if (drawer && drawer.classList.contains('open')) {
+        closeMobileNav();
+      } else {
+        openMobileNav();
+      }
+    }
+
+    function openMobileNav() {
+      const drawer = document.getElementById('mobile-nav-drawer');
+      const backdrop = document.getElementById('mobile-nav-backdrop');
+      if (drawer && backdrop) {
+        drawer.classList.add('open');
+        backdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+
+    function closeMobileNav() {
+      const drawer = document.getElementById('mobile-nav-drawer');
+      const backdrop = document.getElementById('mobile-nav-backdrop');
+      if (drawer && backdrop) {
+        drawer.classList.remove('open');
+        backdrop.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMobileNav();
+    });
+
     function navigateTo(pageId) {
       document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
       const targetPage = document.getElementById('page-' + pageId);
@@ -2446,10 +2749,7 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
-      // Sync active state in navbar
-      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-      const activeNav = document.getElementById('nav-' + pageId);
-      if (activeNav) activeNav.classList.add('active');
+      syncNavbarActiveState();
 
       if (pageId === 'dashboard') {
         renderDashboard();
@@ -2467,14 +2767,16 @@
       // Update filter pills UI
       document.querySelectorAll('.btn-filter-pill').forEach(b => {
         b.className = 'btn btn-secondary btn-sm btn-filter-pill';
-        if (serviceCategory === 'ALL' && b.innerText.includes('All')) b.className = 'btn btn-primary btn-sm btn-filter-pill';
-        if (serviceCategory === 'HOTEL' && b.innerText.includes('Stays')) b.className = 'btn btn-primary btn-sm btn-filter-pill';
-        if (serviceCategory === 'CAR_RENTAL' && b.innerText.includes('Exotic')) b.className = 'btn btn-primary btn-sm btn-filter-pill';
-        if (serviceCategory === 'PRIVATE_DRIVER' && b.innerText.includes('Chauffeur')) b.className = 'btn btn-primary btn-sm btn-filter-pill';
-        if (serviceCategory === 'RESTAURANT' && b.innerText.includes('Gastronomy')) b.className = 'btn btn-primary btn-sm btn-filter-pill';
-        if (serviceCategory === 'YACHT' && b.innerText.includes('Yachts')) b.className = 'btn btn-primary btn-sm btn-filter-pill';
+        const txt = b.innerText.toLowerCase();
+        if (serviceCategory === 'ALL' && txt.includes('all')) b.className = 'btn btn-primary btn-sm btn-filter-pill';
+        if (serviceCategory === 'HOTEL' && txt.includes('stay')) b.className = 'btn btn-primary btn-sm btn-filter-pill';
+        if ((serviceCategory === 'CAR' || serviceCategory === 'CAR_RENTAL') && txt.includes('exotic')) b.className = 'btn btn-primary btn-sm btn-filter-pill';
+        if ((serviceCategory === 'CAR' || serviceCategory === 'PRIVATE_DRIVER') && txt.includes('chauffeur')) b.className = 'btn btn-primary btn-sm btn-filter-pill';
+        if (serviceCategory === 'RESTAURANT' && txt.includes('gastronomy')) b.className = 'btn btn-primary btn-sm btn-filter-pill';
+        if (serviceCategory === 'YACHT' && txt.includes('yacht')) b.className = 'btn btn-primary btn-sm btn-filter-pill';
       });
 
+      syncNavbarActiveState();
       applyFilterEngine();
     }
 
@@ -2490,6 +2792,10 @@
     // ----------------------------------------------------
     function updateCurrency(currencyCode) {
       state.selectedCurrency = currencyCode;
+      const deskCurr = document.getElementById('currency-select');
+      if (deskCurr && deskCurr.value !== currencyCode) deskCurr.value = currencyCode;
+      const mobCurr = document.getElementById('mobile-currency-select');
+      if (mobCurr && mobCurr.value !== currencyCode) mobCurr.value = currencyCode;
       saveState();
       renderFeaturedGrid();
       applyFilterEngine();
@@ -2521,6 +2827,7 @@
         b.className = 'btn btn-secondary btn-sm btn-filter-pill';
       });
       btn.className = 'btn btn-primary btn-sm btn-filter-pill';
+      syncNavbarActiveState();
       applyFilterEngine();
     }
 
@@ -2531,6 +2838,7 @@
       document.getElementById('list-city-input').value = city;
       
       navigateTo('listings');
+      syncNavbarActiveState();
       applyFilterEngine();
     }
 
@@ -4383,18 +4691,44 @@
       const logged = document.getElementById('auth-logged-section');
       const dashNav = document.getElementById('nav-dashboard');
 
-      if (state.currentUser) {
-        unlogged.style.display = 'none';
-        logged.style.display = 'flex';
-        dashNav.style.display = 'flex';
+      const mobileUnlogged = document.getElementById('mobile-auth-unlogged');
+      const mobileLogged = document.getElementById('mobile-auth-logged');
+      const mobileDashNav = document.getElementById('mobile-nav-dashboard');
 
-        document.getElementById('nav-user-name').innerText = `${state.currentUser.firstName} ${state.currentUser.lastName}`;
-        document.getElementById('nav-user-role').innerText = state.currentUser.role;
-        document.getElementById('user-avatar-initials').innerText = state.currentUser.avatar || state.currentUser.firstName[0];
+      if (state.currentUser) {
+        if (unlogged) unlogged.style.display = 'none';
+        if (logged) logged.style.display = 'flex';
+        if (dashNav) dashNav.style.display = 'flex';
+
+        if (mobileUnlogged) mobileUnlogged.style.display = 'none';
+        if (mobileLogged) mobileLogged.style.display = 'flex';
+        if (mobileDashNav) mobileDashNav.style.display = 'flex';
+
+        const fullName = `${state.currentUser.firstName} ${state.currentUser.lastName}`;
+        const avatar = state.currentUser.avatar || state.currentUser.firstName[0];
+        const role = state.currentUser.role;
+
+        const navName = document.getElementById('nav-user-name');
+        if (navName) navName.innerText = fullName;
+        const navRole = document.getElementById('nav-user-role');
+        if (navRole) navRole.innerText = role;
+        const navAvatar = document.getElementById('user-avatar-initials');
+        if (navAvatar) navAvatar.innerText = avatar;
+
+        const mobName = document.getElementById('mobile-nav-user-name');
+        if (mobName) mobName.innerText = fullName;
+        const mobRole = document.getElementById('mobile-nav-user-role');
+        if (mobRole) mobRole.innerText = role;
+        const mobAvatar = document.getElementById('mobile-user-avatar-initials');
+        if (mobAvatar) mobAvatar.innerText = avatar;
       } else {
-        unlogged.style.display = 'block';
-        logged.style.display = 'none';
-        dashNav.style.display = 'none';
+        if (unlogged) unlogged.style.display = 'block';
+        if (logged) logged.style.display = 'none';
+        if (dashNav) dashNav.style.display = 'none';
+
+        if (mobileUnlogged) mobileUnlogged.style.display = 'block';
+        if (mobileLogged) mobileLogged.style.display = 'none';
+        if (mobileDashNav) mobileDashNav.style.display = 'none';
       }
 
       // Sync persona pills active state

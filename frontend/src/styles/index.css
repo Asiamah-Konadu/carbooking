@@ -204,6 +204,7 @@ body {
   gap: 0.6rem;
   cursor: pointer;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
 .navbar-links {
@@ -225,6 +226,8 @@ body {
   padding: 0.55rem 1.1rem;
   border-radius: var(--radius-md);
   border: 1px solid transparent;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav-link:hover {
