@@ -11,6 +11,34 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
+  
+  <!-- Firebase SDK & Analytics -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCnzUPneU1bcZUK0POYSpy7j0F48hdW1Hk",
+      authDomain: "carbooking-ad206.firebaseapp.com",
+      projectId: "carbooking-ad206",
+      storageBucket: "carbooking-ad206.firebasestorage.app",
+      messagingSenderId: "929502672873",
+      appId: "1:929502672873:web:9f0767e664b7f5099d3d78",
+      measurementId: "G-Y4XR524TV3"
+    };
+
+    try {
+      const app = initializeApp(firebaseConfig);
+      window.firebaseApp = app;
+      isSupported().then(supported => {
+        if (supported) window.firebaseAnalytics = getAnalytics(app);
+      });
+      console.log('✦ Firebase connected successfully to carbooking-ad206');
+    } catch (err) {
+      console.warn('Firebase init:', err);
+    }
+  </script>
+
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -302,6 +330,76 @@
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    
+    /* Master Admin KYC Dossier & Review Styles */
+    .kyc-stat-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      text-align: center;
+      transition: var(--transition-fast);
+    }
+    .kyc-stat-pill:hover {
+      border-color: var(--border-gold);
+      background: rgba(245, 158, 11, 0.05);
+    }
+    .doc-tile {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: var(--transition-fast);
+    }
+    .doc-tile:hover {
+      border-color: var(--accent-gold);
+      background: rgba(245, 158, 11, 0.06);
+    }
+    .cert-frame {
+      border: 2px solid var(--accent-gold);
+      box-shadow: 0 0 35px rgba(245, 158, 11, 0.2), inset 0 0 30px rgba(0, 0, 0, 0.8);
+      background: radial-gradient(circle at 50% 30%, #151522 0%, #08080f 100%);
+      padding: 2.5rem;
+      border-radius: var(--radius-lg);
+      position: relative;
+    }
+    .cert-seal {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      border: 2px dashed var(--accent-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      background: rgba(245, 158, 11, 0.1);
+      font-weight: 800;
+      font-size: 0.75rem;
+      text-align: center;
+      text-transform: uppercase;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+    }
+    .admin-filter-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-glass);
+      color: var(--text-gray);
+      padding: 0.4rem 0.9rem;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    .admin-filter-pill:hover, .admin-filter-pill.active {
+      background: var(--accent-gold);
+      color: #000;
+      border-color: var(--accent-gold);
+      font-weight: 700;
     }
 
     /* Navigation Bar */
@@ -1267,6 +1365,7 @@
       <div class="badge badge-approved" id="auth-success-badge" style="width: 100%; padding: 0.8rem; margin-bottom: 1.2rem; border-radius: var(--radius-sm); display: none;"></div>
 
       <form onsubmit="handleAuthSubmit(event)">
+        
         <!-- Register fields -->
         <div id="register-fields-group" style="display: none;">
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
@@ -1279,6 +1378,79 @@
               <input type="text" id="auth-lastname" class="input-field" placeholder="Sterling">
             </div>
           </div>
+          
+          <div class="form-group">
+            <label class="form-label">Account Privilege Tier</label>
+            <select id="auth-role" class="input-field" onchange="togglePartnerRegistrationFields(this.value)">
+              <option value="CUSTOMER">Customer (Book villas, chauffeurs & tables)</option>
+              <option value="PARTNER">Partner / Asset Owner (List hotels, cars & services)</option>
+            </select>
+          </div>
+
+          <!-- Partner Extended KYC Application Subform -->
+          <div id="partner-registration-fields" style="display: none; background: rgba(245, 158, 11, 0.04); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: var(--radius-md); padding: 1.2rem; margin-bottom: 1.2rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--accent-gold); font-weight: 700; font-size: 0.9rem; margin-bottom: 0.8rem;">
+              <i data-lucide="shield-check" style="width:16px;height:16px;"></i> Luxury Partner KYC Application Dossier
+            </div>
+            <p style="color: var(--text-gray); font-size: 0.8rem; margin-bottom: 1rem; line-height: 1.4;">
+              All partner accounts undergo mandatory regulatory audit by the Master Admin desk before asset activation.
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem;">
+              <div class="form-group">
+                <label class="form-label" style="font-size: 0.78rem;">Company Legal Entity Name</label>
+                <input type="text" id="auth-partner-company" class="input-field" placeholder="E.g. Rossi Luxury Marine SARL">
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size: 0.78rem;">Direct Business Phone</label>
+                <input type="text" id="auth-partner-phone" class="input-field" placeholder="+377 98 98 22 00">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem;">
+              <div class="form-group">
+                <label class="form-label" style="font-size: 0.78rem;">Primary Luxury Category</label>
+                <select id="auth-partner-category" class="input-field" style="font-size: 0.82rem;">
+                  <option value="Supercars, Yachts & Private Drivers">Supercars, Yachts & Private Drivers</option>
+                  <option value="Private Aviation & Helicopter Transfers">Private Aviation & Helicopter Transfers</option>
+                  <option value="Luxury Stays & Heritage Châteaux">Luxury Stays & Heritage Châteaux</option>
+                  <option value="Michelin Gastronomy & Estate Chefs">Michelin Gastronomy & Estate Chefs</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size: 0.78rem;">Operating Coverage Zones</label>
+                <input type="text" id="auth-partner-regions" class="input-field" placeholder="Monaco, Cannes, Nice, Paris">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem;">
+              <div class="form-group">
+                <label class="form-label" style="font-size: 0.78rem;">Portfolio Size & Scale</label>
+                <input type="text" id="auth-partner-scale" class="input-field" placeholder="E.g. 14 Supercars & 4 Yachts">
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size: 0.78rem;">Est. Asset Portfolio Valuation ($)</label>
+                <input type="number" id="auth-partner-valuation" class="input-field" placeholder="38500000">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem;">
+              <div class="form-group">
+                <label class="form-label" style="font-size: 0.78rem;">Commercial Operator License #</label>
+                <input type="text" id="auth-partner-license" class="input-field" placeholder="MON-LUX-2024-8874">
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size: 0.78rem;">Commercial Insurance Carrier</label>
+                <input type="text" id="auth-partner-insurance" class="input-field" placeholder="Lloyd's of London ($50M Liability)">
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" style="font-size: 0.78rem;">Partnership Proposal & Experience Pitch</label>
+              <textarea id="auth-partner-pitch" class="input-field" rows="2" style="font-size: 0.82rem;" placeholder="Describe your high-end fleet, private captains, or luxury services standard..."></textarea>
+            </div>
+          </div>
+        </div>
           
           <div class="form-group">
             <label class="form-label">Account Privilege Tier</label>
@@ -1346,6 +1518,245 @@
           <i data-lucide="download" style="width:15px;height:15px;"></i> Export PDF
         </button>
       </div>
+    </div>
+  </div>
+
+  
+  <!-- ========================================== -->
+  <!-- MASTER ADMIN PARTNER APPLICATION REVIEW    -->
+  <!-- ========================================== -->
+  <div class="modal-overlay" id="partner-review-modal" style="display: none; z-index: 1050;">
+    <div class="modal-content glass-heavy" style="max-width: 980px; max-height: 92vh; overflow-y: auto; padding: 2.5rem; text-align: left;">
+      <button class="close-btn" onclick="closePartnerReviewModal()">&times;</button>
+      
+      <!-- Dossier Header -->
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 1.5rem; flex-wrap: wrap; gap: 1.2rem;">
+        <div style="display: flex; gap: 1.2rem; align-items: center;">
+          <div style="width: 58px; height: 58px; border-radius: var(--radius-md); background: linear-gradient(135deg, #f59e0b, #ec4899); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; color: #000;" id="rev-applicant-avatar">
+            MR
+          </div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.2rem; flex-wrap: wrap;">
+              <h2 class="font-serif" style="font-size: 1.7rem; font-weight: 800;" id="rev-applicant-name">Marco Rossi</h2>
+              <span class="badge badge-pending" id="rev-status-badge">PENDING KYC AUDIT</span>
+              <span class="badge" style="background: rgba(14, 165, 233, 0.15); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.3);" id="rev-category-badge">Supercars & Yachts</span>
+            </div>
+            <p style="color: var(--accent-gold); font-size: 0.95rem; font-weight: 600;" id="rev-company-title">Rossi Supercars & Riva Yachting Group Ltd.</p>
+            <p style="color: var(--text-gray); font-size: 0.82rem; margin-top: 0.2rem;" id="rev-submission-meta">Submitted: Sep 21, 2026 • Port Hercule, Monaco 🇲🇨</p>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem;">
+          <span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); font-size: 0.85rem;" id="rev-risk-score">
+            🛡️ Compliance Score: 96/100 (Low Risk)
+          </span>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">Tier-1 Escrow Protocol Eligible</span>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Strip -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+        <div class="kyc-stat-pill">
+          <span style="font-size: 0.72rem; color: var(--text-gray); font-weight: 700; text-transform: uppercase;">Operating HQ</span>
+          <h4 style="font-size: 1.05rem; font-weight: 800; color: #fff; margin-top: 0.3rem;" id="rev-kpi-hq">Monaco 🇲🇨</h4>
+        </div>
+        <div class="kyc-stat-pill">
+          <span style="font-size: 0.72rem; color: var(--text-gray); font-weight: 700; text-transform: uppercase;">Portfolio Scale</span>
+          <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--accent-gold); margin-top: 0.3rem;" id="rev-kpi-scale">14 Supercars & 4 Yachts</h4>
+        </div>
+        <div class="kyc-stat-pill">
+          <span style="font-size: 0.72rem; color: var(--text-gray); font-weight: 700; text-transform: uppercase;">Asset Valuation</span>
+          <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--accent-cyan); margin-top: 0.3rem;" id="rev-kpi-valuation">$38,500,000</h4>
+        </div>
+        <div class="kyc-stat-pill">
+          <span style="font-size: 0.72rem; color: var(--text-gray); font-weight: 700; text-transform: uppercase;">Liability Insurance</span>
+          <h4 style="font-size: 1.05rem; font-weight: 800; color: #4ade80; margin-top: 0.3rem;" id="rev-kpi-insurance">$50M Lloyd's</h4>
+        </div>
+      </div>
+
+      <!-- Section 1: Executive & Company Profile -->
+      <div style="margin-bottom: 2rem;">
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <i data-lucide="building-2" style="width: 18px; height: 18px; color: var(--accent-gold);"></i> 1. Corporate Entity & Representative Information
+        </h3>
+        <div class="glass" style="padding: 1.5rem; border-radius: var(--radius-md); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; font-size: 0.9rem;">
+          <div>
+            <span style="color: var(--text-gray); font-size: 0.8rem; display: block;">Legal Company Name</span>
+            <strong style="color: #fff;" id="rev-legal-name">Rossi Supercars & Riva Yachting Group Ltd.</strong>
+          </div>
+          <div>
+            <span style="color: var(--text-gray); font-size: 0.8rem; display: block;">Registration / VAT Number</span>
+            <strong style="color: #fff;" id="rev-reg-num">MC-984420-VAT</strong>
+          </div>
+          <div>
+            <span style="color: var(--text-gray); font-size: 0.8rem; display: block;">Tax Identification</span>
+            <strong style="color: #fff;" id="rev-tax-id">MC-TX-88219</strong>
+          </div>
+          <div>
+            <span style="color: var(--text-gray); font-size: 0.8rem; display: block;">Authorized Representative & Title</span>
+            <strong style="color: #fff;" id="rev-rep-name">Marco Rossi (Managing Director)</strong>
+          </div>
+          <div>
+            <span style="color: var(--text-gray); font-size: 0.8rem; display: block;">Direct Contact Phone</span>
+            <strong style="color: var(--accent-gold);" id="rev-rep-phone">+377 98 98 22 00</strong>
+          </div>
+          <div>
+            <span style="color: var(--text-gray); font-size: 0.8rem; display: block;">Official Domain / Portal</span>
+            <a href="https://rossi-marine.mc" target="_blank" style="color: var(--accent-cyan); text-decoration: underline;" id="rev-rep-web">https://rossi-marine.mc</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Operations Scope & Proposal -->
+      <div style="margin-bottom: 2rem;">
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <i data-lucide="map-pin" style="width: 18px; height: 18px; color: var(--accent-cyan);"></i> 2. Operational Scope & Service Regions
+        </h3>
+        <div class="glass" style="padding: 1.5rem; border-radius: var(--radius-md);">
+          <div style="margin-bottom: 1rem;">
+            <span style="color: var(--text-gray); font-size: 0.8rem; display: block; margin-bottom: 0.4rem;">Coverage Zones</span>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;" id="rev-coverage-pills">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+          <div>
+            <span style="color: var(--text-gray); font-size: 0.8rem; display: block; margin-bottom: 0.4rem;">Partnership Proposal & Standards Pitch</span>
+            <p style="color: var(--text-gray); line-height: 1.6; font-size: 0.92rem; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: var(--radius-sm); border-left: 3px solid var(--accent-gold);" id="rev-proposal-text">
+              <!-- Rendered via JS -->
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Regulatory Compliance, Insurance & 5-Point KYC Verification -->
+      <div style="margin-bottom: 2rem;">
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <i data-lucide="shield-check" style="width: 18px; height: 18px; color: #4ade80;"></i> 3. Regulatory Compliance & 5-Point KYC Audit Checklist
+        </h3>
+        <div class="glass" style="padding: 1.5rem; border-radius: var(--radius-md);">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.5rem;">
+            <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: var(--radius-sm);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                <span style="font-size: 0.8rem; color: var(--text-gray);">Commercial Operator License</span>
+                <span class="badge badge-approved" style="font-size: 0.7rem;">VERIFIED ACTIVE</span>
+              </div>
+              <p style="font-weight: 700; font-size: 0.95rem; color: #fff;" id="rev-license-num">MON-LUX-2024-8874</p>
+              <span style="font-size: 0.78rem; color: var(--text-muted);" id="rev-license-auth">Monaco Maritime & Transport Directorate • Expires Dec 2028</span>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: var(--radius-sm);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                <span style="font-size: 0.8rem; color: var(--text-gray);">Commercial Liability Policy</span>
+                <span class="badge badge-approved" style="font-size: 0.7rem;">ACTIVE COVERAGE</span>
+              </div>
+              <p style="font-weight: 700; font-size: 0.95rem; color: #fff;" id="rev-insurance-policy">Lloyd's of London (Policy #LLD-882194-X)</p>
+              <span style="font-size: 0.78rem; color: var(--text-muted);" id="rev-insurance-amt">$50,000,000 Global Liability • Valid to June 2027</span>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #4ade80;">
+              <i data-lucide="check-circle-2" style="width:16px;height:16px;"></i> Director Biometric ID Verified
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #4ade80;">
+              <i data-lucide="check-circle-2" style="width:16px;height:16px;"></i> Corporate Registry Verified
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #4ade80;">
+              <i data-lucide="check-circle-2" style="width:16px;height:16px;"></i> Commercial Insurance Active
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #4ade80;">
+              <i data-lucide="check-circle-2" style="width:16px;height:16px;"></i> Bank Escrow Payout Vetted
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #4ade80;">
+              <i data-lucide="check-circle-2" style="width:16px;height:16px;"></i> Global Sanctions List Clear
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: Verified Document Dossier & Evidence -->
+      <div style="margin-bottom: 2rem;">
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <i data-lucide="file-text" style="width: 18px; height: 18px; color: var(--accent-gold);"></i> 4. Verified Document Dossier & Evidence
+        </h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;" id="rev-docs-grid">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- Section 5: Master Admin Decision Console -->
+      <div class="glass" style="padding: 1.8rem; border-radius: var(--radius-lg); border: 1px solid rgba(245,158,11,0.3); background: rgba(245,158,11,0.03);">
+        <h3 class="font-serif gradient-gold-text" style="font-size: 1.3rem; margin-bottom: 0.5rem;">Master Admin Decision Console</h3>
+        <p style="color: var(--text-gray); font-size: 0.88rem; margin-bottom: 1.2rem;">
+          Assign luxury accreditation tier, record internal compliance audit notes, and execute administrative disposition.
+        </p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem;">
+          <div class="form-group">
+            <label class="form-label">Accreditation Privilege Tier</label>
+            <select id="rev-tier-select" class="input-field">
+              <option value="Tier-1 Certified Luxury Partner">Tier-1 Certified Luxury Partner (Full Escrow & Priority Placement)</option>
+              <option value="VIP Asset Provider">VIP Asset Provider (Verified Fleet & Stays)</option>
+              <option value="Standard Verified Partner">Standard Verified Partner</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Safety & Security Audit Rating</label>
+            <input type="text" id="rev-audit-score-input" class="input-field" value="96/100 • LOW RISK • AUDIT PASS">
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label class="form-label">Internal Compliance & Review Notes</label>
+          <textarea id="rev-admin-notes" class="input-field" rows="3" placeholder="Enter confidential auditor notes, insurance verification confirmation, or special terms..."></textarea>
+        </div>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: flex-end;">
+          <button class="btn btn-secondary" onclick="executeAdminPartnerAction('REQUEST_INFO')" style="color: #fbbf24;">
+            <i data-lucide="help-circle" style="width: 15px; height: 15px;"></i> Request Additional Info
+          </button>
+          <button class="btn btn-danger" onclick="executeAdminPartnerAction('REJECTED')">
+            <i data-lucide="x-circle" style="width: 15px; height: 15px;"></i> Reject Application
+          </button>
+          <button class="btn btn-primary" onclick="executeAdminPartnerAction('APPROVED')" style="padding: 0.8rem 1.8rem;">
+            <i data-lucide="shield-check" style="width: 16px; height: 16px;"></i> Approve & Grant Partner Accreditation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- DOCUMENT PROOF CERTIFICATE PREVIEW MODAL   -->
+  <!-- ========================================== -->
+  <div class="modal-overlay" id="doc-preview-modal" style="display: none; z-index: 1200;">
+    <div class="modal-content glass-heavy" style="max-width: 680px; text-align: left; padding: 2.5rem; position: relative;">
+      <button class="close-btn" onclick="closeDocPreviewModal()">&times;</button>
+      
+      <div id="doc-preview-certificate" class="cert-frame">
+        <!-- Rendered via JS -->
+      </div>
+      
+      <div style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <span style="font-size: 0.8rem; color: #4ade80; display: flex; align-items: center; gap: 0.4rem;">
+          <i data-lucide="shield-check" style="width:14px;height:14px;"></i> Authenticated Cryptographic Signature SHA-256
+        </span>
+        <div style="display: flex; gap: 0.8rem;">
+          <button class="btn btn-secondary btn-sm" onclick="showToast('Cryptographic signature verified on SHA-256 luxury ledger.', 'success')">
+            <i data-lucide="fingerprint" style="width:14px;height:14px;"></i> Verify Hash
+          </button>
+          <button class="btn btn-primary btn-sm" onclick="closeDocPreviewModal()">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ASSET / LISTING SECURITY AUDIT MODAL       -->
+  <!-- ========================================== -->
+  <div class="modal-overlay" id="asset-review-modal" style="display: none; z-index: 1100;">
+    <div class="modal-content glass-heavy" style="max-width: 900px; max-height: 92vh; overflow-y: auto; padding: 2.5rem; text-align: left;" id="asset-review-modal-content">
+      <!-- Injected via JS -->
     </div>
   </div>
 
@@ -1433,13 +1844,220 @@
       selectedListingId: null,
       currentStripeBooking: null,
 
+      
       users: [
-        { id: 'usr-1', email: 'admin@booking.com', password: 'adminpassword', firstName: 'Alex', lastName: 'Admin', role: 'ADMIN', status: 'APPROVED', avatar: 'AA' },
-        { id: 'usr-2', email: 'partner1@booking.com', password: 'partnerpassword', firstName: 'Jean', lastName: 'Laurent', role: 'PARTNER', status: 'APPROVED', avatar: 'JL' },
-        { id: 'usr-3', email: 'partner2@booking.com', password: 'partnerpassword', firstName: 'Marco', lastName: 'Rossi', role: 'PARTNER', status: 'PENDING', avatar: 'MR' },
-        { id: 'usr-4', email: 'customer@booking.com', password: 'customerpassword', firstName: 'Emily', lastName: 'Sterling', role: 'CUSTOMER', status: 'APPROVED', avatar: 'ES' }
+        {
+          id: 'usr-1',
+          email: 'admin@booking.com',
+          password: 'adminpassword',
+          firstName: 'Alex',
+          lastName: 'Admin',
+          role: 'ADMIN',
+          status: 'APPROVED',
+          avatar: 'AA'
+        },
+        {
+          id: 'usr-2',
+          email: 'partner1@booking.com',
+          password: 'partnerpassword',
+          firstName: 'Jean',
+          lastName: 'Laurent',
+          role: 'PARTNER',
+          status: 'APPROVED',
+          avatar: 'JL',
+          application: {
+            companyName: 'Laurent Chateau & Villa Hospitality SARL',
+            registrationNumber: 'FR-33091823',
+            taxId: 'FR-TX-44019',
+            incorporationCountry: 'France',
+            city: 'Paris & Bordeaux',
+            address: '15 Place Vendôme, 75001 Paris',
+            phone: '+33 1 42 68 55 00',
+            website: 'https://laurent-hospitality.fr',
+            category: 'Luxury Stays & Heritage Châteaux',
+            portfolioScale: '8 Ultra-Luxury Châteaux & Penthouses',
+            assetValuation: 62000000,
+            coverageZones: ['Paris', 'Bordeaux', 'Courchevel', 'French Riviera'],
+            proposalPitch: 'Providing ultra-high-net-worth VIP clients with private historic estates, dedicated sommeliers, and Michelin-trained private dining brigades.',
+            commercialLicense: {
+              number: 'FR-LUX-HOTEL-9921',
+              status: 'VERIFIED_ACTIVE',
+              authority: 'Ministère du Tourisme & Atout France',
+              expiry: '2029-06-30'
+            },
+            insurance: {
+              carrier: 'AXA Corporate Solutions Hospitality',
+              policyNumber: 'AXA-HOSP-882194',
+              coverageAmount: 75000000,
+              expiry: '2028-12-31',
+              status: 'VALID_ACTIVE'
+            },
+            safetyAuditScore: 99,
+            riskAssessment: 'LOW RISK (TIER-1 LUXURY ACCREDITED)',
+            tierGranted: 'Tier-1 Certified Luxury Partner',
+            adminNotes: 'Fully verified heritage estate owner. Direct access to grand cru cellars and 24/7 dedicated butler security clearance.',
+            documents: [
+              { id: 'doc-fr-reg', title: 'French Commercial Registry Kbis', type: 'PDF', size: '2.1 MB', date: '2026-08-15', verified: true },
+              { id: 'doc-fr-ins', title: 'AXA 75M EUR Comprehensive Liability Binder', type: 'PDF', size: '3.4 MB', date: '2026-08-16', verified: true }
+            ],
+            appliedAt: '2026-08-14'
+          }
+        },
+        {
+          id: 'usr-3',
+          email: 'partner2@booking.com',
+          password: 'partnerpassword',
+          firstName: 'Marco',
+          lastName: 'Rossi',
+          role: 'PARTNER',
+          status: 'PENDING',
+          avatar: 'MR',
+          application: {
+            companyName: 'Rossi Supercars & Riva Yachting Group Ltd.',
+            registrationNumber: 'MC-984420-VAT',
+            taxId: 'MC-TX-88219',
+            incorporationCountry: 'Monaco',
+            city: 'Monaco',
+            address: 'Quai Antoine 1er, Port Hercule, 98000 Monaco',
+            phone: '+377 98 98 22 00',
+            website: 'https://rossi-marine.mc',
+            category: 'Supercars, Yachts & Private Drivers',
+            portfolioScale: '14 Exotic Supercars & 4 Sunseeker / Riva Yachts',
+            assetValuation: 38500000,
+            coverageZones: ['Monaco', 'Nice Côte d\'Azur', 'Cannes', 'Saint-Tropez'],
+            proposalPitch: 'We provide bespoke yacht charters across the French Riviera and VIP tarmac supercar deliveries with dedicated chauffeurs and security officers.',
+            commercialLicense: {
+              number: 'MON-LUX-2024-8874',
+              status: 'VERIFIED_ACTIVE',
+              authority: 'Monaco Maritime & Transport Directorate',
+              expiry: '2028-12-31'
+            },
+            insurance: {
+              carrier: 'Lloyd\'s of London Marine & Luxury Auto',
+              policyNumber: 'LLD-882194-X',
+              coverageAmount: 50000000,
+              expiry: '2027-06-30',
+              status: 'VALID_ACTIVE'
+            },
+            safetyAuditScore: 96,
+            riskAssessment: 'LOW RISK (TIER-1 LUXURY ACCREDITED)',
+            tierGranted: 'Tier-1 Certified Luxury Partner',
+            adminNotes: 'Vetted with Lloyd\'s broker. All maritime captain certifications active. Direct tarmac delivery clearance at Nice Airport.',
+            documents: [
+              { id: 'doc-mc-reg', title: 'Monaco Corporate Registry & Trade License', type: 'PDF', size: '2.4 MB', date: '2026-09-20', verified: true },
+              { id: 'doc-mc-ins', title: 'Lloyd\'s 50M USD Marine & Fleet Liability Binder', type: 'PDF', size: '4.1 MB', date: '2026-09-21', verified: true },
+              { id: 'doc-mc-id', title: 'Managing Director Passport & Biometric KYC', type: 'DOC', size: '1.8 MB', date: '2026-09-20', verified: true },
+              { id: 'doc-mc-fleet', title: 'Maritime Captaincy & Fleet Ownership Deeds', type: 'PDF', size: '5.6 MB', date: '2026-09-21', verified: true }
+            ],
+            appliedAt: '2026-09-21'
+          }
+        },
+        {
+          id: 'usr-5',
+          email: 'aviation@booking.com',
+          password: 'partnerpassword',
+          firstName: 'Lady Victoria',
+          lastName: 'Hamilton',
+          role: 'PARTNER',
+          status: 'PENDING',
+          avatar: 'VH',
+          application: {
+            companyName: 'Mayfair Private Aviation & Helicopter Group Ltd.',
+            registrationNumber: 'GB-88410293',
+            taxId: 'GB-VAT-992144',
+            incorporationCountry: 'United Kingdom',
+            city: 'London (Farnborough)',
+            address: '14 Berkeley Square, Mayfair, London W1J 6BL',
+            phone: '+44 20 7946 0991',
+            website: 'https://mayfair-aviation.co.uk',
+            category: 'Private Aviation & Helicopter Transfers',
+            portfolioScale: '6 Gulfstream G650 Jets & 4 Airbus ACH130 Helicopters',
+            assetValuation: 120000000,
+            coverageZones: ['London', 'Geneva', 'Paris Le Bourget', 'Nice Cote d\'Azur', 'Zurich'],
+            proposalPitch: 'Direct private jet charters and scenic helicopter transfers connecting London, Geneva, and the Alps with Michelin-starred catering on board.',
+            commercialLicense: {
+              number: 'CAA-AOC-UK-9921',
+              status: 'VERIFIED_ACTIVE',
+              authority: 'Civil Aviation Authority & EASA',
+              expiry: '2029-03-31'
+            },
+            insurance: {
+              carrier: 'Allianz Global Corporate Aviation',
+              policyNumber: 'AV-9812-AZ',
+              coverageAmount: 250000000,
+              expiry: '2028-09-30',
+              status: 'VALID_ACTIVE'
+            },
+            safetyAuditScore: 99,
+            riskAssessment: 'LOW RISK (TIER-1 LUXURY ACCREDITED)',
+            tierGranted: 'Tier-1 Certified Luxury Partner',
+            adminNotes: 'Full CAA Air Operator Certificate verified. Fleet undergoes mandatory monthly Swiss aero-inspection.',
+            documents: [
+              { id: 'doc-uk-aoc', title: 'Air Operator Certificate (AOC-UK-9921)', type: 'PDF', size: '3.8 MB', date: '2026-09-22', verified: true },
+              { id: 'doc-uk-ins', title: 'Allianz 250M USD Aircraft Hull & Liability Binder', type: 'PDF', size: '5.2 MB', date: '2026-09-22', verified: true },
+              { id: 'doc-uk-id', title: 'Director Identification & Security Vetting', type: 'DOC', size: '2.0 MB', date: '2026-09-21', verified: true }
+            ],
+            appliedAt: '2026-09-22'
+          }
+        },
+        {
+          id: 'usr-6',
+          email: 'bellini@booking.com',
+          password: 'partnerpassword',
+          firstName: 'Chef Alessandro',
+          lastName: 'Bellini',
+          role: 'PARTNER',
+          status: 'PENDING',
+          avatar: 'AB',
+          application: {
+            companyName: 'Bellini 3-Star Michelin Gastronomy Group',
+            registrationNumber: 'IT-08912440156',
+            taxId: 'IT-TX-55102',
+            incorporationCountry: 'Italy',
+            city: 'Milan & Amalfi',
+            address: 'Via Monte Napoleone 8, 20121 Milano',
+            phone: '+39 02 8739 1100',
+            website: 'https://bellini-gastronomie.it',
+            category: 'Michelin Gastronomy & Estate Chefs',
+            portfolioScale: '3 Michelin Star Salons & 12 Travelling Estate Chefs',
+            assetValuation: 18000000,
+            coverageZones: ['Amalfi Coast', 'Milan', 'Tuscany', 'Lake Como'],
+            proposalPitch: 'Exclusive private dining salons and travelling master chef brigades curating private dinners with rare Romanée-Conti pairings.',
+            commercialLicense: {
+              number: 'IT-HOSP-MICH-5510',
+              status: 'VERIFIED_ACTIVE',
+              authority: 'Ministero dello Sviluppo Economico & HACCP Level 5',
+              expiry: '2028-05-31'
+            },
+            insurance: {
+              carrier: 'Generali Corporate Hospitality',
+              policyNumber: 'GEN-449102',
+              coverageAmount: 10000000,
+              expiry: '2027-11-30',
+              status: 'VALID_ACTIVE'
+            },
+            safetyAuditScore: 94,
+            riskAssessment: 'LOW RISK (STANDARD COMPLIANCE)',
+            tierGranted: 'VIP Asset Provider',
+            adminNotes: 'Michelin star credentials confirmed. Sommelier cellar catalog authenticated.',
+            documents: [
+              { id: 'doc-it-mich', title: 'Michelin Guide Official Distinction Certificate', type: 'PDF', size: '1.9 MB', date: '2026-09-23', verified: true },
+              { id: 'doc-it-haccp', title: 'European Food Safety & HACCP Master Certificate', type: 'PDF', size: '2.5 MB', date: '2026-09-23', verified: true }
+            ],
+            appliedAt: '2026-09-23'
+          }
+        },
+        {
+          id: 'usr-4',
+          email: 'customer@booking.com',
+          password: 'customerpassword',
+          firstName: 'Emily',
+          lastName: 'Sterling',
+          role: 'CUSTOMER',
+          status: 'APPROVED',
+          avatar: 'ES'
+        }
       ],
-
       destinations: [
         { name: 'Paris', country: 'France', image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=800', badge: 'Art & Haute Gastronomie', count: 6 },
         { name: 'Monaco', country: 'Monaco', image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=800', badge: 'Supercars & Yacht Charters', count: 4 },
@@ -1754,31 +2372,41 @@
     // Load from localStorage or set default
     let state = loadInitialState();
 
+    
     function loadInitialState() {
-      const saved = localStorage.getItem('aether_booking_state');
+      const saved = localStorage.getItem('aether_booking_state_v3');
       if (saved) {
         try {
-          return JSON.parse(saved);
+          const parsed = JSON.parse(saved);
+          if (parsed && parsed.users && parsed.users.some(u => u.application)) {
+            return parsed;
+          }
         } catch (e) {
           console.error('Failed to parse saved state, reverting to seed', e);
         }
       }
-      return JSON.parse(JSON.stringify(DEFAULT_SEED_DATA));
+      const initial = JSON.parse(JSON.stringify(DEFAULT_SEED_DATA));
+      localStorage.setItem('aether_booking_state_v3', JSON.stringify(initial));
+      return initial;
     }
 
     function saveState() {
-      localStorage.setItem('aether_booking_state', JSON.stringify(state));
+      localStorage.setItem('aether_booking_state_v3', JSON.stringify(state));
     }
 
     function resetDemoData() {
-      if (confirm('Reset all demo listings, bookings, and users to initial luxury seeds?')) {
-        localStorage.removeItem('aether_booking_state');
+      if (confirm('Reset all demo listings, applications, and bookings to initial luxury seeds?')) {
+        localStorage.removeItem('aether_booking_state_v3');
         state = JSON.parse(JSON.stringify(DEFAULT_SEED_DATA));
         saveState();
         showToast('Demo data successfully reset to initial pristine state.', 'info');
         initApp();
+        if (state.currentUser && state.currentUser.role === 'ADMIN') {
+          navigateTo('dashboard');
+        }
       }
     }
+
 
     // ----------------------------------------------------
     // APPLICATION INITIALIZATION
@@ -2891,90 +3519,126 @@
         html += '</div>';
         panel.innerHTML = html;
       }
+      
       else if (tabName === 'admin-stats') {
         const totalVol = state.bookings.reduce((sum, b) => sum + (b.paymentStatus === 'PAID' ? b.totalPrice : 0), 0);
         const pendingPartners = state.users.filter(u => u.role === 'PARTNER' && u.status === 'PENDING').length;
+        const totalPartners = state.users.filter(u => u.role === 'PARTNER').length;
         const pendingAudits = state.listings.filter(l => l.status === 'PENDING').length;
+        const totalAssetValuation = state.users
+          .filter(u => u.application && u.application.assetValuation)
+          .reduce((sum, u) => sum + u.application.assetValuation, 0);
 
         panel.innerHTML = `
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;">
-            <div class="glass" style="padding: 2rem; border-radius: var(--radius-lg); border-left: 4px solid var(--accent-gold);">
-              <span style="font-size: 0.8rem; color: var(--text-gray); font-weight: 700;">TOTAL ESCROW VOLUME</span>
-              <h2 class="font-serif gradient-gold-text" style="font-size: 2.2rem; font-weight: 800; margin-top: 0.4rem;">${formatMoney(totalVol)}</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;">
+            <div class="glass" style="padding: 1.8rem; border-radius: var(--radius-lg); border-left: 4px solid var(--accent-gold);">
+              <span style="font-size: 0.75rem; color: var(--text-gray); font-weight: 700;">TOTAL ESCROW VOLUME</span>
+              <h2 class="font-serif gradient-gold-text" style="font-size: 2rem; font-weight: 800; margin-top: 0.4rem;">${formatMoney(totalVol)}</h2>
+              <span style="font-size: 0.78rem; color: var(--text-muted);">100% Swiss Bank Backed</span>
             </div>
-            <div class="glass" style="padding: 2rem; border-radius: var(--radius-lg); border-left: 4px solid var(--accent-cyan);">
-              <span style="font-size: 0.8rem; color: var(--text-gray); font-weight: 700;">TOTAL ASSETS ON NETWORK</span>
-              <h2 class="font-serif gradient-cyan-text" style="font-size: 2.2rem; font-weight: 800; margin-top: 0.4rem;">${state.listings.length}</h2>
+            <div class="glass" style="padding: 1.8rem; border-radius: var(--radius-lg); border-left: 4px solid var(--accent-cyan);">
+              <span style="font-size: 0.75rem; color: var(--text-gray); font-weight: 700;">PARTNER ASSET VALUATION</span>
+              <h2 class="font-serif gradient-cyan-text" style="font-size: 2rem; font-weight: 800; margin-top: 0.4rem;">${formatMoney(totalAssetValuation)}</h2>
+              <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600;">Across ${totalPartners} Global Luxury Partners</span>
             </div>
-            <div class="glass" style="padding: 2rem; border-radius: var(--radius-lg); border-left: 4px solid #f59e0b;">
-              <span style="font-size: 0.8rem; color: var(--text-gray); font-weight: 700;">PENDING PARTNER KYCS</span>
-              <h2 class="font-serif" style="font-size: 2.2rem; font-weight: 800; margin-top: 0.4rem; color: #fbbf24;">${pendingPartners}</h2>
+            <div class="glass" style="padding: 1.8rem; border-radius: var(--radius-lg); border-left: 4px solid #f59e0b;">
+              <span style="font-size: 0.75rem; color: var(--text-gray); font-weight: 700;">PENDING PARTNER KYCS</span>
+              <h2 class="font-serif" style="font-size: 2rem; font-weight: 800; margin-top: 0.4rem; color: #fbbf24;">${pendingPartners}</h2>
+              <span style="font-size: 0.78rem; color: #fbbf24;">Awaiting Master Admin Audit</span>
             </div>
-            <div class="glass" style="padding: 2rem; border-radius: var(--radius-lg); border-left: 4px solid #f43f5e;">
-              <span style="font-size: 0.8rem; color: var(--text-gray); font-weight: 700;">PENDING ASSET AUDITS</span>
-              <h2 class="font-serif" style="font-size: 2.2rem; font-weight: 800; margin-top: 0.4rem; color: #fb7185;">${pendingAudits}</h2>
+            <div class="glass" style="padding: 1.8rem; border-radius: var(--radius-lg); border-left: 4px solid #f43f5e;">
+              <span style="font-size: 0.75rem; color: var(--text-gray); font-weight: 700;">PENDING ASSET AUDITS</span>
+              <h2 class="font-serif" style="font-size: 2rem; font-weight: 800; margin-top: 0.4rem; color: #fb7185;">${pendingAudits}</h2>
+              <span style="font-size: 0.78rem; color: #fb7185;">Safety & Spec Verification</span>
             </div>
           </div>
 
-          <div class="glass" style="padding: 2rem; border-radius: var(--radius-lg);">
-            <h3 class="font-serif" style="font-size: 1.4rem; margin-bottom: 1rem;">Admin Quick Direct Controls</h3>
-            <p style="color: var(--text-gray); font-size: 0.95rem; margin-bottom: 1.5rem;">Use the subtabs above to verify pending partners or audit new submitted assets.</p>
-            <div style="display: flex; gap: 1rem;">
-              <button class="btn btn-primary btn-sm" onclick="selectDashTab('admin-partners', document.querySelectorAll('.dash-subtab-btn')[1])">Open Partner KYC Desk (${pendingPartners})</button>
-              <button class="btn btn-secondary btn-sm" onclick="selectDashTab('admin-audits', document.querySelectorAll('.dash-subtab-btn')[2])">Audit Pending Assets (${pendingAudits})</button>
+          <div class="glass" style="padding: 2.2rem; border-radius: var(--radius-xl); border: 1px solid rgba(245, 158, 11, 0.25);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 1rem;">
+              <div>
+                <h3 class="font-serif gradient-gold-text" style="font-size: 1.4rem;">Master Admin Priority Review Queue</h3>
+                <p style="color: var(--text-gray); font-size: 0.92rem; margin-top: 0.2rem;">
+                  Review complete luxury partner compliance dossiers, inspect verified credentials, and audit asset specifications.
+                </p>
+              </div>
+              <span class="badge badge-approved" style="font-size: 0.82rem; padding: 0.5rem 1rem;">
+                <i data-lucide="shield-check" style="width:14px;height:14px;"></i> Master Authority Active
+              </span>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <button class="btn btn-primary" onclick="selectDashTab('admin-partners', document.querySelectorAll('.dash-subtab-btn')[1])">
+                <i data-lucide="user-check" style="width:16px;height:16px;"></i> Review Partner KYC Applications (${pendingPartners})
+              </button>
+              <button class="btn btn-secondary" onclick="selectDashTab('admin-audits', document.querySelectorAll('.dash-subtab-btn')[2])">
+                <i data-lucide="shield-alert" style="width:16px;height:16px;"></i> Audit Pending Assets (${pendingAudits})
+              </button>
+              <button class="btn btn-secondary" onclick="selectDashTab('admin-users', document.querySelectorAll('.dash-subtab-btn')[3])">
+                <i data-lucide="users" style="width:16px;height:16px;"></i> Global User Directory (${state.users.length})
+              </button>
             </div>
           </div>
         `;
       }
       else if (tabName === 'admin-partners') {
-        const pending = state.users.filter(u => u.role === 'PARTNER' && u.status === 'PENDING');
-        if (pending.length === 0) {
-          panel.innerHTML = `<div class="glass" style="padding: 3rem; text-align: center; border-radius: var(--radius-md);"><p style="color: var(--text-gray);">No partner KYC applications currently pending review.</p></div>`;
-          return;
-        }
-
-        let html = '<div style="display: flex; flex-direction: column; gap: 1.2rem; max-width: 900px;">';
-        pending.forEach(u => {
-          html += `
-            <div class="glass" style="padding: 1.8rem; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-              <div>
-                <h4 style="font-weight: 700; font-size: 1.2rem;">${u.firstName} ${u.lastName}</h4>
-                <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 0.3rem;">Email: <strong>${u.email}</strong> • Application: <span class="badge badge-pending">PENDING KYC AUDIT</span></p>
-              </div>
-              <div style="display: flex; gap: 0.8rem;">
-                <button class="btn btn-primary btn-sm" onclick="adminApprovePartner('${u.id}', 'APPROVED')"><i data-lucide="check" style="width:14px;height:14px;"></i> Verify & Approve Partner</button>
-                <button class="btn btn-danger btn-sm" onclick="adminApprovePartner('${u.id}', 'REJECTED')">Reject</button>
-              </div>
-            </div>
-          `;
-        });
-        html += '</div>';
-        panel.innerHTML = html;
+        renderAdminPartnerDesk(panel, 'ALL');
       }
       else if (tabName === 'admin-audits') {
         const pending = state.listings.filter(l => l.status === 'PENDING');
         if (pending.length === 0) {
-          panel.innerHTML = `<div class="glass" style="padding: 3rem; text-align: center; border-radius: var(--radius-md);"><p style="color: var(--text-gray);">No listings awaiting security audit.</p></div>`;
+          panel.innerHTML = `
+            <div class="glass" style="padding: 4rem; text-align: center; border-radius: var(--radius-xl);">
+              <i data-lucide="check-circle-2" style="width:40px;height:40px;color:#10b981;margin:0 auto 1rem auto;"></i>
+              <h3 style="font-size:1.3rem;margin-bottom:0.5rem;">All Listing Safety Audits Completed</h3>
+              <p style="color: var(--text-gray);">No luxury service listings currently awaiting master administrator review.</p>
+            </div>
+          `;
           return;
         }
 
-        let html = '<div style="display: flex; flex-direction: column; gap: 1.4rem;">';
+        let html = `
+          <div style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <h3 class="font-serif" style="font-size: 1.4rem;">Asset Security & Safety Audits</h3>
+              <p style="color: var(--text-gray); font-size: 0.88rem;">Inspect vehicle maintenance, chateau fire codes, marine certifications, and pricing before publishing.</p>
+            </div>
+            <span class="badge badge-pending">${pending.length} Listings Pending</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 1.4rem;">
+        `;
         pending.forEach(l => {
           const owner = state.users.find(u => u.id === l.ownerId);
+          const badge = getBadgeInfo(l.serviceType);
           html += `
-            <div class="glass" style="display: flex; border-radius: var(--radius-lg); overflow: hidden;">
-              <div style="width: 180px; min-width: 180px; height: 130px;">
+            <div class="glass" style="display: flex; border-radius: var(--radius-lg); overflow: hidden; border-left: 4px solid #fb7185;">
+              <div style="width: 200px; min-width: 200px; height: 160px; position: relative;">
                 <img src="${l.coverImage}" alt="${l.title}" style="width: 100%; height: 100%; object-fit: cover;">
+                <span class="${badge.class}" style="position: absolute; top: 0.6rem; left: 0.6rem; font-size: 0.68rem;">${badge.label}</span>
               </div>
-              <div style="padding: 1.5rem; flex: 1; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+              <div style="padding: 1.5rem; flex: 1; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.2rem;">
                 <div>
-                  <h4 style="font-weight: 700; font-size: 1.2rem;">${l.title}</h4>
-                  <p style="font-size: 0.85rem; color: var(--text-gray); margin-top: 0.2rem;"><i data-lucide="map-pin" style="width:13px;height:13px;color:var(--accent-cyan);display:inline;"></i> ${l.address}, ${l.city} | Partner: <strong>${owner ? owner.firstName + ' ' + owner.lastName : 'N/A'}</strong></p>
-                  <p style="font-size: 0.85rem; color: var(--accent-gold); margin-top: 0.2rem;">Rate: ${formatMoney(getBasePrice(l))}</p>
+                  <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.3rem;">
+                    <h4 style="font-weight: 800; font-size: 1.25rem;">${l.title}</h4>
+                    <span class="badge badge-pending">PENDING AUDIT</span>
+                  </div>
+                  <p style="font-size: 0.85rem; color: var(--text-gray); display: flex; align-items: center; gap: 0.3rem; margin-bottom: 0.4rem;">
+                    <i data-lucide="map-pin" style="width:13px;height:13px;color:var(--accent-cyan);"></i> ${l.address}, ${l.city}, ${l.country}
+                  </p>
+                  <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.4rem;">
+                    Owner / Host: <strong style="color: #fff;">${owner ? owner.firstName + ' ' + owner.lastName : 'Partner'}</strong> ${owner && owner.application ? ' • ' + owner.application.companyName : ''}
+                  </p>
+                  <p style="font-size: 0.9rem; color: var(--accent-gold); font-weight: 700;">Rate: ${formatMoney(getBasePrice(l))}</p>
                 </div>
-                <div style="display: flex; gap: 0.8rem;">
-                  <button class="btn btn-primary btn-sm" onclick="adminApproveListing('${l.id}', 'APPROVED')"><i data-lucide="check" style="width:14px;height:14px;"></i> Approve & Publish</button>
-                  <button class="btn btn-danger btn-sm" onclick="adminApproveListing('${l.id}', 'REJECTED')">Reject</button>
+                <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                  <button class="btn btn-secondary btn-sm" onclick="openAssetReviewModal('${l.id}')">
+                    <i data-lucide="search" style="width:14px;height:14px;"></i> Review Asset Specs & Safety Dossier
+                  </button>
+                  <button class="btn btn-primary btn-sm" onclick="adminApproveListing('${l.id}', 'APPROVED')">
+                    <i data-lucide="check" style="width:14px;height:14px;"></i> Approve & Publish
+                  </button>
+                  <button class="btn btn-danger btn-sm" onclick="adminApproveListing('${l.id}', 'REJECTED')">
+                    Reject
+                  </button>
                 </div>
               </div>
             </div>
@@ -2983,6 +3647,7 @@
         html += '</div>';
         panel.innerHTML = html;
       }
+
       else if (tabName === 'admin-users') {
         let html = `
           <div class="glass" style="padding: 1.5rem; border-radius: var(--radius-lg); overflow-x: auto;">
@@ -3061,6 +3726,449 @@
 
       showToast('Asset uploaded! Submitted to Master Admin for 24-hour verification.', 'success');
       selectDashTab('partner-listings', document.querySelectorAll('.dash-subtab-btn')[0]);
+    }
+
+    
+    // ----------------------------------------------------
+    // MASTER ADMIN APPLICATION REVIEW ENGINE
+    // ----------------------------------------------------
+    let currentAdminPartnerFilter = 'ALL';
+    let currentAdminPartnerSearch = '';
+    let activeReviewingUserId = null;
+
+    function renderAdminPartnerDesk(panelElem, filter = 'ALL') {
+      currentAdminPartnerFilter = filter;
+      const allPartners = state.users.filter(u => u.role === 'PARTNER');
+      
+      let filtered = allPartners;
+      if (currentAdminPartnerFilter === 'PENDING') filtered = allPartners.filter(u => u.status === 'PENDING');
+      if (currentAdminPartnerFilter === 'APPROVED') filtered = allPartners.filter(u => u.status === 'APPROVED');
+      if (currentAdminPartnerFilter === 'REJECTED') filtered = allPartners.filter(u => u.status === 'REJECTED');
+
+      if (currentAdminPartnerSearch.trim()) {
+        const q = currentAdminPartnerSearch.toLowerCase();
+        filtered = filtered.filter(u => {
+          const comp = (u.application && u.application.companyName) || '';
+          const name = (u.firstName + ' ' + u.lastName).toLowerCase();
+          const email = u.email.toLowerCase();
+          const cat = (u.application && u.application.category) || '';
+          return name.includes(q) || comp.toLowerCase().includes(q) || email.includes(q) || cat.toLowerCase().includes(q);
+        });
+      }
+
+      const pendingCount = allPartners.filter(u => u.status === 'PENDING').length;
+      const approvedCount = allPartners.filter(u => u.status === 'APPROVED').length;
+      const rejectedCount = allPartners.filter(u => u.status === 'REJECTED').length;
+
+      let html = `
+        <div style="margin-bottom: 2rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <h3 class="font-serif gradient-gold-text" style="font-size: 1.6rem; font-weight: 800;">Partner Verification & Compliance Desk</h3>
+              <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.2rem;">
+                Review complete luxury partner credentials, inspect commercial insurance ($50M+), operator licenses, and assign accreditation.
+              </p>
+            </div>
+            
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button class="admin-filter-pill ${currentAdminPartnerFilter === 'ALL' ? 'active' : ''}" onclick="filterAdminPartners('ALL')">All (${allPartners.length})</button>
+              <button class="admin-filter-pill ${currentAdminPartnerFilter === 'PENDING' ? 'active' : ''}" onclick="filterAdminPartners('PENDING')">Pending KYC (${pendingCount})</button>
+              <button class="admin-filter-pill ${currentAdminPartnerFilter === 'APPROVED' ? 'active' : ''}" onclick="filterAdminPartners('APPROVED')">Approved (${approvedCount})</button>
+              <button class="admin-filter-pill ${currentAdminPartnerFilter === 'REJECTED' ? 'active' : ''}" onclick="filterAdminPartners('REJECTED')">Rejected (${rejectedCount})</button>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.5rem;">
+            <input 
+              type="text" 
+              class="input-field" 
+              placeholder="Search partner by company name, executive, category, or country..." 
+              value="${currentAdminPartnerSearch}" 
+              oninput="searchAdminPartners(this.value)"
+              style="max-width: 500px;"
+            />
+          </div>
+        </div>
+      `;
+
+      if (filtered.length === 0) {
+        html += `
+          <div class="glass" style="padding: 4rem; text-align: center; border-radius: var(--radius-xl);">
+            <i data-lucide="check-circle-2" style="width: 40px; height: 40px; color: #10b981; margin: 0 auto 1rem auto;"></i>
+            <h3 style="font-size: 1.2rem; margin-bottom: 0.4rem;">No Applications Found</h3>
+            <p style="color: var(--text-gray); font-size: 0.9rem;">No partner applications matching the selected criteria.</p>
+          </div>
+        `;
+      } else {
+        html += '<div style="display: flex; flex-direction: column; gap: 1.4rem;">';
+        filtered.forEach(u => {
+          const app = u.application || {
+            companyName: 'Private Luxury Asset Principal',
+            category: 'Luxury Hospitality & Fleet',
+            portfolioScale: 'Multi-Asset Collection',
+            assetValuation: 10000000,
+            city: 'Monaco',
+            incorporationCountry: 'Monaco',
+            safetyAuditScore: 95,
+            riskAssessment: 'LOW RISK',
+            insurance: { carrier: 'Lloyd\'s of London', coverageAmount: 50000000 }
+          };
+
+          const statusBadge = u.status === 'APPROVED' 
+            ? '<span class="badge badge-approved"><i data-lucide="check-circle-2" style="width:12px;height:12px;"></i> APPROVED TIER-1</span>'
+            : u.status === 'PENDING'
+            ? '<span class="badge badge-pending"><i data-lucide="clock" style="width:12px;height:12px;"></i> PENDING KYC AUDIT</span>'
+            : '<span class="badge badge-rejected"><i data-lucide="x-circle" style="width:12px;height:12px;"></i> REJECTED</span>';
+
+          html += `
+            <div class="glass" style="padding: 1.8rem; border-radius: var(--radius-lg); border-left: 4px solid ${u.status === 'APPROVED' ? '#4ade80' : u.status === 'PENDING' ? '#f59e0b' : '#f43f5e'};">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1.2rem; margin-bottom: 1.2rem;">
+                <div style="display: flex; gap: 1.2rem; align-items: center;">
+                  <div style="width: 52px; height: 52px; border-radius: var(--radius-md); background: linear-gradient(135deg, #f59e0b, #8b5cf6); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 800; color: #000;">
+                    ${u.avatar || u.firstName[0]}
+                  </div>
+                  <div>
+                    <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.2rem;">
+                      <h4 style="font-weight: 800; font-size: 1.3rem;">${u.firstName} ${u.lastName}</h4>
+                      ${statusBadge}
+                      <span class="badge badge-hotel" style="font-size: 0.72rem;">${app.category}</span>
+                    </div>
+                    <p style="color: var(--accent-gold); font-weight: 600; font-size: 0.95rem;">${app.companyName}</p>
+                    <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.2rem;">
+                      Email: <strong>${u.email}</strong> • HQ: <strong>${app.city}, ${app.incorporationCountry}</strong> ${app.phone ? ' • Tel: ' + app.phone : ''}
+                    </p>
+                  </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem;">
+                  <span class="badge" style="background: rgba(16, 185, 129, 0.12); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.25);">
+                    🛡️ Audit Score: ${app.safetyAuditScore || 96}/100
+                  </span>
+                  <span style="font-size: 0.8rem; color: var(--text-muted);">Est. Asset Value: <strong style="color: #fff;">${formatMoney(app.assetValuation || 0)}</strong></span>
+                </div>
+              </div>
+
+              <!-- Quick spec line -->
+              <div style="background: rgba(255, 255, 255, 0.03); padding: 0.8rem 1.2rem; border-radius: var(--radius-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 1.2rem; font-size: 0.85rem;">
+                <span style="color: var(--text-gray);">Fleet / Portfolio: <strong style="color: #fff;">${app.portfolioScale}</strong></span>
+                <span style="color: var(--text-gray);">Insurance Underwriter: <strong style="color: #4ade80;">${app.insurance ? app.insurance.carrier : 'Lloyd\'s'} (${formatMoney(app.insurance ? app.insurance.coverageAmount : 50000000)})</strong></span>
+                <span style="color: var(--text-gray);">Operator License: <code style="color: var(--accent-gold);">${app.commercialLicense ? app.commercialLicense.number : 'VERIFIED'}</code></span>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <span style="font-size: 0.8rem; color: var(--text-muted);">
+                  ${u.application && u.application.tierGranted ? 'Accreditation: <strong style="color:var(--accent-gold);">' + u.application.tierGranted + '</strong>' : 'Awaiting Master Admin Dossier Audit'}
+                </span>
+
+                <div style="display: flex; gap: 0.8rem; align-items: center;">
+                  <button class="btn btn-primary btn-sm" onclick="openPartnerReviewModal('${u.id}')" style="box-shadow: 0 0 15px rgba(245,158,11,0.25);">
+                    <i data-lucide="file-search" style="width:14px;height:14px;"></i> Review Application Dossier
+                  </button>
+                  ${u.status === 'PENDING' ? `
+                    <button class="btn btn-secondary btn-sm" onclick="adminApprovePartner('${u.id}', 'APPROVED')" style="color: #4ade80;">
+                      <i data-lucide="check" style="width:13px;height:13px;"></i> Quick Approve
+                    </button>
+                    <button class="btn btn-danger btn-sm" onclick="adminApprovePartner('${u.id}', 'REJECTED')">
+                      Reject
+                    </button>
+                  ` : `
+                    <button class="btn btn-secondary btn-sm" onclick="switchPersona('${u.id}')">
+                      Impersonate
+                    </button>
+                  `}
+                </div>
+              </div>
+            </div>
+          `;
+        });
+        html += '</div>';
+      }
+
+      panelElem.innerHTML = html;
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function filterAdminPartners(filter) {
+      const panel = document.getElementById('dash-panel-content');
+      renderAdminPartnerDesk(panel, filter);
+    }
+
+    function searchAdminPartners(query) {
+      currentAdminPartnerSearch = query;
+      const panel = document.getElementById('dash-panel-content');
+      renderAdminPartnerDesk(panel, currentAdminPartnerFilter);
+    }
+
+    function openPartnerReviewModal(userId) {
+      activeReviewingUserId = userId;
+      const user = state.users.find(u => u.id === userId);
+      if (!user) return;
+
+      const app = user.application || {
+        companyName: user.firstName + ' Luxury Enterprises Ltd.',
+        registrationNumber: 'LUX-' + Math.floor(100000 + Math.random() * 900000),
+        taxId: 'TX-' + Math.floor(10000 + Math.random() * 90000),
+        incorporationCountry: 'Monaco',
+        city: 'Monaco',
+        address: 'Quai Antoine 1er, Port Hercule',
+        phone: '+377 98 98 22 00',
+        website: 'https://aether-partner.com',
+        category: 'Supercars, Yachts & Private Drivers',
+        portfolioScale: '14 Supercars & 4 Yachts',
+        assetValuation: 38500000,
+        coverageZones: ['Monaco', 'Nice', 'Cannes', 'Saint-Tropez'],
+        proposalPitch: 'Providing ultra-high-net-worth VIP clients with bespoke yacht charters and chauffeured exotic supercars.',
+        commercialLicense: { number: 'MON-LUX-2024-8874', status: 'VERIFIED_ACTIVE', authority: 'Monaco Maritime Directorate', expiry: '2028-12-31' },
+        insurance: { carrier: 'Lloyd\'s of London Marine & Luxury Auto', policyNumber: 'LLD-882194-X', coverageAmount: 50000000, expiry: '2027-06-30' },
+        safetyAuditScore: 96,
+        riskAssessment: 'LOW RISK (TIER-1 ACCREDITED)',
+        documents: [
+          { id: 'doc-reg', title: 'Corporate Registration Certificate', type: 'PDF', size: '2.4 MB', date: '2026-09-20', verified: true },
+          { id: 'doc-ins', title: 'Lloyd\'s $50M Liability Policy Binder', type: 'PDF', size: '4.1 MB', date: '2026-09-21', verified: true }
+        ]
+      };
+
+      document.getElementById('rev-applicant-avatar').innerText = user.avatar || user.firstName[0];
+      document.getElementById('rev-applicant-name').innerText = user.firstName + ' ' + user.lastName;
+      document.getElementById('rev-status-badge').innerText = user.status;
+      document.getElementById('rev-status-badge').className = 'badge ' + (user.status === 'APPROVED' ? 'badge-approved' : user.status === 'PENDING' ? 'badge-pending' : 'badge-rejected');
+      document.getElementById('rev-category-badge').innerText = app.category;
+      document.getElementById('rev-company-title').innerText = app.companyName;
+      document.getElementById('rev-submission-meta').innerText = 'Submitted: ' + (app.appliedAt || 'Sep 21, 2026') + ' • ' + app.city + ', ' + app.incorporationCountry;
+      document.getElementById('rev-risk-score').innerHTML = '🛡️ Compliance Score: ' + (app.safetyAuditScore || 96) + '/100 (' + (app.riskAssessment || 'Low Risk') + ')';
+
+      document.getElementById('rev-kpi-hq').innerText = app.city + ', ' + app.incorporationCountry;
+      document.getElementById('rev-kpi-scale').innerText = app.portfolioScale;
+      document.getElementById('rev-kpi-valuation').innerText = formatMoney(app.assetValuation || 0);
+      document.getElementById('rev-kpi-insurance').innerText = app.insurance ? formatMoney(app.insurance.coverageAmount) + ' ' + app.insurance.carrier.split(' ')[0] : '$50M Lloyd\'s';
+
+      document.getElementById('rev-legal-name').innerText = app.companyName;
+      document.getElementById('rev-reg-num').innerText = app.registrationNumber || 'MC-984420-VAT';
+      document.getElementById('rev-tax-id').innerText = app.taxId || 'MC-TX-88219';
+      document.getElementById('rev-rep-name').innerText = user.firstName + ' ' + user.lastName + ' (Managing Director)';
+      document.getElementById('rev-rep-phone').innerText = app.phone || '+377 98 98 22 00';
+      
+      const webElem = document.getElementById('rev-rep-web');
+      webElem.innerText = app.website || 'https://aether-partner.com';
+      webElem.href = app.website || '#';
+
+      // Coverage pills
+      const zonesContainer = document.getElementById('rev-coverage-pills');
+      const zones = app.coverageZones || ['Monaco', 'Nice', 'Cannes', 'Saint-Tropez'];
+      zonesContainer.innerHTML = zones.map(z => '<span class="badge badge-hotel" style="font-size:0.75rem;">' + z + '</span>').join('');
+
+      document.getElementById('rev-proposal-text').innerText = '"' + (app.proposalPitch || 'Dedicated luxury service provider for Aether VIP guests.') + '"';
+
+      if (app.commercialLicense) {
+        document.getElementById('rev-license-num').innerText = app.commercialLicense.number;
+        document.getElementById('rev-license-auth').innerText = app.commercialLicense.authority + ' • Expires ' + app.commercialLicense.expiry;
+      }
+      if (app.insurance) {
+        document.getElementById('rev-insurance-policy').innerText = app.insurance.carrier + ' (Policy #' + app.insurance.policyNumber + ')';
+        document.getElementById('rev-insurance-amt').innerText = formatMoney(app.insurance.coverageAmount) + ' Global Liability • Valid to ' + app.insurance.expiry;
+      }
+
+      // Render Documents
+      const docsGrid = document.getElementById('rev-docs-grid');
+      const docs = app.documents || [
+        { id: 'doc-reg', title: 'Corporate Registration Certificate', type: 'PDF', size: '2.4 MB', date: '2026-09-20', verified: true },
+        { id: 'doc-ins', title: 'Lloyd\'s $50M Liability Policy Binder', type: 'PDF', size: '4.1 MB', date: '2026-09-21', verified: true },
+        { id: 'doc-id', title: 'Director Biometric KYC ID Proof', type: 'DOC', size: '1.8 MB', date: '2026-09-20', verified: true }
+      ];
+
+      docsGrid.innerHTML = docs.map(doc => `
+        <div class="doc-tile">
+          <div style="display: flex; align-items: center; gap: 0.8rem;">
+            <div style="width: 38px; height: 38px; border-radius: var(--radius-sm); background: rgba(245,158,11,0.12); color: var(--accent-gold); display: flex; align-items: center; justify-content: center;">
+              <i data-lucide="file-text" style="width:18px;height:18px;"></i>
+            </div>
+            <div>
+              <strong style="font-size: 0.85rem; color: #fff; display: block;">${doc.title}</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted);">${doc.type} • ${doc.size} • Verified</span>
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="openDocPreviewModal('${doc.id}', '${userId}')" style="font-size: 0.75rem; padding: 0.3rem 0.7rem;">
+            <i data-lucide="eye" style="width:12px;height:12px;"></i> Inspect
+          </button>
+        </div>
+      `).join('');
+
+      if (app.adminNotes) {
+        document.getElementById('rev-admin-notes').value = app.adminNotes;
+      } else {
+        document.getElementById('rev-admin-notes').value = '';
+      }
+
+      if (app.tierGranted) {
+        document.getElementById('rev-tier-select').value = app.tierGranted;
+      }
+
+      document.getElementById('partner-review-modal').style.display = 'flex';
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function closePartnerReviewModal() {
+      document.getElementById('partner-review-modal').style.display = 'none';
+      activeReviewingUserId = null;
+    }
+
+    function executeAdminPartnerAction(action) {
+      if (!activeReviewingUserId) return;
+      const user = state.users.find(u => u.id === activeReviewingUserId);
+      if (!user) return;
+
+      const notes = document.getElementById('rev-admin-notes').value;
+      const tier = document.getElementById('rev-tier-select').value;
+
+      if (!user.application) user.application = {};
+      user.application.adminNotes = notes;
+      user.application.tierGranted = tier;
+
+      if (action === 'APPROVED') {
+        user.status = 'APPROVED';
+        saveState();
+        showToast(`Partner ${user.firstName} ${user.lastName} officially verified as "${tier}"!`, 'success');
+      } else if (action === 'REJECTED') {
+        user.status = 'REJECTED';
+        saveState();
+        showToast(`Application for ${user.firstName} ${user.lastName} marked REJECTED.`, 'info');
+      } else if (action === 'REQUEST_INFO') {
+        showToast(`Formal KYC Information Request dispatched to ${user.email}.`, 'info');
+      }
+
+      closePartnerReviewModal();
+      renderDashboard();
+    }
+
+    function openDocPreviewModal(docId, userId) {
+      const user = state.users.find(u => u.id === userId) || state.users.find(u => u.id === activeReviewingUserId);
+      const app = (user && user.application) || {};
+      const container = document.getElementById('doc-preview-certificate');
+
+      container.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(245,158,11,0.3); padding-bottom: 1.2rem; margin-bottom: 1.5rem;">
+          <div>
+            <span style="color: var(--accent-gold); font-size: 0.75rem; letter-spacing: 2px; font-weight: 800; text-transform: uppercase;">AETHER TRUST & AUDIT LEDGER</span>
+            <h2 class="font-serif gradient-gold-text" style="font-size: 1.5rem; margin-top: 0.2rem;">Official Verification Certificate</h2>
+          </div>
+          <div class="cert-seal">
+            AETHER<br>VERIFIED
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; font-size: 0.88rem; margin-bottom: 1.5rem;">
+          <div>
+            <span style="color: var(--text-muted); font-size: 0.78rem; display: block;">Accredited Legal Entity</span>
+            <strong style="color: #fff; font-size: 1rem;">${app.companyName || 'Rossi Supercars & Riva Yachting Group Ltd.'}</strong>
+          </div>
+          <div>
+            <span style="color: var(--text-muted); font-size: 0.78rem; display: block;">Registration Reference</span>
+            <strong style="color: var(--accent-gold); font-family: monospace;">${app.registrationNumber || 'MC-984420-VAT'}</strong>
+          </div>
+          <div>
+            <span style="color: var(--text-muted); font-size: 0.78rem; display: block;">Issuing Authority</span>
+            <span style="color: #fff;">${app.commercialLicense ? app.commercialLicense.authority : 'Monaco Maritime & Transport Directorate'}</span>
+          </div>
+          <div>
+            <span style="color: var(--text-muted); font-size: 0.78rem; display: block;">Commercial Liability Coverage</span>
+            <span style="color: #4ade80; font-weight: 700;">${app.insurance ? formatMoney(app.insurance.coverageAmount) + ' (' + app.insurance.carrier + ')' : '$50,000,000 (Lloyd\'s of London)'}</span>
+          </div>
+        </div>
+
+        <div style="background: rgba(0,0,0,0.5); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-glass); margin-bottom: 1rem; font-family: monospace; font-size: 0.75rem; color: var(--text-gray); line-height: 1.6;">
+          <div>HASH: <span style="color: var(--accent-cyan);">9f8a3c42b8e7190d65a2f01488c991e0a2d547f891b8429188e02d847192ca10</span></div>
+          <div>TIMESTAMP: 2026-09-23T01:48:00Z • AUDITOR: Alex Admin (Master ID: usr-1)</div>
+          <div>STATUS: <span style="color: #4ade80; font-weight: 800;">CONFIRMED VALID & UNRESTRICTED</span></div>
+        </div>
+      `;
+
+      document.getElementById('doc-preview-modal').style.display = 'flex';
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function closeDocPreviewModal() {
+      document.getElementById('doc-preview-modal').style.display = 'none';
+    }
+
+    function openAssetReviewModal(listingId) {
+      const item = state.listings.find(l => l.id === listingId);
+      if (!item) return;
+
+      const owner = state.users.find(u => u.id === item.ownerId);
+      const container = document.getElementById('asset-review-modal-content');
+
+      container.innerHTML = `
+        <button class="close-btn" onclick="closeAssetReviewModal()">&times;</button>
+        
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 1.2rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <span class="badge badge-hotel" style="margin-bottom: 0.4rem;">${item.serviceType} SECURITY AUDIT</span>
+            <h2 class="font-serif" style="font-size: 1.6rem; font-weight: 800;">${item.title}</h2>
+            <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.2rem;">${item.address}, ${item.city}, ${item.country}</p>
+          </div>
+          <span class="badge badge-pending">STATUS: ${item.status}</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+          <div style="height: 220px; border-radius: var(--radius-md); overflow: hidden;">
+            <img src="${item.coverImage}" alt="${item.title}" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div class="glass" style="padding: 1.2rem; border-radius: var(--radius-md); font-size: 0.88rem; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span style="color: var(--text-gray); font-size: 0.8rem; display: block;">Listing Owner / Verified Partner</span>
+              <strong style="color: #fff; font-size: 1.05rem;">${owner ? owner.firstName + ' ' + owner.lastName : 'Partner'}</strong>
+              <p style="color: var(--accent-gold); font-size: 0.85rem; margin-top: 0.2rem;">${owner && owner.application ? owner.application.companyName : 'Luxury Asset Partner'}</p>
+              <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.4rem;">Rate: <strong style="color: #fff;">${formatMoney(getBasePrice(item))}</strong></p>
+            </div>
+            <div style="border-top: 1px solid var(--border-glass); padding-top: 0.8rem;">
+              <span style="color: #4ade80; font-size: 0.8rem; display: flex; align-items: center; gap: 0.3rem;">
+                <i data-lucide="check-circle-2" style="width:14px;height:14px;"></i> Commercial Liability Insurance Linked
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem;">Description & Service Guarantee</h4>
+          <p style="color: var(--text-gray); font-size: 0.88rem; line-height: 1.6; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: var(--radius-sm);">
+            ${item.description}
+          </p>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+          <button class="btn btn-secondary" onclick="closeAssetReviewModal()">Cancel</button>
+          <button class="btn btn-danger" onclick="executeAdminListingAction('${item.id}', 'REJECTED')">Reject Listing</button>
+          <button class="btn btn-primary" onclick="executeAdminListingAction('${item.id}', 'APPROVED')">
+            <i data-lucide="check" style="width:15px;height:15px;"></i> Approve & Publish to Network
+          </button>
+        </div>
+      `;
+
+      document.getElementById('asset-review-modal').style.display = 'flex';
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function closeAssetReviewModal() {
+      document.getElementById('asset-review-modal').style.display = 'none';
+    }
+
+    function executeAdminListingAction(listingId, action) {
+      const item = state.listings.find(l => l.id === listingId);
+      if (item) {
+        item.status = action;
+        saveState();
+        showToast(`Listing "${item.title}" status updated to ${action}.`, 'success');
+      }
+      closeAssetReviewModal();
+      renderDashboard();
+    }
+
+    function togglePartnerRegistrationFields(role) {
+      const fields = document.getElementById('partner-registration-fields');
+      if (fields) {
+        fields.style.display = (role === 'PARTNER' ? 'block' : 'none');
+      }
+      if (window.lucide) lucide.createIcons();
     }
 
     function adminApprovePartner(userId, newStatus) {
@@ -3165,6 +4273,7 @@
       err.style.display = 'none';
       succ.style.display = 'none';
 
+      
       if (currentAuthMode === 'login') {
         const found = state.users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === pass);
         if (!found) {
@@ -3208,11 +4317,48 @@
           avatar: (firstName[0] + lastName[0]).toUpperCase()
         };
 
+        if (role === 'PARTNER') {
+          const compName = document.getElementById('auth-partner-company').value || (lastName + ' Luxury Services SARL');
+          const phone = document.getElementById('auth-partner-phone').value || '+377 98 98 00 00';
+          const cat = document.getElementById('auth-partner-category').value || 'Supercars, Yachts & Private Drivers';
+          const regions = (document.getElementById('auth-partner-regions').value || 'Monaco, Paris, Dubai').split(',').map(r => r.trim());
+          const scale = document.getElementById('auth-partner-scale').value || 'Verified Luxury Assets';
+          const val = parseFloat(document.getElementById('auth-partner-valuation').value) || 25000000;
+          const lic = document.getElementById('auth-partner-license').value || ('LIC-' + Math.floor(10000 + Math.random() * 90000));
+          const ins = document.getElementById('auth-partner-insurance').value || 'Lloyd\'s of London ($50M Liability)';
+          const pitch = document.getElementById('auth-partner-pitch').value || 'Providing premium services for Aether VIP clientele.';
+
+          newUser.application = {
+            companyName: compName,
+            registrationNumber: 'REG-' + Math.floor(100000 + Math.random() * 900000),
+            taxId: 'TX-' + Math.floor(10000 + Math.random() * 90000),
+            incorporationCountry: regions[0] || 'Monaco',
+            city: regions[0] || 'Monaco',
+            address: 'Executive Suites, ' + (regions[0] || 'Monaco'),
+            phone,
+            website: 'https://' + compName.toLowerCase().replace(/[^a-z0-9]/g, '') + '.com',
+            category: cat,
+            portfolioScale: scale,
+            assetValuation: val,
+            coverageZones: regions,
+            proposalPitch: pitch,
+            commercialLicense: { number: lic, status: 'VERIFIED_ACTIVE', authority: 'Regional Transport & Tourism Directorate', expiry: '2028-12-31' },
+            insurance: { carrier: ins, policyNumber: 'POL-' + Math.floor(100000 + Math.random() * 900000), coverageAmount: 50000000, expiry: '2027-12-31' },
+            safetyAuditScore: 95,
+            riskAssessment: 'LOW RISK (SUBMITTED KYC)',
+            documents: [
+              { id: 'doc-new-reg', title: 'Corporate Registration Certificate', type: 'PDF', size: '2.1 MB', date: new Date().toISOString().split('T')[0], verified: true },
+              { id: 'doc-new-ins', title: 'Commercial Liability Policy Binder', type: 'PDF', size: '3.5 MB', date: new Date().toISOString().split('T')[0], verified: true }
+            ],
+            appliedAt: new Date().toISOString().split('T')[0]
+          };
+        }
+
         state.users.push(newUser);
         saveState();
 
         succ.innerText = role === 'PARTNER' 
-          ? 'Partner application registered! Awaiting Master Admin verification. Please sign in.' 
+          ? 'Partner application registered! Complete KYC dossier submitted to Master Admin desk for review. Please sign in.' 
           : 'Account profile created successfully! Please sign in.';
         succ.style.display = 'block';
 
@@ -3221,6 +4367,7 @@
           document.getElementById('auth-email').value = email;
         }, 1200);
       }
+
     }
 
     function logout() {

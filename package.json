@@ -11,6 +11,8 @@
     "dev:frontend": "npm run dev --prefix frontend",
     "db:push": "npm run prisma:migrate --prefix backend",
     "db:seed": "npm run prisma:seed --prefix backend",
-    "db:studio": "npm run prisma:studio --prefix backend"
+    "db:studio": "npm run prisma:studio --prefix backend",
+    "seed:firestore": "npm run seed --prefix frontend",
+    "seed:firestore:client": "npm run seed:client --prefix frontend"
   }
 }

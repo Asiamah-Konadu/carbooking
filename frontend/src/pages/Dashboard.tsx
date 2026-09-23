@@ -1,6 +1,99 @@
+
+const INITIAL_PARTNER_SEED = [
+  {
+    id: 'usr-3',
+    firstName: 'Marco',
+    lastName: 'Rossi',
+    email: 'partner2@booking.com',
+    role: 'PARTNER',
+    status: 'PENDING',
+    createdAt: '2026-09-21T14:30:00Z',
+    application: {
+      companyName: 'Rossi Supercars & Riva Yachting Group Ltd.',
+      registrationNumber: 'MC-984420-VAT',
+      taxId: 'MC-TX-88219',
+      incorporationCountry: 'Monaco',
+      city: 'Monaco',
+      address: 'Quai Antoine 1er, Port Hercule, 98000 Monaco',
+      phone: '+377 98 98 22 00',
+      website: 'https://rossi-marine.mc',
+      category: 'Supercars, Yachts & Private Drivers',
+      portfolioScale: '14 Exotic Supercars & 4 Sunseeker / Riva Yachts',
+      assetValuation: 38500000,
+      coverageZones: ['Monaco', 'Nice Côte d\'Azur', 'Cannes', 'Saint-Tropez'],
+      proposalPitch: 'We provide bespoke yacht charters across the French Riviera and VIP tarmac supercar deliveries with dedicated chauffeurs.',
+      commercialLicense: {
+        number: 'MON-LUX-2024-8874',
+        status: 'VERIFIED_ACTIVE',
+        authority: 'Monaco Maritime & Transport Directorate',
+        expiry: '2028-12-31'
+      },
+      insurance: {
+        carrier: 'Lloyd\'s of London Marine & Luxury Auto',
+        policyNumber: 'LLD-882194-X',
+        coverageAmount: 50000000,
+        expiry: '2027-06-30',
+        status: 'VALID_ACTIVE'
+      },
+      safetyAuditScore: 96,
+      riskAssessment: 'LOW RISK (TIER-1 LUXURY ACCREDITED)',
+      tierGranted: 'Tier-1 Certified Luxury Partner',
+      documents: [
+        { id: 'doc-mc-reg', title: 'Monaco Corporate Registry & Trade License', type: 'PDF', size: '2.4 MB', date: '2026-09-20', verified: true },
+        { id: 'doc-mc-ins', title: 'Lloyd\'s 50M USD Marine & Fleet Liability Binder', type: 'PDF', size: '4.1 MB', date: '2026-09-21', verified: true },
+        { id: 'doc-mc-id', title: 'Managing Director Passport & Biometric KYC', type: 'DOC', size: '1.8 MB', date: '2026-09-20', verified: true }
+      ]
+    }
+  },
+  {
+    id: 'usr-5',
+    firstName: 'Lady Victoria',
+    lastName: 'Hamilton',
+    email: 'aviation@booking.com',
+    role: 'PARTNER',
+    status: 'PENDING',
+    createdAt: '2026-09-22T09:15:00Z',
+    application: {
+      companyName: 'Mayfair Private Aviation & Helicopter Group Ltd.',
+      registrationNumber: 'GB-88410293',
+      taxId: 'GB-VAT-992144',
+      incorporationCountry: 'United Kingdom',
+      city: 'London (Farnborough)',
+      address: '14 Berkeley Square, Mayfair, London W1J 6BL',
+      phone: '+44 20 7946 0991',
+      website: 'https://mayfair-aviation.co.uk',
+      category: 'Private Aviation & Helicopter Transfers',
+      portfolioScale: '6 Gulfstream G650 Jets & 4 Airbus ACH130 Helicopters',
+      assetValuation: 120000000,
+      coverageZones: ['London', 'Geneva', 'Paris Le Bourget', 'Nice Cote d\'Azur', 'Zurich'],
+      proposalPitch: 'Direct private jet charters and scenic helicopter transfers connecting London, Geneva, and the Alps with Michelin-starred catering on board.',
+      commercialLicense: {
+        number: 'CAA-AOC-UK-9921',
+        status: 'VERIFIED_ACTIVE',
+        authority: 'Civil Aviation Authority & EASA',
+        expiry: '2029-03-31'
+      },
+      insurance: {
+        carrier: 'Allianz Global Corporate Aviation',
+        policyNumber: 'AV-9812-AZ',
+        coverageAmount: 250000000,
+        expiry: '2028-09-30',
+        status: 'VALID_ACTIVE'
+      },
+      safetyAuditScore: 99,
+      riskAssessment: 'LOW RISK (TIER-1 LUXURY ACCREDITED)',
+      tierGranted: 'Tier-1 Certified Luxury Partner',
+      documents: [
+        { id: 'doc-uk-aoc', title: 'Air Operator Certificate (AOC-UK-9921)', type: 'PDF', size: '3.8 MB', date: '2026-09-22', verified: true },
+        { id: 'doc-uk-ins', title: 'Allianz 250M USD Aircraft Hull & Liability Binder', type: 'PDF', size: '5.2 MB', date: '2026-09-22', verified: true }
+      ]
+    }
+  }
+];
+
 import React, { useState, useEffect } from 'react';
 import { 
-  Calendar, User as UserIcon, 
+  Calendar, User as UserIcon, FileText, Eye, ShieldCheck, HelpCircle, Fingerprint, 
   CheckCircle, XCircle, Clock, Trash2, CreditCard, PlusCircle, 
   TrendingUp, FolderKanban, Building2, Car, UtensilsCrossed, 
   Crown, MapPin, Users, CheckCircle2, AlertCircle, 
@@ -68,7 +161,18 @@ export default function Dashboard({ user, token, navigateToDetail, addToast }: D
   // ----------------------------------------------------
   // ADMIN STATE
   // ----------------------------------------------------
-  const [pendingPartners, setPendingPartners] = useState<any[]>([]);
+  const [pendingPartners, setPendingPartners] = useState<any[]>(INITIAL_PARTNER_SEED);
+
+  // ----------------------------------------------------
+  // MASTER ADMIN KYC REVIEW STATE
+  // ----------------------------------------------------
+  const [selectedReviewPartner, setSelectedReviewPartner] = useState<any | null>(null);
+  const [selectedDocPreview, setSelectedDocPreview] = useState<any | null>(null);
+  const [adminPartnerFilter, setAdminPartnerFilter] = useState<'ALL' | 'PENDING' | 'APPROVED' | 'REJECTED'>('ALL');
+  const [adminSearchQuery, setAdminSearchQuery] = useState('');
+  const [adminReviewNotes, setAdminReviewNotes] = useState('');
+  const [adminTierGranted, setAdminTierGranted] = useState('Tier-1 Certified Luxury Partner');
+
   const [pendingListings, setPendingListings] = useState<any[]>([]);
 
   // ----------------------------------------------------
@@ -894,30 +998,413 @@ export default function Dashboard({ user, token, navigateToDetail, addToast }: D
         {/* ======================================================== */}
         {activeSubTab === 'admin-partners' && (
           <div>
-            {pendingPartners.length === 0 ? (
+            <div style={{ marginBottom: '2rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
+                <div>
+                  <h3 className="gradient-text" style={{ fontSize: '1.6rem', fontWeight: 800 }}>Partner Verification & Compliance Desk</h3>
+                  <p style={{ color: 'var(--text-gray)', fontSize: '0.9rem', marginTop: '0.2rem' }}>
+                    Review complete luxury partner compliance dossiers, inspect $50M+ liability insurance, and assign accreditation.
+                  </p>
+                </div>
+                
+                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                  {(['ALL', 'PENDING', 'APPROVED', 'REJECTED'] as const).map(tab => (
+                    <button
+                      key={tab}
+                      onClick={() => setAdminPartnerFilter(tab)}
+                      className={`btn ${adminPartnerFilter === tab ? 'btn-primary' : 'btn-secondary'}`}
+                      style={{ padding: '0.4rem 0.9rem', fontSize: '0.8rem', borderRadius: 'var(--radius-full)' }}
+                    >
+                      {tab === 'ALL' && `All (${pendingPartners.length})`}
+                      {tab === 'PENDING' && `Pending KYC (${pendingPartners.filter(p => p.status === 'PENDING').length})`}
+                      {tab === 'APPROVED' && `Approved (${pendingPartners.filter(p => p.status === 'APPROVED').length})`}
+                      {tab === 'REJECTED' && `Rejected (${pendingPartners.filter(p => p.status === 'REJECTED').length})`}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ marginBottom: '1.5rem' }}>
+                <input 
+                  type="text" 
+                  className="input-field" 
+                  placeholder="Search partner by company name, executive, or category..." 
+                  value={adminSearchQuery} 
+                  onChange={(e) => setAdminSearchQuery(e.target.value)}
+                  style={{ maxWidth: '500px' }}
+                />
+              </div>
+            </div>
+
+            {pendingPartners.filter(p => {
+              if (adminPartnerFilter === 'PENDING') return p.status === 'PENDING';
+              if (adminPartnerFilter === 'APPROVED') return p.status === 'APPROVED';
+              if (adminPartnerFilter === 'REJECTED') return p.status === 'REJECTED';
+              return true;
+            }).filter(p => {
+              if (!adminSearchQuery.trim()) return true;
+              const q = adminSearchQuery.toLowerCase();
+              const comp = (p.application?.companyName || '').toLowerCase();
+              const name = `${p.firstName} ${p.lastName}`.toLowerCase();
+              const email = p.email.toLowerCase();
+              return comp.includes(q) || name.includes(q) || email.includes(q);
+            }).length === 0 ? (
               <div className="glass" style={{ padding: '3.5rem', textAlign: 'center', borderRadius: 'var(--radius-lg)' }}>
                 <CheckCircle2 size={36} style={{ color: '#10b981', margin: '0 auto 1rem auto' }} />
-                <p style={{ color: 'var(--text-gray)' }}>All partner applications have been audited and resolved.</p>
+                <p style={{ color: 'var(--text-gray)' }}>No partner applications matching current filter.</p>
               </div>
             ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', maxWidth: '850px' }}>
-                {pendingPartners.map((partner) => (
-                  <div key={partner.id} className="glass" style={{ padding: '1.6rem', borderRadius: 'var(--radius-lg)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div>
-                      <h4 style={{ fontWeight: 800, fontSize: '1.15rem', marginBottom: '0.3rem' }}>{partner.firstName} {partner.lastName}</h4>
-                      <p style={{ fontSize: '0.88rem', color: 'var(--text-gray)' }}>Email: <strong style={{ color: '#fff' }}>{partner.email}</strong> | Phone: {partner.phoneNumber || 'N/A'}</p>
-                      <p style={{ fontSize: '0.8rem', color: 'var(--text-gray)', marginTop: '0.2rem' }}>Applied: {new Date(partner.createdAt).toLocaleDateString()}</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.4rem' }}>
+                {pendingPartners.filter(p => {
+                  if (adminPartnerFilter === 'PENDING') return p.status === 'PENDING';
+                  if (adminPartnerFilter === 'APPROVED') return p.status === 'APPROVED';
+                  if (adminPartnerFilter === 'REJECTED') return p.status === 'REJECTED';
+                  return true;
+                }).filter(p => {
+                  if (!adminSearchQuery.trim()) return true;
+                  const q = adminSearchQuery.toLowerCase();
+                  const comp = (p.application?.companyName || '').toLowerCase();
+                  const name = `${p.firstName} ${p.lastName}`.toLowerCase();
+                  const email = p.email.toLowerCase();
+                  return comp.includes(q) || name.includes(q) || email.includes(q);
+                }).map((partner) => {
+                  const app = partner.application || {
+                    companyName: partner.companyName || `${partner.firstName} Luxury Principal`,
+                    category: 'Supercars, Yachts & Private Drivers',
+                    portfolioScale: 'Multi-Asset Collection',
+                    assetValuation: 38500000,
+                    city: 'Monaco',
+                    incorporationCountry: 'Monaco',
+                    safetyAuditScore: 96,
+                    insurance: { carrier: "Lloyd's of London", coverageAmount: 50000000 }
+                  };
+
+                  return (
+                    <div 
+                      key={partner.id} 
+                      className="glass" 
+                      style={{ 
+                        padding: '1.8rem', 
+                        borderRadius: 'var(--radius-lg)', 
+                        borderLeft: `4px solid ${partner.status === 'APPROVED' ? '#4ade80' : partner.status === 'PENDING' ? '#f59e0b' : '#f43f5e'}`
+                      }}
+                    >
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1.2rem', marginBottom: '1.2rem' }}>
+                        <div style={{ display: 'flex', gap: '1.2rem', alignItems: 'center' }}>
+                          <div style={{ width: '52px', height: '52px', borderRadius: 'var(--radius-md)', background: 'linear-gradient(135deg, #f59e0b, #8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.3rem', fontWeight: 800, color: '#000' }}>
+                            {partner.firstName[0]}
+                          </div>
+                          <div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '0.2rem' }}>
+                              <h4 style={{ fontWeight: 800, fontSize: '1.25rem' }}>{partner.firstName} {partner.lastName}</h4>
+                              <span className={`badge ${partner.status === 'APPROVED' ? 'badge-approved' : partner.status === 'PENDING' ? 'badge-pending' : 'badge-rejected'}`}>
+                                {partner.status}
+                              </span>
+                              <span className="badge badge-hotel" style={{ fontSize: '0.72rem' }}>{app.category}</span>
+                            </div>
+                            <p style={{ color: 'var(--accent-gold)', fontWeight: 600, fontSize: '0.95rem' }}>{app.companyName}</p>
+                            <p style={{ color: 'var(--text-gray)', fontSize: '0.85rem', marginTop: '0.2rem' }}>
+                              Email: <strong>{partner.email}</strong> • HQ: <strong>{app.city}, {app.incorporationCountry}</strong>
+                            </p>
+                          </div>
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.4rem' }}>
+                          <span className="badge" style={{ background: 'rgba(16, 185, 129, 0.12)', color: '#34d399', border: '1px solid rgba(16, 185, 129, 0.25)' }}>
+                            🛡️ Audit Score: {app.safetyAuditScore || 96}/100
+                          </span>
+                          <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                            Est. Valuation: <strong style={{ color: '#fff' }}>${((app.assetValuation || 38500000) / 1000000).toFixed(1)}M</strong>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div style={{ background: 'rgba(255, 255, 255, 0.03)', padding: '0.8rem 1.2rem', borderRadius: 'var(--radius-sm)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.8rem', marginBottom: '1.2rem', fontSize: '0.85rem' }}>
+                        <span style={{ color: 'var(--text-gray)' }}>Portfolio: <strong style={{ color: '#fff' }}>{app.portfolioScale}</strong></span>
+                        <span style={{ color: 'var(--text-gray)' }}>Underwriter: <strong style={{ color: '#4ade80' }}>{app.insurance?.carrier || "Lloyd's"} (${((app.insurance?.coverageAmount || 50000000) / 1000000).toFixed(0)}M Liability)</strong></span>
+                      </div>
+
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+                        <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                          {app.tierGranted ? `Accreditation: ${app.tierGranted}` : 'Awaiting Master Admin Dossier Audit'}
+                        </span>
+
+                        <div style={{ display: 'flex', gap: '0.8rem', alignItems: 'center' }}>
+                          <button 
+                            className="btn btn-primary" 
+                            onClick={() => {
+                              setSelectedReviewPartner(partner);
+                              setAdminReviewNotes(app.adminNotes || '');
+                              setAdminTierGranted(app.tierGranted || 'Tier-1 Certified Luxury Partner');
+                            }}
+                            style={{ padding: '0.5rem 1.1rem', fontSize: '0.82rem', boxShadow: '0 0 15px rgba(245,158,11,0.25)' }}
+                          >
+                            <FileText size={14} />
+                            <span>Review Application Dossier</span>
+                          </button>
+                          
+                          {partner.status === 'PENDING' && (
+                            <>
+                              <button 
+                                className="btn btn-secondary" 
+                                onClick={() => handleApprovePartner(partner.id, 'APPROVED')} 
+                                style={{ padding: '0.5rem 0.9rem', fontSize: '0.82rem', color: '#4ade80' }}
+                              >
+                                <Check size={14} /> Approve
+                              </button>
+                              <button 
+                                className="btn btn-secondary" 
+                                onClick={() => handleApprovePartner(partner.id, 'REJECTED')} 
+                                style={{ padding: '0.5rem 0.9rem', fontSize: '0.82rem', color: '#f87171' }}
+                              >
+                                <XCircle size={14} /> Reject
+                              </button>
+                            </>
+                          )}
+                        </div>
+                      </div>
                     </div>
-                    <div style={{ display: 'flex', gap: '0.8rem' }}>
-                      <button className="btn btn-primary" onClick={() => handleApprovePartner(partner.id, 'APPROVED')} style={{ padding: '0.5rem 1rem', fontSize: '0.82rem' }}>
-                        <Check size={14} /> Approve Partner
+                  );
+                })}
+              </div>
+            )}
+
+            {/* MASTER ADMIN APPLICATION REVIEW DOSSIER MODAL */}
+            {selectedReviewPartner && (
+              <div className="modal-overlay" style={{ display: 'flex', zIndex: 1050 }}>
+                <div className="modal-content glass-heavy" style={{ maxWidth: '950px', maxHeight: '92vh', overflowY: 'auto', padding: '2.5rem', textAlign: 'left' }}>
+                  <button className="close-btn" onClick={() => setSelectedReviewPartner(null)}>&times;</button>
+                  
+                  {/* Modal Header */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem', borderBottom: '1px solid var(--border-glass)', paddingBottom: '1.5rem', flexWrap: 'wrap', gap: '1.2rem' }}>
+                    <div style={{ display: 'flex', gap: '1.2rem', alignItems: 'center' }}>
+                      <div style={{ width: '58px', height: '58px', borderRadius: 'var(--radius-md)', background: 'linear-gradient(135deg, #f59e0b, #ec4899)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: 800, color: '#000' }}>
+                        {selectedReviewPartner.firstName[0]}
+                      </div>
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '0.2rem' }}>
+                          <h2 className="font-serif" style={{ fontSize: '1.6rem', fontWeight: 800 }}>{selectedReviewPartner.firstName} {selectedReviewPartner.lastName}</h2>
+                          <span className={`badge ${selectedReviewPartner.status === 'APPROVED' ? 'badge-approved' : selectedReviewPartner.status === 'PENDING' ? 'badge-pending' : 'badge-rejected'}`}>
+                            {selectedReviewPartner.status}
+                          </span>
+                        </div>
+                        <p style={{ color: 'var(--accent-gold)', fontSize: '0.95rem', fontWeight: 600 }}>{selectedReviewPartner.application?.companyName || 'Rossi Supercars & Riva Yachting Group Ltd.'}</p>
+                        <p style={{ color: 'var(--text-gray)', fontSize: '0.82rem', marginTop: '0.2rem' }}>
+                          HQ: {selectedReviewPartner.application?.city || 'Monaco'}, {selectedReviewPartner.application?.incorporationCountry || 'Monaco'}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.4rem' }}>
+                      <span className="badge" style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#34d399', border: '1px solid rgba(16, 185, 129, 0.3)' }}>
+                        🛡️ Compliance Score: {selectedReviewPartner.application?.safetyAuditScore || 96}/100 (Low Risk)
+                      </span>
+                      <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Tier-1 Escrow Protocol Eligible</span>
+                    </div>
+                  </div>
+
+                  {/* Section 1: Entity Info */}
+                  <div style={{ marginBottom: '1.8rem' }}>
+                    <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <Building2 size={16} style={{ color: 'var(--accent-gold)' }} /> 1. Corporate Entity & Representative Information
+                    </h3>
+                    <div className="glass" style={{ padding: '1.4rem', borderRadius: 'var(--radius-md)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.2rem', fontSize: '0.9rem' }}>
+                      <div>
+                        <span style={{ color: 'var(--text-gray)', fontSize: '0.78rem', display: 'block' }}>Legal Company Name</span>
+                        <strong style={{ color: '#fff' }}>{selectedReviewPartner.application?.companyName || 'Rossi Marine Charters Ltd.'}</strong>
+                      </div>
+                      <div>
+                        <span style={{ color: 'var(--text-gray)', fontSize: '0.78rem', display: 'block' }}>Registration / VAT</span>
+                        <strong style={{ color: '#fff' }}>{selectedReviewPartner.application?.registrationNumber || 'MC-984420-VAT'}</strong>
+                      </div>
+                      <div>
+                        <span style={{ color: 'var(--text-gray)', fontSize: '0.78rem', display: 'block' }}>Direct Phone</span>
+                        <strong style={{ color: 'var(--accent-gold)' }}>{selectedReviewPartner.application?.phone || '+377 98 98 22 00'}</strong>
+                      </div>
+                      <div>
+                        <span style={{ color: 'var(--text-gray)', fontSize: '0.78rem', display: 'block' }}>Official Domain</span>
+                        <a href={selectedReviewPartner.application?.website || '#'} target="_blank" rel="noreferrer" style={{ color: 'var(--accent-cyan)', textDecoration: 'underline' }}>
+                          {selectedReviewPartner.application?.website || 'https://rossi-marine.mc'}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Section 2: Operations & Proposal */}
+                  <div style={{ marginBottom: '1.8rem' }}>
+                    <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <MapPin size={16} style={{ color: 'var(--accent-cyan)' }} /> 2. Operational Scope & Partnership Proposal
+                    </h3>
+                    <div className="glass" style={{ padding: '1.4rem', borderRadius: 'var(--radius-md)' }}>
+                      <div style={{ marginBottom: '1rem' }}>
+                        <span style={{ color: 'var(--text-gray)', fontSize: '0.78rem', display: 'block', marginBottom: '0.4rem' }}>Coverage Zones</span>
+                        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                          {(selectedReviewPartner.application?.coverageZones || ['Monaco', 'Nice', 'Cannes', 'Saint-Tropez']).map((z: string) => (
+                            <span key={z} className="badge badge-hotel" style={{ fontSize: '0.75rem' }}>{z}</span>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <span style={{ color: 'var(--text-gray)', fontSize: '0.78rem', display: 'block', marginBottom: '0.4rem' }}>Partnership Pitch</span>
+                        <p style={{ color: 'var(--text-gray)', fontSize: '0.88rem', lineHeight: 1.6, background: 'rgba(0,0,0,0.3)', padding: '0.9rem', borderRadius: 'var(--radius-sm)', borderLeft: '3px solid var(--accent-gold)' }}>
+                          "{selectedReviewPartner.application?.proposalPitch || 'We provide bespoke yacht charters and chauffeured exotic supercars for Aether VIP travelers.'}"
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Section 3: Regulatory Compliance & Insurance */}
+                  <div style={{ marginBottom: '1.8rem' }}>
+                    <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <ShieldCheck size={16} style={{ color: '#4ade80' }} /> 3. Regulatory Compliance & 5-Point KYC Verification
+                    </h3>
+                    <div className="glass" style={{ padding: '1.4rem', borderRadius: 'var(--radius-md)' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.2rem', marginBottom: '1.2rem' }}>
+                        <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.9rem', borderRadius: 'var(--radius-sm)' }}>
+                          <span style={{ fontSize: '0.78rem', color: 'var(--text-gray)' }}>Commercial License</span>
+                          <p style={{ fontWeight: 700, color: '#fff', marginTop: '0.2rem' }}>{selectedReviewPartner.application?.commercialLicense?.number || 'MON-LUX-2024-8874'}</p>
+                          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Verified & Active</span>
+                        </div>
+                        <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.9rem', borderRadius: 'var(--radius-sm)' }}>
+                          <span style={{ fontSize: '0.78rem', color: 'var(--text-gray)' }}>Liability Insurance</span>
+                          <p style={{ fontWeight: 700, color: '#fff', marginTop: '0.2rem' }}>{selectedReviewPartner.application?.insurance?.carrier || "Lloyd's of London"}</p>
+                          <span style={{ fontSize: '0.75rem', color: '#4ade80' }}>$50M Coverage Active</span>
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.8rem' }}>
+                        {['Director Biometric ID Verified', 'Corporate Registry Verified', 'Commercial Insurance Active', 'Bank Escrow Payout Vetted', 'Sanctions List Clear'].map((check) => (
+                          <div key={check} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem', color: '#4ade80' }}>
+                            <CheckCircle2 size={14} />
+                            <span>{check}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Section 4: Document Inspector */}
+                  <div style={{ marginBottom: '1.8rem' }}>
+                    <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <FileText size={16} style={{ color: 'var(--accent-gold)' }} /> 4. Verified Document Dossier & Evidence
+                    </h3>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
+                      {(selectedReviewPartner.application?.documents || [
+                        { id: 'doc-reg', title: 'Corporate Registration Certificate', type: 'PDF', size: '2.4 MB' },
+                        { id: 'doc-ins', title: "Lloyd's $50M Liability Policy Binder", type: 'PDF', size: '4.1 MB' }
+                      ]).map((doc: any) => (
+                        <div key={doc.id} className="glass" style={{ padding: '0.9rem 1.2rem', borderRadius: 'var(--radius-md)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                            <FileText size={16} style={{ color: 'var(--accent-gold)' }} />
+                            <div>
+                              <strong style={{ fontSize: '0.82rem', color: '#fff', display: 'block' }}>{doc.title}</strong>
+                              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{doc.type} • {doc.size}</span>
+                            </div>
+                          </div>
+                          <button 
+                            className="btn btn-secondary" 
+                            onClick={() => setSelectedDocPreview({ doc, partner: selectedReviewPartner })}
+                            style={{ padding: '0.3rem 0.7rem', fontSize: '0.75rem' }}
+                          >
+                            <Eye size={12} /> Inspect
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Section 5: Decision Console */}
+                  <div className="glass" style={{ padding: '1.6rem', borderRadius: 'var(--radius-lg)', border: '1px solid rgba(245,158,11,0.3)', background: 'rgba(245,158,11,0.03)' }}>
+                    <h3 className="gradient-text" style={{ fontSize: '1.2rem', marginBottom: '0.4rem' }}>Master Admin Decision Console</h3>
+                    <p style={{ color: 'var(--text-gray)', fontSize: '0.85rem', marginBottom: '1.2rem' }}>
+                      Assign luxury accreditation tier, record internal audit notes, and execute administrative disposition.
+                    </p>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.2rem', marginBottom: '1.2rem' }}>
+                      <div className="form-group">
+                        <label className="form-label">Accreditation Privilege Tier</label>
+                        <select className="input-field" value={adminTierGranted} onChange={(e) => setAdminTierGranted(e.target.value)}>
+                          <option value="Tier-1 Certified Luxury Partner">Tier-1 Certified Luxury Partner</option>
+                          <option value="VIP Asset Provider">VIP Asset Provider</option>
+                          <option value="Standard Verified Partner">Standard Verified Partner</option>
+                        </select>
+                      </div>
+                      <div className="form-group">
+                        <label className="form-label">Internal Audit Notes</label>
+                        <input type="text" className="input-field" placeholder="Auditor notes / verification details..." value={adminReviewNotes} onChange={(e) => setAdminReviewNotes(e.target.value)} />
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
+                      <button className="btn btn-secondary" onClick={() => {
+                        if (addToast) addToast(`Formal KYC Information Request dispatched to ${selectedReviewPartner.email}`, 'info');
+                        setSelectedReviewPartner(null);
+                      }} style={{ color: '#fbbf24' }}>
+                        <HelpCircle size={14} /> Request Info
                       </button>
-                      <button className="btn btn-secondary" onClick={() => handleApprovePartner(partner.id, 'REJECTED')} style={{ padding: '0.5rem 1rem', fontSize: '0.82rem', color: '#f87171' }}>
-                        <XCircle size={14} /> Reject
+                      <button className="btn btn-secondary" onClick={() => {
+                        handleApprovePartner(selectedReviewPartner.id, 'REJECTED');
+                        setSelectedReviewPartner(null);
+                      }} style={{ color: '#f87171' }}>
+                        <XCircle size={14} /> Reject Application
+                      </button>
+                      <button className="btn btn-primary" onClick={() => {
+                        handleApprovePartner(selectedReviewPartner.id, 'APPROVED');
+                        setSelectedReviewPartner(null);
+                      }}>
+                        <ShieldCheck size={16} /> Approve & Grant Accreditation
                       </button>
                     </div>
                   </div>
-                ))}
+
+                </div>
+              </div>
+            )}
+
+            {/* DOCUMENT PROOF PREVIEW MODAL */}
+            {selectedDocPreview && (
+              <div className="modal-overlay" style={{ display: 'flex', zIndex: 1200 }}>
+                <div className="modal-content glass-heavy" style={{ maxWidth: '650px', padding: '2.5rem', textAlign: 'left' }}>
+                  <button className="close-btn" onClick={() => setSelectedDocPreview(null)}>&times;</button>
+                  
+                  <div style={{ border: '2px solid var(--accent-gold)', padding: '2rem', borderRadius: 'var(--radius-md)', background: 'radial-gradient(circle at 50% 30%, #151522 0%, #08080f 100%)', boxShadow: '0 0 30px rgba(245,158,11,0.2)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(245,158,11,0.3)', paddingBottom: '1rem', marginBottom: '1.2rem' }}>
+                      <div>
+                        <span style={{ color: 'var(--accent-gold)', fontSize: '0.72rem', letterSpacing: '2px', fontWeight: 800 }}>AETHER TRUST & AUDIT LEDGER</span>
+                        <h3 className="gradient-text" style={{ fontSize: '1.4rem', marginTop: '0.2rem' }}>Official Regulatory Certificate</h3>
+                      </div>
+                      <div style={{ width: '56px', height: '56px', borderRadius: '50%', border: '2px dashed var(--accent-gold)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-gold)', fontSize: '0.7rem', fontWeight: 800, textAlign: 'center' }}>
+                        AETHER<br/>AUDIT
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.85rem', marginBottom: '1.2rem' }}>
+                      <div>
+                        <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem', display: 'block' }}>Entity Name</span>
+                        <strong style={{ color: '#fff' }}>{selectedDocPreview.partner?.application?.companyName || 'Rossi Supercars Group Ltd.'}</strong>
+                      </div>
+                      <div>
+                        <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem', display: 'block' }}>Registration Reference</span>
+                        <strong style={{ color: 'var(--accent-gold)', fontFamily: 'monospace' }}>{selectedDocPreview.partner?.application?.registrationNumber || 'MC-984420-VAT'}</strong>
+                      </div>
+                    </div>
+
+                    <div style={{ background: 'rgba(0,0,0,0.5)', padding: '0.8rem', borderRadius: 'var(--radius-sm)', fontFamily: 'monospace', fontSize: '0.72rem', color: 'var(--text-gray)', lineHeight: 1.6 }}>
+                      <div>HASH: <span style={{ color: 'var(--accent-cyan)' }}>9f8a3c42b8e7190d65a2f01488c991e0a2d547f891b8429188e02d847192ca10</span></div>
+                      <div>TIMESTAMP: 2026-09-23T01:48:00Z • AUDITOR: Alex Admin (Master ID: usr-1)</div>
+                      <div>STATUS: <span style={{ color: '#4ade80', fontWeight: 800 }}>CONFIRMED VALID & ACTIVE</span></div>
+                    </div>
+                  </div>
+
+                  <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '0.78rem', color: '#4ade80', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                      <Fingerprint size={14} /> SHA-256 Verified
+                    </span>
+                    <button className="btn btn-primary btn-sm" onClick={() => setSelectedDocPreview(null)}>
+                      Close Preview
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
           </div>

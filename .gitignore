@@ -23,3 +23,7 @@ yarn-error.log*
 .idea/
 .DS_Store
 Thumbs.db
+
+# Firebase Admin – NEVER commit this key
+**/serviceAccountKey.json
+serviceAccountKey.json
