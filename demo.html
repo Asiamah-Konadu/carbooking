@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AETHER | Ultra-Luxury Travel, Stays, Chauffeurs & Gastronomy</title>
-  <meta name="description" content="Aether Luxury Booking - Reserve verified penthouses, luxury villas, exotic supercars, private chauffeurs, Michelin-starred gastronomy, and private yachts.">
+  <title>AETHER | Ghana's Premier Luxury Stays, Executive Fleet & Gastronomy</title>
+  <meta name="description" content="Aether Ghana - Reserve verified 5-star hotel suites in Accra & Kumasi, ride BMW xDrive, Mercedes GLE & Toyota Land Cruiser V8, and discover authentic Ghanaian fine dining.">
   
   <!-- Modern Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -269,7 +269,7 @@
     .badge-car { background: rgba(6, 182, 212, 0.15); color: #38bdf8; border: 1px solid rgba(6, 182, 212, 0.35); }
     .badge-driver { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
     .badge-dining { background: rgba(244, 63, 94, 0.15); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.35); }
-    .badge-yacht { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
+    .badge-fleet { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.35); }
     
     .badge-approved { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.35); }
     .badge-pending { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
@@ -650,7 +650,7 @@
       justify-content: center;
       padding: 4rem 2rem 8rem 2rem;
       text-align: center;
-      background: radial-gradient(circle at 50% 20%, rgba(30, 27, 75, 0.6) 0%, rgba(7, 7, 11, 0.95) 75%), url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2000');
+      background: radial-gradient(circle at 50% 25%, rgba(10, 10, 18, 0.45) 0%, rgba(7, 7, 11, 0.94) 82%), url('https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=2000');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -953,8 +953,7 @@
       <a class="nav-link active" id="nav-home" onclick="navigateTo('home')"><i data-lucide="compass" style="width:15px;height:15px;"></i> Explore</a>
       <a class="nav-link" id="nav-stays" onclick="quickFilterService('HOTEL')"><i data-lucide="building" style="width:15px;height:15px;"></i> Stays</a>
       <a class="nav-link" id="nav-fleet" onclick="quickFilterService('CAR')"><i data-lucide="car" style="width:15px;height:15px;"></i> Fleet & Drivers</a>
-      <a class="nav-link" id="nav-dining" onclick="quickFilterService('RESTAURANT')"><i data-lucide="utensils" style="width:15px;height:15px;"></i> Gastronomy</a>
-      <a class="nav-link" id="nav-yachts" onclick="quickFilterService('YACHT')"><i data-lucide="anchor" style="width:15px;height:15px;"></i> Yachts & Jets</a>
+      <a class="nav-link" id="nav-dining" onclick="quickFilterService('RESTAURANT')"><i data-lucide="utensils" style="width:15px;height:15px;"></i> Gastronomy</a>
       <a class="nav-link" id="nav-concierge" onclick="navigateTo('concierge')"><i data-lucide="sparkles" style="width:15px;height:15px;color:var(--accent-gold);"></i> VIP Concierge</a>
       <a class="nav-link" id="nav-destinations" onclick="navigateTo('destinations')"><i data-lucide="globe" style="width:15px;height:15px;"></i> Destinations</a>
       <a class="nav-link" id="nav-dashboard" onclick="navigateTo('dashboard')" style="display: none;"><i data-lucide="layout-dashboard" style="width:15px;height:15px;"></i> Dashboard</a>
@@ -1016,8 +1015,7 @@
       <a class="mobile-nav-link active" id="mobile-nav-home" onclick="navigateTo('home'); closeMobileNav();"><i data-lucide="compass"></i> Explore</a>
       <a class="mobile-nav-link" id="mobile-nav-stays" onclick="quickFilterService('HOTEL'); closeMobileNav();"><i data-lucide="building"></i> Stays</a>
       <a class="mobile-nav-link" id="mobile-nav-fleet" onclick="quickFilterService('CAR'); closeMobileNav();"><i data-lucide="car"></i> Fleet & Drivers</a>
-      <a class="mobile-nav-link" id="mobile-nav-dining" onclick="quickFilterService('RESTAURANT'); closeMobileNav();"><i data-lucide="utensils"></i> Gastronomy</a>
-      <a class="mobile-nav-link" id="mobile-nav-yachts" onclick="quickFilterService('YACHT'); closeMobileNav();"><i data-lucide="anchor"></i> Yachts & Jets</a>
+      <a class="mobile-nav-link" id="mobile-nav-dining" onclick="quickFilterService('RESTAURANT'); closeMobileNav();"><i data-lucide="utensils"></i> Gastronomy</a>
       <a class="mobile-nav-link" id="mobile-nav-concierge" onclick="navigateTo('concierge'); closeMobileNav();"><i data-lucide="sparkles" style="color:var(--accent-gold);"></i> VIP Concierge</a>
       <a class="mobile-nav-link" id="mobile-nav-destinations" onclick="navigateTo('destinations'); closeMobileNav();"><i data-lucide="globe"></i> Destinations</a>
       <a class="mobile-nav-link" id="mobile-nav-dashboard" onclick="navigateTo('dashboard'); closeMobileNav();" style="display: none;"><i data-lucide="layout-dashboard"></i> Dashboard</a>
@@ -1089,17 +1087,16 @@
         <!-- Service switcher tabs -->
         <div class="service-tabs-nav">
           <button class="tab-search-btn active" onclick="setSearchCategory('ALL', this)"><i data-lucide="globe" style="width:15px;height:15px;"></i> All Services</button>
-          <button class="tab-search-btn" onclick="setSearchCategory('HOTEL', this)"><i data-lucide="building-2" style="width:15px;height:15px;"></i> Hotels & Villas</button>
-          <button class="tab-search-btn" onclick="setSearchCategory('CAR_RENTAL', this)"><i data-lucide="car" style="width:15px;height:15px;"></i> Exotic Car Rentals</button>
-          <button class="tab-search-btn" onclick="setSearchCategory('PRIVATE_DRIVER', this)"><i data-lucide="award" style="width:15px;height:15px;"></i> Chauffeur Services</button>
-          <button class="tab-search-btn" onclick="setSearchCategory('RESTAURANT', this)"><i data-lucide="utensils-crossed" style="width:15px;height:15px;"></i> Michelin Dining</button>
-          <button class="tab-search-btn" onclick="setSearchCategory('YACHT', this)"><i data-lucide="anchor" style="width:15px;height:15px;"></i> Yachts & Jets</button>
+          <button class="tab-search-btn" onclick="setSearchCategory('HOTEL', this)"><i data-lucide="building-2" style="width:15px;height:15px;"></i> Hotels & Resorts</button>
+          <button class="tab-search-btn" onclick="setSearchCategory('CAR_RENTAL', this)"><i data-lucide="car" style="width:15px;height:15px;"></i> Executive Car Fleet</button>
+          <button class="tab-search-btn" onclick="setSearchCategory('PRIVATE_DRIVER', this)"><i data-lucide="award" style="width:15px;height:15px;"></i> Chauffeur & VIP Escorts</button>
+          <button class="tab-search-btn" onclick="setSearchCategory('RESTAURANT', this)"><i data-lucide="utensils-crossed" style="width:15px;height:15px;"></i> Ghanaian Fine Dining</button>
         </div>
 
         <form onsubmit="handleMainSearch(event)" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) 120px; gap: 1rem; align-items: end;">
           <div class="form-group" style="margin-bottom: 0;">
             <label class="form-label"><i data-lucide="map-pin" style="width:13px;height:13px;color:var(--accent-gold);"></i> Destination / City</label>
-            <input type="text" id="search-destination" placeholder="e.g. Paris, Dubai, Monaco" class="input-field">
+            <input type="text" id="search-destination" placeholder="e.g. Accra, Kumasi, Takoradi" class="input-field">
           </div>
           
           <div class="form-group" style="margin-bottom: 0;">
@@ -1140,16 +1137,16 @@
     <section style="background: rgba(10,10,18,0.8); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass); padding: 3rem 4rem;">
       <div style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; text-align: center;">
         <div>
-          <h2 class="font-serif gradient-gold-text" style="font-size: 2.8rem; font-weight: 900;">14,500+</h2>
-          <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.3rem;">Verified Luxury Accommodations</p>
+          <h2 class="font-serif gradient-gold-text" style="font-size: 2.8rem; font-weight: 900;">150+</h2>
+          <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.3rem;">Luxury Ghanaian Hotels & Suites</p>
         </div>
         <div>
-          <h2 class="font-serif gradient-cyan-text" style="font-size: 2.8rem; font-weight: 900;">1,200+</h2>
-          <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.3rem;">Chauffeurs & Exotic Supercars</p>
+          <h2 class="font-serif gradient-cyan-text" style="font-size: 2.8rem; font-weight: 900;">95+</h2>
+          <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.3rem;">BMW, GLE & V8 Fleet Vehicles</p>
         </div>
         <div>
-          <h2 class="font-serif gradient-gold-text" style="font-size: 2.8rem; font-weight: 900;">680+</h2>
-          <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.3rem;">Michelin & Sommelier Tables</p>
+          <h2 class="font-serif gradient-gold-text" style="font-size: 2.8rem; font-weight: 900;">60+</h2>
+          <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.3rem;">Fine Dining & Gastronomy Venues</p>
         </div>
         <div>
           <h2 class="font-serif" style="font-size: 2.8rem; font-weight: 900; color: #4ade80;">99.8%</h2>
@@ -1263,15 +1260,15 @@
         <div class="glass" style="padding: 2.5rem; border-radius: var(--radius-lg); position: relative;">
           <div style="color: var(--accent-gold); font-size: 1.2rem; margin-bottom: 1rem;">⭐⭐⭐⭐⭐</div>
           <p style="color: var(--text-gray); font-style: italic; line-height: 1.6; margin-bottom: 1.5rem;">
-            "The partner host portal is the best in the industry. As a luxury villa owner in Amalfi, getting approved guests and direct payouts has never been smoother."
+            "Aether has transformed our executive fleet operations in Accra. From BMW xDrives to Land Cruiser V8 convoys, corporate clients and tourists book effortlessly with guaranteed escrow settlements."
           </p>
           <div style="display: flex; align-items: center; gap: 0.8rem;">
             <div style="width: 44px; height: 44px; border-radius: 50%; background: #334155; overflow: hidden;">
               <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200" alt="Client" style="width:100%;height:100%;object-fit:cover;">
             </div>
             <div>
-              <h4 style="font-size: 0.95rem; font-weight: 700;">Gianluca Rossi</h4>
-              <p style="font-size: 0.78rem; color: var(--text-muted);">Villa & Yacht Operator, Italy</p>
+              <h4 style="font-size: 0.95rem; font-weight: 700;">Kwame Asante</h4>
+              <p style="font-size: 0.78rem; color: var(--text-muted);">Luxury Fleet & Residence Host, Accra & Kumasi</p>
             </div>
           </div>
         </div>
@@ -1284,7 +1281,7 @@
         <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-gold); letter-spacing: 1.5px; text-transform: uppercase;">Private Invitation</span>
         <h2 class="font-serif" style="font-size: 2.5rem; font-weight: 800; margin: 0.5rem 0 1rem 0;">Join the Aether Private Club</h2>
         <p style="color: var(--text-gray); margin-bottom: 2rem; font-size: 1rem;">
-          Subscribe for confidential private jet empty-leg alerts, private island invitations, and $250 credit toward your first booking.
+          Subscribe for confidential luxury suite upgrades, VIP Land Cruiser convoy discounts, and GH₵500 welcome credit toward your first booking.
         </p>
         <form onsubmit="handleNewsletter(event)" style="display: flex; gap: 0.8rem; max-width: 500px; margin: 0 auto;">
           <input type="email" id="newsletter-email" required placeholder="Enter your executive email..." class="input-field" style="height: 50px;">
@@ -1301,17 +1298,16 @@
     <!-- Filter Bar -->
     <div style="background: rgba(10,10,16,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-glass); padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
       <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;" id="listing-filter-pills">
-        <button class="btn btn-primary btn-sm btn-filter-pill" onclick="filterByServiceType('ALL', this)">All (16)</button>
-        <button class="btn btn-secondary btn-sm btn-filter-pill" onclick="filterByServiceType('HOTEL', this)"><i data-lucide="building" style="width:14px;height:14px;"></i> Stays & Villas</button>
-        <button class="btn btn-secondary btn-sm btn-filter-pill" onclick="filterByServiceType('CAR_RENTAL', this)"><i data-lucide="car" style="width:14px;height:14px;"></i> Exotic Rentals</button>
-        <button class="btn btn-secondary btn-sm btn-filter-pill" onclick="filterByServiceType('PRIVATE_DRIVER', this)"><i data-lucide="award" style="width:14px;height:14px;"></i> Chauffeurs</button>
-        <button class="btn btn-secondary btn-sm btn-filter-pill" onclick="filterByServiceType('RESTAURANT', this)"><i data-lucide="utensils" style="width:14px;height:14px;"></i> Gastronomy</button>
-        <button class="btn btn-secondary btn-sm btn-filter-pill" onclick="filterByServiceType('YACHT', this)"><i data-lucide="anchor" style="width:14px;height:14px;"></i> Yachts & Jets</button>
+        <button class="btn btn-primary btn-sm btn-filter-pill" onclick="filterByServiceType('ALL', this)">All Collections</button>
+        <button class="btn btn-secondary btn-sm btn-filter-pill" onclick="filterByServiceType('HOTEL', this)"><i data-lucide="building" style="width:14px;height:14px;"></i> Stays & Resorts</button>
+        <button class="btn btn-secondary btn-sm btn-filter-pill" onclick="filterByServiceType('CAR_RENTAL', this)"><i data-lucide="car" style="width:14px;height:14px;"></i> Car Rentals (BMW, GLE, V8, Vitz)</button>
+        <button class="btn btn-secondary btn-sm btn-filter-pill" onclick="filterByServiceType('PRIVATE_DRIVER', this)"><i data-lucide="award" style="width:14px;height:14px;"></i> Executive Chauffeurs</button>
+        <button class="btn btn-secondary btn-sm btn-filter-pill" onclick="filterByServiceType('RESTAURANT', this)"><i data-lucide="utensils" style="width:14px;height:14px;"></i> Ghanaian Gastronomy</button>
       </div>
       
       <div style="display: flex; gap: 0.8rem; align-items: center; flex: 1; max-width: 550px;">
         <div style="position: relative; flex: 1;">
-          <input type="text" id="list-keyword-input" placeholder="Search keywords, penthouse, Ferrari..." class="input-field" oninput="applyFilterEngine()" style="height: 40px; padding-left: 2.2rem;">
+          <input type="text" id="list-keyword-input" placeholder="Search BMW xDrive, Land Cruiser V8, Kempinski, Buka..." class="input-field" oninput="applyFilterEngine()" style="height: 40px; padding-left: 2.2rem;">
           <i data-lucide="search" style="position: absolute; left: 10px; top: 12px; width: 14px; height: 14px; color: var(--text-gray);"></i>
         </div>
         <input type="text" id="list-city-input" placeholder="City filter..." class="input-field" oninput="applyFilterEngine()" style="height: 40px; width: 140px;">
@@ -1379,8 +1375,8 @@
       <div style="text-align: center; margin-bottom: 3.5rem;">
         <span style="font-size: 0.82rem; font-weight: 700; color: var(--accent-gold); letter-spacing: 1.5px; text-transform: uppercase;">Direct Private Desk</span>
         <h1 class="font-serif" style="font-size: 3rem; font-weight: 800; margin: 0.5rem 0 1rem 0;">Aether VIP Bespoke Concierge</h1>
-        <p style="color: var(--text-gray); font-size: 1.1rem; max-width: 650px; margin: 0 auto;">
-          Require a private jet charter, superyacht Mediterranean buyout, red carpet security entourage, or Michelin chef residency at your private villa?
+        <p style="color: var(--text-gray); font-size: 1.1rem; max-width: 680px; margin: 0 auto;">
+          Require police escort motorcades, Toyota Land Cruiser V8 cross-country convoys, VIP Kotoka International Airport reception, or private chef residency?
         </p>
       </div>
 
@@ -1391,11 +1387,11 @@
             <div class="form-group">
               <label class="form-label">Mission Category</label>
               <select id="concierge-type" class="input-field">
-                <option value="Private Jet & Aviation">Private Jet & Helicopter Aviation</option>
-                <option value="Superyacht Buyout">Superyacht Mediterranean Buyout</option>
-                <option value="VIP Security & Armored Transport">VIP Close Protection & Armored Escort</option>
-                <option value="Private Island Estate">Private Island Estate Acquisition</option>
-                <option value="Michelin Private Chef">Private Michelin Chef in Residence</option>
+                <option value="VIP Police Escort & Diplomatic Motorcade">VIP Police Escort & Diplomatic Motorcade</option>
+                <option value="Toyota Land Cruiser V8 Cross-Country Convoy">Toyota Land Cruiser V8 Cross-Country Convoy</option>
+                <option value="Kotoka International Airport (KIA) VIP Meet & Greet">Kotoka International Airport (KIA) VIP Meet & Greet</option>
+                <option value="Private Chef for Contemporary Ghanaian Gastronomy">Private Chef for Contemporary Ghanaian Gastronomy</option>
+                <option value="Presidential Lake & Oceanfront Villa Buyout">Presidential Lake & Oceanfront Villa Buyout (Akosombo / Ada Foah)</option>
               </select>
             </div>
 
@@ -1412,7 +1408,7 @@
 
             <div class="form-group">
               <label class="form-label">Target Destinations / Routing</label>
-              <input type="text" id="concierge-route" required class="input-field" placeholder="e.g. Nice Airport to Monaco Heliport + Port Hercule">
+              <input type="text" id="concierge-route" required class="input-field" placeholder="e.g. Kotoka Airport KIA VIP Lounge to Kempinski Hotel & Kumasi Convoy">
             </div>
 
             <div class="form-group">
@@ -1635,11 +1631,11 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem;">
               <div class="form-group">
                 <label class="form-label" style="font-size: 0.78rem;">Company Legal Entity Name</label>
-                <input type="text" id="auth-partner-company" class="input-field" placeholder="E.g. Rossi Luxury Marine SARL">
+                <input type="text" id="auth-partner-company" class="input-field" placeholder="E.g. Gold Coast Executive Motors & Stays Ltd.">
               </div>
               <div class="form-group">
                 <label class="form-label" style="font-size: 0.78rem;">Direct Business Phone</label>
-                <input type="text" id="auth-partner-phone" class="input-field" placeholder="+377 98 98 22 00">
+                <input type="text" id="auth-partner-phone" class="input-field" placeholder="+233 24 456 7890">
               </div>
             </div>
 
@@ -1647,22 +1643,22 @@
               <div class="form-group">
                 <label class="form-label" style="font-size: 0.78rem;">Primary Luxury Category</label>
                 <select id="auth-partner-category" class="input-field" style="font-size: 0.82rem;">
-                  <option value="Supercars, Yachts & Private Drivers">Supercars, Yachts & Private Drivers</option>
-                  <option value="Private Aviation & Helicopter Transfers">Private Aviation & Helicopter Transfers</option>
-                  <option value="Luxury Stays & Heritage Châteaux">Luxury Stays & Heritage Châteaux</option>
-                  <option value="Michelin Gastronomy & Estate Chefs">Michelin Gastronomy & Estate Chefs</option>
+                  <option value="Executive Cars & Chauffeur Services">Executive Cars & Chauffeur Services (BMW xDrive, GLE, V8, Vitz/Yaris)</option>
+                  <option value="5-Star Hotels, Stays & Luxury Villas">5-Star Hotels, Stays & Luxury Villas</option>
+                  <option value="Authentic & Contemporary Gastronomy">Authentic & Contemporary Gastronomy</option>
+                  <option value="VIP Diplomatic & Corporate Security Escorts">VIP Diplomatic & Corporate Security Escorts</option>
                 </select>
               </div>
               <div class="form-group">
                 <label class="form-label" style="font-size: 0.78rem;">Operating Coverage Zones</label>
-                <input type="text" id="auth-partner-regions" class="input-field" placeholder="Monaco, Cannes, Nice, Paris">
+                <input type="text" id="auth-partner-regions" class="input-field" placeholder="Accra, Kumasi, Takoradi, Tema, Cape Coast">
               </div>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem;">
               <div class="form-group">
                 <label class="form-label" style="font-size: 0.78rem;">Portfolio Size & Scale</label>
-                <input type="text" id="auth-partner-scale" class="input-field" placeholder="E.g. 14 Supercars & 4 Yachts">
+                <input type="text" id="auth-partner-scale" class="input-field" placeholder="E.g. 18 Luxury SUVs (BMW, GLE, V8) & 12 City Cruisers (Vitz/Yaris)">
               </div>
               <div class="form-group">
                 <label class="form-label" style="font-size: 0.78rem;">Est. Asset Portfolio Valuation ($)</label>
@@ -1673,11 +1669,11 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem;">
               <div class="form-group">
                 <label class="form-label" style="font-size: 0.78rem;">Commercial Operator License #</label>
-                <input type="text" id="auth-partner-license" class="input-field" placeholder="MON-LUX-2024-8874">
+                <input type="text" id="auth-partner-license" class="input-field" placeholder="DVLA-GH-FLEET-8874">
               </div>
               <div class="form-group">
                 <label class="form-label" style="font-size: 0.78rem;">Commercial Insurance Carrier</label>
-                <input type="text" id="auth-partner-insurance" class="input-field" placeholder="Lloyd's of London ($50M Liability)">
+                <input type="text" id="auth-partner-insurance" class="input-field" placeholder="Enterprise Insurance Ghana Ltd. (GH₵25M Liability)">
               </div>
             </div>
 
@@ -1773,12 +1769,12 @@
           </div>
           <div>
             <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.2rem; flex-wrap: wrap;">
-              <h2 class="font-serif" style="font-size: 1.7rem; font-weight: 800;" id="rev-applicant-name">Marco Rossi</h2>
+              <h2 class="font-serif" style="font-size: 1.7rem; font-weight: 800;" id="rev-applicant-name">Akosua Mensah</h2>
               <span class="badge badge-pending" id="rev-status-badge">PENDING KYC AUDIT</span>
-              <span class="badge" style="background: rgba(14, 165, 233, 0.15); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.3);" id="rev-category-badge">Supercars & Yachts</span>
+              <span class="badge" style="background: rgba(14, 165, 233, 0.15); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.3);" id="rev-category-badge">Executive Fleet</span>
             </div>
-            <p style="color: var(--accent-gold); font-size: 0.95rem; font-weight: 600;" id="rev-company-title">Rossi Supercars & Riva Yachting Group Ltd.</p>
-            <p style="color: var(--text-gray); font-size: 0.82rem; margin-top: 0.2rem;" id="rev-submission-meta">Submitted: Sep 21, 2026 • Port Hercule, Monaco 🇲🇨</p>
+            <p style="color: var(--accent-gold); font-size: 0.95rem; font-weight: 600;" id="rev-company-title">Gold Coast Prestige Motors & Chauffeur Services Ltd.</p>
+            <p style="color: var(--text-gray); font-size: 0.82rem; margin-top: 0.2rem;" id="rev-submission-meta">Submitted: Sep 21, 2026 • Airport City, Accra 🇬🇭</p>
           </div>
         </div>
 
@@ -1794,11 +1790,11 @@
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
         <div class="kyc-stat-pill">
           <span style="font-size: 0.72rem; color: var(--text-gray); font-weight: 700; text-transform: uppercase;">Operating HQ</span>
-          <h4 style="font-size: 1.05rem; font-weight: 800; color: #fff; margin-top: 0.3rem;" id="rev-kpi-hq">Monaco 🇲🇨</h4>
+          <h4 style="font-size: 1.05rem; font-weight: 800; color: #fff; margin-top: 0.3rem;" id="rev-kpi-hq">Accra 🇬🇭</h4>
         </div>
         <div class="kyc-stat-pill">
           <span style="font-size: 0.72rem; color: var(--text-gray); font-weight: 700; text-transform: uppercase;">Portfolio Scale</span>
-          <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--accent-gold); margin-top: 0.3rem;" id="rev-kpi-scale">14 Supercars & 4 Yachts</h4>
+          <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--accent-gold); margin-top: 0.3rem;" id="rev-kpi-scale">18 SUVs & 12 Cruisers</h4>
         </div>
         <div class="kyc-stat-pill">
           <span style="font-size: 0.72rem; color: var(--text-gray); font-weight: 700; text-transform: uppercase;">Asset Valuation</span>
@@ -1818,19 +1814,19 @@
         <div class="glass" style="padding: 1.5rem; border-radius: var(--radius-md); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; font-size: 0.9rem;">
           <div>
             <span style="color: var(--text-gray); font-size: 0.8rem; display: block;">Legal Company Name</span>
-            <strong style="color: #fff;" id="rev-legal-name">Rossi Supercars & Riva Yachting Group Ltd.</strong>
+            <strong style="color: #fff;" id="rev-legal-name">Gold Coast Prestige Motors & Chauffeur Services Ltd.</strong>
           </div>
           <div>
             <span style="color: var(--text-gray); font-size: 0.8rem; display: block;">Registration / VAT Number</span>
-            <strong style="color: #fff;" id="rev-reg-num">MC-984420-VAT</strong>
+            <strong style="color: #fff;" id="rev-reg-num">GH-CS-892401</strong>
           </div>
           <div>
             <span style="color: var(--text-gray); font-size: 0.8rem; display: block;">Tax Identification</span>
-            <strong style="color: #fff;" id="rev-tax-id">MC-TX-88219</strong>
+            <strong style="color: #fff;" id="rev-tax-id">GH-TIN-P0029104</strong>
           </div>
           <div>
             <span style="color: var(--text-gray); font-size: 0.8rem; display: block;">Authorized Representative & Title</span>
-            <strong style="color: #fff;" id="rev-rep-name">Marco Rossi (Managing Director)</strong>
+            <strong style="color: #fff;" id="rev-rep-name">Akosua Mensah (Managing Director)</strong>
           </div>
           <div>
             <span style="color: var(--text-gray); font-size: 0.8rem; display: block;">Direct Contact Phone</span>
@@ -1838,7 +1834,7 @@
           </div>
           <div>
             <span style="color: var(--text-gray); font-size: 0.8rem; display: block;">Official Domain / Portal</span>
-            <a href="https://rossi-marine.mc" target="_blank" style="color: var(--accent-cyan); text-decoration: underline;" id="rev-rep-web">https://rossi-marine.mc</a>
+            <a href="https://rossi-marine.mc" target="_blank" style="color: var(--accent-cyan); text-decoration: underline;" id="rev-rep-web">https://goldcoast-motors.com.gh</a>
           </div>
         </div>
       </div>
@@ -2026,7 +2022,6 @@
           <a onclick="quickFilterService('CAR_RENTAL')" style="cursor: pointer; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-gray)'">Ferrari & Rolls-Royce Fleet</a>
           <a onclick="quickFilterService('PRIVATE_DRIVER')" style="cursor: pointer; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-gray)'">Executive Chauffeurs</a>
           <a onclick="quickFilterService('RESTAURANT')" style="cursor: pointer; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-gray)'">Michelin Star Tables</a>
-          <a onclick="quickFilterService('YACHT')" style="cursor: pointer; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-gray)'">Superyachts & Jets</a>
         </div>
       </div>
 
@@ -2073,248 +2068,156 @@
       currentPage: 'home',
       activeSearchType: 'ALL',
       activeFilterType: 'ALL',
-      selectedCurrency: 'USD',
-      currencyRates: { USD: 1, EUR: 0.92, GBP: 0.78, AED: 3.67, JPY: 154 },
-      currencySymbols: { USD: '$', EUR: '€', GBP: '£', AED: 'د.إ', JPY: '¥' },
+      selectedCurrency: 'GHS',
+      currencyRates: { GHS: 1, USD: 0.065, EUR: 0.059, GBP: 0.051 },
+      currencySymbols: { GHS: 'GH₵', USD: '$', EUR: '€', GBP: '£' },
       currentUser: null,
       selectedListingId: null,
       currentStripeBooking: null,
 
-      
       users: [
         {
           id: 'usr-1',
-          email: 'admin@booking.com',
+          email: 'admin@booking.com.gh',
           password: 'adminpassword',
           firstName: 'Alex',
           lastName: 'Admin',
           role: 'ADMIN',
           status: 'APPROVED',
-          avatar: 'AA'
+          avatar: 'AA',
+          phoneNumber: '+233 24 000 0001'
         },
         {
           id: 'usr-2',
-          email: 'partner1@booking.com',
+          email: 'kwame.asante@asantefleets.com.gh',
           password: 'partnerpassword',
-          firstName: 'Jean',
-          lastName: 'Laurent',
+          firstName: 'Kwame',
+          lastName: 'Asante',
           role: 'PARTNER',
           status: 'APPROVED',
-          avatar: 'JL',
+          avatar: 'KA',
+          phoneNumber: '+233 24 456 7890',
           application: {
-            companyName: 'Laurent Chateau & Villa Hospitality SARL',
-            registrationNumber: 'FR-33091823',
-            taxId: 'FR-TX-44019',
-            incorporationCountry: 'France',
-            city: 'Paris & Bordeaux',
-            address: '15 Place Vendôme, 75001 Paris',
-            phone: '+33 1 42 68 55 00',
-            website: 'https://laurent-hospitality.fr',
-            category: 'Luxury Stays & Heritage Châteaux',
-            portfolioScale: '8 Ultra-Luxury Châteaux & Penthouses',
-            assetValuation: 62000000,
-            coverageZones: ['Paris', 'Bordeaux', 'Courchevel', 'French Riviera'],
-            proposalPitch: 'Providing ultra-high-net-worth VIP clients with private historic estates, dedicated sommeliers, and Michelin-trained private dining brigades.',
+            companyName: 'Asante Executive Fleets & Suites Ghana Ltd.',
+            registrationNumber: 'GH-CS-7849102',
+            taxId: 'GH-TIN-P0084912',
+            incorporationCountry: 'Ghana',
+            city: 'Accra & Kumasi',
+            address: 'Airport Residential Area, Accra',
+            phone: '+233 24 456 7890',
+            website: 'https://asante-fleets.com.gh',
+            category: 'Executive Cars & 5-Star Suites',
+            portfolioScale: '24 Executive Vehicles (BMW xDrive, GLE, Land Cruiser V8, Vitz/Yaris) & 10 Presidential Suites',
+            assetValuation: 45000000,
+            coverageZones: ['Accra', 'Kumasi', 'Takoradi', 'Aburi Hills'],
+            proposalPitch: 'Providing diplomats, multinational corporate executives, and high-net-worth visitors with luxury BMW xDrive SUVs, Mercedes-Benz GLEs, and rugged Toyota Land Cruiser V8s across Ghana.',
             commercialLicense: {
-              number: 'FR-LUX-HOTEL-9921',
+              number: 'DVLA-GH-FLEET-9921',
               status: 'VERIFIED_ACTIVE',
-              authority: 'Ministère du Tourisme & Atout France',
+              authority: 'Driver & Vehicle Licensing Authority (DVLA) Ghana',
               expiry: '2029-06-30'
             },
             insurance: {
-              carrier: 'AXA Corporate Solutions Hospitality',
-              policyNumber: 'AXA-HOSP-882194',
-              coverageAmount: 75000000,
+              carrier: 'Enterprise Insurance Ghana Ltd.',
+              policyNumber: 'EIG-FLEET-882194-GH',
+              coverageAmount: 25000000,
               expiry: '2028-12-31',
               status: 'VALID_ACTIVE'
             },
             safetyAuditScore: 99,
             riskAssessment: 'LOW RISK (TIER-1 LUXURY ACCREDITED)',
             tierGranted: 'Tier-1 Certified Luxury Partner',
-            adminNotes: 'Fully verified heritage estate owner. Direct access to grand cru cellars and 24/7 dedicated butler security clearance.',
+            adminNotes: 'Fully vetted executive fleet operator. DVLA roadworthiness and comprehensive passenger liability verified.',
             documents: [
-              { id: 'doc-fr-reg', title: 'French Commercial Registry Kbis', type: 'PDF', size: '2.1 MB', date: '2026-08-15', verified: true },
-              { id: 'doc-fr-ins', title: 'AXA 75M EUR Comprehensive Liability Binder', type: 'PDF', size: '3.4 MB', date: '2026-08-16', verified: true }
+              { id: 'doc-gh-reg', title: 'Ghana Registrar General Certificate of Incorporation', type: 'PDF', size: '2.1 MB', date: '2026-08-15', verified: true },
+              { id: 'doc-gh-ins', title: 'Enterprise Insurance GH₵25M Comprehensive Fleet Binder', type: 'PDF', size: '3.4 MB', date: '2026-08-16', verified: true }
             ],
             appliedAt: '2026-08-14'
           }
         },
         {
           id: 'usr-3',
-          email: 'partner2@booking.com',
+          email: 'akosua.mensah@goldcoastmotors.com.gh',
           password: 'partnerpassword',
-          firstName: 'Marco',
-          lastName: 'Rossi',
+          firstName: 'Akosua',
+          lastName: 'Mensah',
           role: 'PARTNER',
           status: 'PENDING',
-          avatar: 'MR',
+          avatar: 'AM',
+          phoneNumber: '+233 20 890 1234',
           application: {
-            companyName: 'Rossi Supercars & Riva Yachting Group Ltd.',
-            registrationNumber: 'MC-984420-VAT',
-            taxId: 'MC-TX-88219',
-            incorporationCountry: 'Monaco',
-            city: 'Monaco',
-            address: 'Quai Antoine 1er, Port Hercule, 98000 Monaco',
-            phone: '+377 98 98 22 00',
-            website: 'https://rossi-marine.mc',
-            category: 'Supercars, Yachts & Private Drivers',
-            portfolioScale: '14 Exotic Supercars & 4 Sunseeker / Riva Yachts',
-            assetValuation: 38500000,
-            coverageZones: ['Monaco', 'Nice Côte d\'Azur', 'Cannes', 'Saint-Tropez'],
-            proposalPitch: 'We provide bespoke yacht charters across the French Riviera and VIP tarmac supercar deliveries with dedicated chauffeurs and security officers.',
+            companyName: 'Gold Coast Prestige Motors & Chauffeur Services Ltd.',
+            registrationNumber: 'GH-CS-892401',
+            taxId: 'GH-TIN-P0029104',
+            incorporationCountry: 'Ghana',
+            city: 'Accra',
+            address: 'Liberation Road, Airport City, Accra',
+            phone: '+233 20 890 1234',
+            website: 'https://goldcoast-motors.com.gh',
+            category: 'Executive Car Rentals & Chauffeur Fleet',
+            portfolioScale: '18 Luxury SUVs (BMW xDrive, Mercedes GLE, Toyota Land Cruiser V8) & 12 City Cruisers (Toyota Yaris & Vitz)',
+            assetValuation: 32000000,
+            coverageZones: ['Greater Accra', 'Ashanti Region', 'Western Region'],
+            proposalPitch: 'We provide VIP executive transport and self-drive rentals with top-maintained BMW xDrive SUVs, Mercedes-Benz GLEs, and bulletproof Toyota Land Cruiser V8s for corporate and leisure clients across Ghana.',
             commercialLicense: {
-              number: 'MON-LUX-2024-8874',
+              number: 'DVLA-GH-FLEET-8874',
               status: 'VERIFIED_ACTIVE',
-              authority: 'Monaco Maritime & Transport Directorate',
+              authority: 'Driver & Vehicle Licensing Authority (DVLA) Ghana',
               expiry: '2028-12-31'
             },
             insurance: {
-              carrier: 'Lloyd\'s of London Marine & Luxury Auto',
-              policyNumber: 'LLD-882194-X',
-              coverageAmount: 50000000,
+              carrier: 'SIC Insurance Ghana PLC',
+              policyNumber: 'SIC-GH-882194-AUTO',
+              coverageAmount: 20000000,
               expiry: '2027-06-30',
               status: 'VALID_ACTIVE'
             },
-            safetyAuditScore: 96,
+            safetyAuditScore: 97,
             riskAssessment: 'LOW RISK (TIER-1 LUXURY ACCREDITED)',
             tierGranted: 'Tier-1 Certified Luxury Partner',
-            adminNotes: 'Vetted with Lloyd\'s broker. All maritime captain certifications active. Direct tarmac delivery clearance at Nice Airport.',
+            adminNotes: 'Vetted with DVLA licensing registry. All vehicles 2023-2025 models with full maintenance records. Direct airport pickup permits active.',
             documents: [
-              { id: 'doc-mc-reg', title: 'Monaco Corporate Registry & Trade License', type: 'PDF', size: '2.4 MB', date: '2026-09-20', verified: true },
-              { id: 'doc-mc-ins', title: 'Lloyd\'s 50M USD Marine & Fleet Liability Binder', type: 'PDF', size: '4.1 MB', date: '2026-09-21', verified: true },
-              { id: 'doc-mc-id', title: 'Managing Director Passport & Biometric KYC', type: 'DOC', size: '1.8 MB', date: '2026-09-20', verified: true },
-              { id: 'doc-mc-fleet', title: 'Maritime Captaincy & Fleet Ownership Deeds', type: 'PDF', size: '5.6 MB', date: '2026-09-21', verified: true }
+              { id: 'doc-gh-corp', title: 'Ghana Corporate Registration & Tax Clearance', type: 'PDF', size: '2.4 MB', date: '2026-09-20', verified: true },
+              { id: 'doc-gh-fleet-ins', title: 'SIC Insurance GH₵20M Fleet Liability Binder', type: 'PDF', size: '4.1 MB', date: '2026-09-21', verified: true },
+              { id: 'doc-gh-id', title: 'Managing Director Passport & National ID KYC', type: 'DOC', size: '1.8 MB', date: '2026-09-20', verified: true }
             ],
             appliedAt: '2026-09-21'
           }
         },
         {
-          id: 'usr-5',
-          email: 'aviation@booking.com',
-          password: 'partnerpassword',
-          firstName: 'Lady Victoria',
-          lastName: 'Hamilton',
-          role: 'PARTNER',
-          status: 'PENDING',
-          avatar: 'VH',
-          application: {
-            companyName: 'Mayfair Private Aviation & Helicopter Group Ltd.',
-            registrationNumber: 'GB-88410293',
-            taxId: 'GB-VAT-992144',
-            incorporationCountry: 'United Kingdom',
-            city: 'London (Farnborough)',
-            address: '14 Berkeley Square, Mayfair, London W1J 6BL',
-            phone: '+44 20 7946 0991',
-            website: 'https://mayfair-aviation.co.uk',
-            category: 'Private Aviation & Helicopter Transfers',
-            portfolioScale: '6 Gulfstream G650 Jets & 4 Airbus ACH130 Helicopters',
-            assetValuation: 120000000,
-            coverageZones: ['London', 'Geneva', 'Paris Le Bourget', 'Nice Cote d\'Azur', 'Zurich'],
-            proposalPitch: 'Direct private jet charters and scenic helicopter transfers connecting London, Geneva, and the Alps with Michelin-starred catering on board.',
-            commercialLicense: {
-              number: 'CAA-AOC-UK-9921',
-              status: 'VERIFIED_ACTIVE',
-              authority: 'Civil Aviation Authority & EASA',
-              expiry: '2029-03-31'
-            },
-            insurance: {
-              carrier: 'Allianz Global Corporate Aviation',
-              policyNumber: 'AV-9812-AZ',
-              coverageAmount: 250000000,
-              expiry: '2028-09-30',
-              status: 'VALID_ACTIVE'
-            },
-            safetyAuditScore: 99,
-            riskAssessment: 'LOW RISK (TIER-1 LUXURY ACCREDITED)',
-            tierGranted: 'Tier-1 Certified Luxury Partner',
-            adminNotes: 'Full CAA Air Operator Certificate verified. Fleet undergoes mandatory monthly Swiss aero-inspection.',
-            documents: [
-              { id: 'doc-uk-aoc', title: 'Air Operator Certificate (AOC-UK-9921)', type: 'PDF', size: '3.8 MB', date: '2026-09-22', verified: true },
-              { id: 'doc-uk-ins', title: 'Allianz 250M USD Aircraft Hull & Liability Binder', type: 'PDF', size: '5.2 MB', date: '2026-09-22', verified: true },
-              { id: 'doc-uk-id', title: 'Director Identification & Security Vetting', type: 'DOC', size: '2.0 MB', date: '2026-09-21', verified: true }
-            ],
-            appliedAt: '2026-09-22'
-          }
-        },
-        {
-          id: 'usr-6',
-          email: 'bellini@booking.com',
-          password: 'partnerpassword',
-          firstName: 'Chef Alessandro',
-          lastName: 'Bellini',
-          role: 'PARTNER',
-          status: 'PENDING',
-          avatar: 'AB',
-          application: {
-            companyName: 'Bellini 3-Star Michelin Gastronomy Group',
-            registrationNumber: 'IT-08912440156',
-            taxId: 'IT-TX-55102',
-            incorporationCountry: 'Italy',
-            city: 'Milan & Amalfi',
-            address: 'Via Monte Napoleone 8, 20121 Milano',
-            phone: '+39 02 8739 1100',
-            website: 'https://bellini-gastronomie.it',
-            category: 'Michelin Gastronomy & Estate Chefs',
-            portfolioScale: '3 Michelin Star Salons & 12 Travelling Estate Chefs',
-            assetValuation: 18000000,
-            coverageZones: ['Amalfi Coast', 'Milan', 'Tuscany', 'Lake Como'],
-            proposalPitch: 'Exclusive private dining salons and travelling master chef brigades curating private dinners with rare Romanée-Conti pairings.',
-            commercialLicense: {
-              number: 'IT-HOSP-MICH-5510',
-              status: 'VERIFIED_ACTIVE',
-              authority: 'Ministero dello Sviluppo Economico & HACCP Level 5',
-              expiry: '2028-05-31'
-            },
-            insurance: {
-              carrier: 'Generali Corporate Hospitality',
-              policyNumber: 'GEN-449102',
-              coverageAmount: 10000000,
-              expiry: '2027-11-30',
-              status: 'VALID_ACTIVE'
-            },
-            safetyAuditScore: 94,
-            riskAssessment: 'LOW RISK (STANDARD COMPLIANCE)',
-            tierGranted: 'VIP Asset Provider',
-            adminNotes: 'Michelin star credentials confirmed. Sommelier cellar catalog authenticated.',
-            documents: [
-              { id: 'doc-it-mich', title: 'Michelin Guide Official Distinction Certificate', type: 'PDF', size: '1.9 MB', date: '2026-09-23', verified: true },
-              { id: 'doc-it-haccp', title: 'European Food Safety & HACCP Master Certificate', type: 'PDF', size: '2.5 MB', date: '2026-09-23', verified: true }
-            ],
-            appliedAt: '2026-09-23'
-          }
-        },
-        {
           id: 'usr-4',
-          email: 'customer@booking.com',
+          email: 'kofi.boateng@traveler.com.gh',
           password: 'customerpassword',
-          firstName: 'Emily',
-          lastName: 'Sterling',
+          firstName: 'Kofi',
+          lastName: 'Boateng',
           role: 'CUSTOMER',
           status: 'APPROVED',
-          avatar: 'ES'
+          avatar: 'KB',
+          phoneNumber: '+233 55 123 4567'
         }
       ],
+
       destinations: [
-        { name: 'Paris', country: 'France', image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=800', badge: 'Art & Haute Gastronomie', count: 6 },
-        { name: 'Monaco', country: 'Monaco', image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=800', badge: 'Supercars & Yacht Charters', count: 4 },
-        { name: 'Dubai', country: 'UAE', image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800', badge: 'Futuristic Penthouse Living', count: 3 },
-        { name: 'Tokyo', country: 'Japan', image: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=800', badge: '3-Star Michelin Omaksase', count: 2 },
-        { name: 'Amalfi Coast', country: 'Italy', image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=800', badge: 'Cliffside Master Villas', count: 3 },
-        { name: 'Geneva', country: 'Switzerland', image: 'https://images.unsplash.com/photo-1527668752968-14dc70a27c95?q=80&w=800', badge: 'Alpine Estates & Security', count: 2 }
+        { name: 'Accra', country: 'Ghana', image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=800', badge: '5-Star Hotels & Executive Fleets', count: 6 },
+        { name: 'Kumasi', country: 'Ghana', image: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800', badge: 'Garden City Royalty & Land Cruiser V8s', count: 4 },
+        { name: 'Takoradi', country: 'Ghana', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800', badge: 'Western Coastline & Oil City Stays', count: 3 },
+        { name: 'Aburi Hills', country: 'Ghana', image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800', badge: 'Lush Mountain Resorts & Vistas', count: 3 },
+        { name: 'Akosombo & Volta', country: 'Ghana', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800', badge: 'Riverfront Luxury & Lake Escapes', count: 2 },
+        { name: 'Cape Coast', country: 'Ghana', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800', badge: 'Heritage Coastline & Palm Beaches', count: 2 }
       ],
 
       listings: [
         {
           id: 'lst-1',
-          title: 'Hôtel Splendide Glassmorphic Penthouse',
-          description: 'Experience pure architectural bliss in the heart of Paris. Featuring floating glass balconies, private champagne cellar, 24/7 dedicated butler, and panoramic Eiffel Tower vistas.',
+          title: 'Kempinski Hotel Gold Coast City Accra',
+          description: "Accra's premier 5-star destination in the downtown diplomatic enclave. Unparalleled luxury suites, 25-meter infinity pool, Resense Spa, and VIP executive lounge access.",
           serviceType: 'HOTEL',
           status: 'APPROVED',
-          address: '15 Place Vendôme',
-          city: 'Paris',
-          country: 'France',
-          latitude: 48.8675,
-          longitude: 2.3294,
+          address: 'Gammal Abdul Nasser Ave, Ministries',
+          city: 'Accra',
+          country: 'Ghana',
+          latitude: 5.5502,
+          longitude: -0.1985,
           mapTop: 45,
           mapLeft: 42,
           coverImage: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800',
@@ -2327,90 +2230,159 @@
           reviewCount: 42,
           ownerId: 'usr-2',
           hotelDetails: {
-            roomType: 'Royal Presidential Suite',
-            amenities: ['Private Butler', 'Champagne Cellar', 'Infinity Spa', 'Helipad Access', '24/7 Concierge', 'Chauffeur On Demand'],
-            pricePerNight: 850.0,
+            roomType: 'Diplomatic Presidential Suite',
+            amenities: ['Resort Infinity Pool', 'Resense Spa Access', '24/7 Butler Service', 'Airport Chauffeur Included', 'Executive Lounge Bar'],
+            pricePerNight: 3500.0,
             capacity: 4,
-            bedrooms: 3
+            bedrooms: 2
           },
           reviews: [
-            { reviewer: 'Arthur Dent', rating: 5, comment: 'Phenomenal service! The floating glass balcony view over Paris at sunset was mesmerizing.' },
-            { reviewer: 'Charlotte De Valois', rating: 5, comment: 'Impeccable butler service. Dom Pérignon was waiting chilled upon arrival.' }
+            { reviewer: 'Dr. Kwame Osei', rating: 5, comment: 'Exceptional hospitality. The presidential suite at Kempinski with views over Accra is unmatched.' },
+            { reviewer: 'Sarah Jenkins', rating: 5, comment: 'Impeccable service, delicious Ghanaian jollof and wonderful spa treatments.' }
           ]
         },
         {
           id: 'lst-2',
-          title: 'Ferrari F8 Tributo Spider (Self-Drive)',
-          description: '710-horsepower twin-turbo V8 Italian engineering. Delivered full-tank to your hotel in Monaco or Cannes. Includes unrestricted track day pass at Paul Ricard.',
+          title: 'BMW X5 xDrive40i (Executive Luxury SUV)',
+          description: 'German engineering at its finest with intelligent xDrive all-wheel drive, panoramic sky lounge roof, and Harman Kardon sound. The preferred ride for executive business in Cantonments and Airport Residential.',
           serviceType: 'CAR_RENTAL',
           status: 'APPROVED',
-          address: 'Avenue Princesse Grâce',
-          city: 'Monaco',
-          country: 'Monaco',
-          latitude: 43.7384,
-          longitude: 7.4246,
+          address: 'Airport Residential Area',
+          city: 'Accra',
+          country: 'Ghana',
+          latitude: 5.6037,
+          longitude: -0.1768,
           mapTop: 32,
-          mapLeft: 68,
-          coverImage: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?q=80&w=800',
+          mapLeft: 55,
+          coverImage: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=800',
           images: [
-            'https://images.unsplash.com/photo-1583121274602-3e2820c69888?q=80&w=800',
-            'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=800'
+            'https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=800',
+            'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800'
           ],
           rating: 4.95,
-          reviewCount: 28,
+          reviewCount: 38,
           ownerId: 'usr-2',
           carDetails: {
-            carType: 'Ferrari F8 Tributo Spider',
+            carType: 'BMW X5 xDrive40i M-Sport',
             isRental: true,
-            pricePerDay: 1450.0,
-            capacity: 2,
-            transmission: 'Dual-Clutch F1 7-Speed',
-            fuelType: 'Twin-Turbo V8 Petrol'
+            pricePerDay: 1850.0,
+            capacity: 5,
+            transmission: 'Steptronic 8-Speed xDrive',
+            fuelType: 'TwinPower Turbo Petrol'
           },
           reviews: [
-            { reviewer: 'Marcus Vance', rating: 5, comment: 'Cruising the Col de Turini in this monster was an unforgettable experience.' }
+            { reviewer: 'Nana Yaw Ampofo', rating: 5, comment: 'Superb xDrive handling on Accra roads. Delivered with full tank and immaculately clean.' }
           ]
         },
         {
           id: 'lst-3',
-          title: 'Mercedes-Maybach S680 (Chauffeur & Armored)',
-          description: 'Travel in sovereign comfort. Driven by a security-cleared executive chauffeur. Features reclining rear first-class suites, Burmester 4D surround sound, and champagne flutes.',
-          serviceType: 'PRIVATE_DRIVER',
+          title: 'Mercedes-Benz GLE 450 AMG Line (4MATIC)',
+          description: 'Commanding road presence with AMG body styling, 4MATIC all-wheel drive, airmatic suspension, and Burmester surround audio. Immaculate condition for high-profile arrivals across Accra and Kumasi.',
+          serviceType: 'CAR_RENTAL',
           status: 'APPROVED',
-          address: 'Champs-Élysées',
-          city: 'Paris',
-          country: 'France',
-          latitude: 48.8698,
-          longitude: 2.3075,
+          address: 'Airport City High Street',
+          city: 'Accra',
+          country: 'Ghana',
+          latitude: 5.6022,
+          longitude: -0.1714,
           mapTop: 48,
-          mapLeft: 38,
-          coverImage: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=800',
-          images: ['https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=800'],
-          rating: 4.92,
-          reviewCount: 35,
+          mapLeft: 48,
+          coverImage: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=800',
+          images: [
+            'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=800',
+            'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?q=80&w=800'
+          ],
+          rating: 4.96,
+          reviewCount: 32,
           ownerId: 'usr-2',
           carDetails: {
-            carType: 'Mercedes-Maybach S680 V12',
-            isRental: false,
-            driverName: 'Jean-Pierre Laurent (B1 Security Certified)',
-            pricePerHour: 140.0,
-            capacity: 3
+            carType: 'Mercedes-Benz GLE 450 4MATIC',
+            isRental: true,
+            pricePerDay: 2600.0,
+            capacity: 5,
+            transmission: '9G-TRONIC 4MATIC',
+            fuelType: 'Mild Hybrid EQ Boost'
           },
           reviews: [
-            { reviewer: 'Lady Vivienne Sterling', rating: 5, comment: 'Jean-Pierre navigated fashion week traffic with supreme elegance and discretion.' }
+            { reviewer: 'Chief David Lawson', rating: 5, comment: 'The GLE is the benchmark for corporate dignity in Accra. Smooth ride and pristine interior.' }
           ]
         },
         {
           id: 'lst-4',
-          title: 'L’Étoile 3-Star Michelin Botanical Flight',
-          description: 'A sensory 12-course culinary journey orchestrated by master chef Pierre Savoy inside an illuminated glass conservatory overlooking the Seine.',
+          title: 'Toyota Land Cruiser V8 (King of Ghana Roads)',
+          description: "Ghana's undisputed heavyweight icon. Unmatched power, bulletproof 4x4 ruggedness, tinted privacy glass, and plush leather interior. Driven by security-vetted professional chauffeur for cross-country trips and convoys.",
+          serviceType: 'PRIVATE_DRIVER',
+          status: 'APPROVED',
+          address: 'Harper Road, Nhyiaeso',
+          city: 'Kumasi',
+          country: 'Ghana',
+          latitude: 6.6885,
+          longitude: -1.6244,
+          mapTop: 28,
+          mapLeft: 35,
+          coverImage: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800',
+          images: [
+            'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800',
+            'https://images.unsplash.com/photo-1594976912810-8800cbe6085a?q=80&w=800'
+          ],
+          rating: 4.99,
+          reviewCount: 56,
+          ownerId: 'usr-2',
+          carDetails: {
+            carType: 'Toyota Land Cruiser V8 LC200',
+            isRental: false,
+            driverName: 'Kofi Mensah (VIP & Security Certified)',
+            pricePerHour: 280.0,
+            capacity: 6
+          },
+          reviews: [
+            { reviewer: 'Ambassador Emmanuel Darko', rating: 5, comment: 'Kofi navigated the Accra-Kumasi corridor with supreme poise. The V8 road presence is unrivaled.' }
+          ]
+        },
+        {
+          id: 'lst-5',
+          title: 'Toyota Vitz / Yaris (Urban City Executive)',
+          description: "Ghana's favorite smart city cruiser. Ultra fuel-efficient, ice-cold air conditioning, pristine interior, and effortless handling. Perfect for agile commuting and meetings across Osu, East Legon, and Accra Central.",
+          serviceType: 'CAR_RENTAL',
+          status: 'APPROVED',
+          address: 'Lagos Avenue, East Legon',
+          city: 'Accra',
+          country: 'Ghana',
+          latitude: 5.6375,
+          longitude: -0.1601,
+          mapTop: 36,
+          mapLeft: 62,
+          coverImage: 'https://images.unsplash.com/photo-1609521263047-f8f205293f24?q=80&w=800',
+          images: [
+            'https://images.unsplash.com/photo-1609521263047-f8f205293f24?q=80&w=800',
+            'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=800'
+          ],
+          rating: 4.88,
+          reviewCount: 44,
+          ownerId: 'usr-2',
+          carDetails: {
+            carType: 'Toyota Vitz / Yaris Hatchback',
+            isRental: true,
+            pricePerDay: 650.0,
+            capacity: 5,
+            transmission: 'Automatic CVT',
+            fuelType: 'Petrol (Ultra Efficient)'
+          },
+          reviews: [
+            { reviewer: 'Abena Frimpong', rating: 5, comment: 'Super convenient for meetings in East Legon and Osu. AC was freezing cold and petrol lasted all week!' }
+          ]
+        },
+        {
+          id: 'lst-6',
+          title: 'The Buka Restaurant & Lounge',
+          description: "Accra's premier upscale destination for authentic Ghanaian gastronomy and West African delicacies. Fresh charcoal-grilled tilapia, seasoned party jollof, spicy kelewele, and signature palm wine cocktails in an open-air terrace.",
           serviceType: 'RESTAURANT',
           status: 'APPROVED',
-          address: '4 Avenue Gustave Eiffel',
-          city: 'Paris',
-          country: 'France',
-          latitude: 48.8584,
-          longitude: 2.2945,
+          address: '10th Street, Osu',
+          city: 'Accra',
+          country: 'Ghana',
+          latitude: 5.5562,
+          longitude: -0.1832,
           mapTop: 52,
           mapLeft: 46,
           coverImage: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=800',
@@ -2418,150 +2390,96 @@
             'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=800',
             'https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800'
           ],
-          rating: 5.0,
-          reviewCount: 64,
+          rating: 4.95,
+          reviewCount: 68,
           ownerId: 'usr-2',
           diningDetails: {
-            cuisineType: '3-Star Michelin Modern French Haute Cuisine',
-            averageCost: 450.0,
-            availableSlots: ['12:30 PM', '07:00 PM', '08:30 PM', '09:45 PM'],
-            seatingCapacity: 32
+            cuisineType: 'Authentic Ghanaian & West African Gastronomy',
+            averageCost: 550.0,
+            availableSlots: ['12:30 PM', '02:00 PM', '06:30 PM', '08:00 PM', '09:30 PM'],
+            seatingCapacity: 60
           },
           reviews: [
-            { reviewer: 'Gault & Millau Critic', rating: 5, comment: 'The caviar and truffle tartlet paired with vintage Krug is unmatched.' }
+            { reviewer: 'Ekow Mensah', rating: 5, comment: 'The grilled tilapia with banku and hot pepper sauce is pure gold. Outstanding atmosphere.' }
           ]
         },
         {
-          id: 'lst-5',
-          title: 'Sanlorenzo 88ft Superyacht "Aethelgard"',
-          description: 'Charter the azure waters of the French Riviera and Corsica. Includes full crew of 4 (Captain, Private Chef, Stewardess, Deckhand), seabobs, and tender.',
-          serviceType: 'YACHT',
-          status: 'APPROVED',
-          address: 'Port Hercule',
-          city: 'Monaco',
-          country: 'Monaco',
-          latitude: 43.7352,
-          longitude: 7.4208,
-          mapTop: 28,
-          mapLeft: 72,
-          coverImage: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?q=80&w=800',
-          images: ['https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?q=80&w=800'],
-          rating: 4.97,
-          reviewCount: 19,
-          ownerId: 'usr-2',
-          hotelDetails: {
-            roomType: '88ft Flybridge Tri-Deck Yacht',
-            amenities: ['Full Crew & Chef', 'Seabobs & Jet Skis', 'Jacuzzi On Deck', 'Master Stateroom', 'Stabilizers At Anchor'],
-            pricePerNight: 3200.0,
-            capacity: 8,
-            bedrooms: 4
-          },
-          reviews: []
-        },
-        {
-          id: 'lst-6',
-          title: 'Villa Bellisima Cliffside Ravello',
-          description: 'Suspended 350 meters above the Mediterranean with private infinity pool carved into the rock, lemon groves, and private helicopter landing pad.',
+          id: 'lst-7',
+          title: 'The Royal Senchi Resort & Hotel',
+          description: "Ghana's premier luxury river resort along the historic Volta River in Akosombo. Traditional royal architecture, riverfront infinity pool, nature park excursions, and tranquil sunsets.",
           serviceType: 'HOTEL',
           status: 'APPROVED',
-          address: 'Via Panoramica 12',
-          city: 'Amalfi Coast',
-          country: 'Italy',
-          latitude: 40.6500,
-          longitude: 14.6100,
-          mapTop: 65,
-          mapLeft: 58,
-          coverImage: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800',
-          images: ['https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800'],
-          rating: 4.99,
-          reviewCount: 22,
+          address: 'Senchi Ferry Road',
+          city: 'Akosombo',
+          country: 'Ghana',
+          latitude: 6.2235,
+          longitude: 0.0894,
+          mapTop: 22,
+          mapLeft: 70,
+          coverImage: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=800',
+          images: ['https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=800'],
+          rating: 4.97,
+          reviewCount: 29,
           ownerId: 'usr-2',
           hotelDetails: {
-            roomType: 'Entire Historic 5-Bedroom Estate',
-            amenities: ['Infinity Pool', 'Private Helipad', 'Personal Pizza Chef', 'Wine Cellar', 'Sea Access'],
-            pricePerNight: 2100.0,
-            capacity: 10,
-            bedrooms: 5
-          },
-          reviews: []
-        },
-        {
-          id: 'lst-7',
-          title: 'Rolls-Royce Spectre Electric (Chauffeur)',
-          description: 'Whisper-quiet luxury. The first ultra-luxury all-electric super coupe. Starlight headliner with 4,796 fiber optic stars and bespoke lambswool rugs.',
-          serviceType: 'PRIVATE_DRIVER',
-          status: 'APPROVED',
-          address: 'Downtown Dubai',
-          city: 'Dubai',
-          country: 'UAE',
-          latitude: 25.1972,
-          longitude: 55.2744,
-          mapTop: 58,
-          mapLeft: 82,
-          coverImage: 'https://images.unsplash.com/photo-1631295868223-63265b40d9e4?q=80&w=800',
-          images: ['https://images.unsplash.com/photo-1631295868223-63265b40d9e4?q=80&w=800'],
-          rating: 4.88,
-          reviewCount: 15,
-          ownerId: 'usr-2',
-          carDetails: {
-            carType: 'Rolls-Royce Spectre EV',
-            isRental: false,
-            driverName: 'Tariq Al-Mansoor',
-            pricePerHour: 180.0,
-            capacity: 3
+            roomType: 'Volta River Presidential Villa',
+            amenities: ['Riverfront Balcony', 'Infinity Pool', 'Boat Cruise Included', 'Spa & Wellness Sanctuary', 'Tennis Court'],
+            pricePerNight: 2800.0,
+            capacity: 4,
+            bedrooms: 2
           },
           reviews: []
         },
         {
           id: 'lst-8',
-          title: 'Sushi Saito Tokyo Omakase VIP Table',
-          description: 'Extremely rare counter seats at the legendary sushi sanctum in Roppongi. Tsukiji morning selections prepared with antique cedar rice vinegar.',
+          title: 'Skybar 25 Rooftop Lounge',
+          description: "Perched atop the iconic Alto Tower at Villaggio Vista, Skybar 25 offers 360-degree panoramic views of Accra's glowing skyline with craft cocktails, gourmet tasting small plates, and international DJ sets.",
           serviceType: 'RESTAURANT',
           status: 'APPROVED',
-          address: 'Roppongi 1-4-5',
-          city: 'Tokyo',
-          country: 'Japan',
-          latitude: 35.6628,
-          longitude: 139.7345,
-          mapTop: 36,
-          mapLeft: 88,
-          coverImage: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=800',
-          images: ['https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=800'],
-          rating: 5.0,
+          address: 'Villaggio Vista, Airport Residential',
+          city: 'Accra',
+          country: 'Ghana',
+          latitude: 5.6081,
+          longitude: -0.1788,
+          mapTop: 42,
+          mapLeft: 58,
+          coverImage: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800',
+          images: ['https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800'],
+          rating: 4.92,
           reviewCount: 51,
           ownerId: 'usr-2',
           diningDetails: {
-            cuisineType: 'Edomae Master Omakase',
-            averageCost: 550.0,
-            availableSlots: ['06:00 PM', '08:30 PM'],
-            seatingCapacity: 8
+            cuisineType: 'Rooftop Pan-Asian & Contemporary Fusion',
+            averageCost: 750.0,
+            availableSlots: ['06:00 PM', '08:00 PM', '10:00 PM'],
+            seatingCapacity: 45
           },
           reviews: []
         },
         {
           id: 'lst-9',
-          title: 'Chateau Bordeaux Vineyard Estate & Cellars',
-          description: 'Exclusive 18th-century chateau in Bordeaux with access to the private grand cru wine cellars. Currently awaiting master administrator security audit.',
+          title: 'Peduase Valley Resort (Aburi Hills)',
+          description: 'Nestled in the lush, cool green ridges of Aburi overlooking Greater Accra. Elegant chalets, horse stables, heated pool, and pure mountain air just 30 minutes from the capital.',
           serviceType: 'HOTEL',
-          status: 'PENDING',
-          address: 'Route des Grands Crus',
-          city: 'Bordeaux',
-          country: 'France',
-          latitude: 44.8378,
-          longitude: -0.5792,
-          mapTop: 62,
-          mapLeft: 30,
-          coverImage: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=800',
-          images: ['https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=800'],
-          rating: 0.0,
-          reviewCount: 0,
-          ownerId: 'usr-3',
+          status: 'APPROVED',
+          address: 'Peduase Valley, Aburi Hills',
+          city: 'Aburi',
+          country: 'Ghana',
+          latitude: 5.8485,
+          longitude: -0.1764,
+          mapTop: 18,
+          mapLeft: 50,
+          coverImage: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800',
+          images: ['https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800'],
+          rating: 4.94,
+          reviewCount: 25,
+          ownerId: 'usr-2',
           hotelDetails: {
-            roomType: 'Grand Cru Vineyard Master Suite',
-            amenities: ['Wine Tasting Tour', 'Private Chef', 'Helipad', 'Horse Stables'],
-            pricePerNight: 950.0,
-            capacity: 4,
-            bedrooms: 3
+            roomType: 'Mountain View Executive Chalet',
+            amenities: ['Mountain View Balcony', 'Horse Riding', 'Heated Pool', 'Spa Treatments', 'High-Speed WiFi'],
+            pricePerNight: 2200.0,
+            capacity: 3,
+            bedrooms: 1
           },
           reviews: []
         }
@@ -2572,35 +2490,35 @@
           id: 'bk-94812',
           customerId: 'usr-4',
           listingId: 'lst-1',
-          listingTitle: 'Hôtel Splendide Glassmorphic Penthouse',
+          listingTitle: 'Kempinski Hotel Gold Coast City Accra',
           listingImage: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800',
           serviceType: 'HOTEL',
           startDate: '2026-10-12',
           endDate: '2026-10-15',
           timeSlot: null,
           guestCount: 2,
-          totalPrice: 2550.0,
+          totalPrice: 10500.0,
           status: 'CONFIRMED',
           paymentStatus: 'PAID',
-          vipPerks: ['VIP Meet & Greet', 'Dom Pérignon 2013 Chilled'],
-          referenceCode: 'AETH-PAR-94812'
+          vipPerks: ['VIP Airport Chauffeur (BMW xDrive)', 'Complimentary Resense Spa Treatment'],
+          referenceCode: 'AETH-ACC-94812'
         },
         {
           id: 'bk-94813',
           customerId: 'usr-4',
-          listingId: 'lst-3',
-          listingTitle: 'Mercedes-Maybach S680 (Chauffeur)',
-          listingImage: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=800',
+          listingId: 'lst-4',
+          listingTitle: 'Toyota Land Cruiser V8 (King of Ghana Roads)',
+          listingImage: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800',
           serviceType: 'PRIVATE_DRIVER',
           startDate: '2026-10-12',
           endDate: null,
-          timeSlot: '04:00 PM',
-          guestCount: 2,
-          totalPrice: 420.0,
+          timeSlot: '09:00 AM',
+          guestCount: 4,
+          totalPrice: 1680.0,
           status: 'CONFIRMED',
           paymentStatus: 'PAID',
-          vipPerks: ['Airport Pickup Terminal 1'],
-          referenceCode: 'AETH-DRV-94813'
+          vipPerks: ['VIP Police Escort Protocol Available', 'Bottled Mineral Refreshments'],
+          referenceCode: 'AETH-KMS-94813'
         }
       ]
     };
@@ -2695,7 +2613,7 @@
         if (state.activeFilterType === 'HOTEL') activeId = 'nav-stays';
         else if (state.activeFilterType === 'CAR' || state.activeFilterType === 'CAR_RENTAL' || state.activeFilterType === 'PRIVATE_DRIVER') activeId = 'nav-fleet';
         else if (state.activeFilterType === 'RESTAURANT') activeId = 'nav-dining';
-        else if (state.activeFilterType === 'YACHT') activeId = 'nav-yachts';
+        
         else activeId = 'nav-home';
       }
       if (activeId) {
@@ -2773,7 +2691,7 @@
         if ((serviceCategory === 'CAR' || serviceCategory === 'CAR_RENTAL') && txt.includes('exotic')) b.className = 'btn btn-primary btn-sm btn-filter-pill';
         if ((serviceCategory === 'CAR' || serviceCategory === 'PRIVATE_DRIVER') && txt.includes('chauffeur')) b.className = 'btn btn-primary btn-sm btn-filter-pill';
         if (serviceCategory === 'RESTAURANT' && txt.includes('gastronomy')) b.className = 'btn btn-primary btn-sm btn-filter-pill';
-        if (serviceCategory === 'YACHT' && txt.includes('yacht')) b.className = 'btn btn-primary btn-sm btn-filter-pill';
+        
       });
 
       syncNavbarActiveState();
@@ -2886,7 +2804,7 @@
     }
 
     function getBasePrice(item) {
-      if (item.serviceType === 'HOTEL' || item.serviceType === 'YACHT') return item.hotelDetails?.pricePerNight || 0;
+      if (item.serviceType === 'HOTEL') return item.hotelDetails?.pricePerNight || 0;
       if (item.serviceType === 'CAR_RENTAL') return item.carDetails?.pricePerDay || 0;
       if (item.serviceType === 'PRIVATE_DRIVER') return item.carDetails?.pricePerHour || 0;
       if (item.serviceType === 'RESTAURANT') return item.diningDetails?.averageCost || 0;
@@ -2898,7 +2816,7 @@
       if (type === 'CAR_RENTAL') return { class: 'badge badge-car', label: 'Exotic Rental', icon: 'car' };
       if (type === 'PRIVATE_DRIVER') return { class: 'badge badge-driver', label: 'Chauffeur', icon: 'award' };
       if (type === 'RESTAURANT') return { class: 'badge badge-dining', label: 'Michelin Table', icon: 'utensils' };
-      return { class: 'badge badge-yacht', label: 'Superyacht / Jet', icon: 'anchor' };
+      return { class: 'badge badge-car', label: 'Executive Fleet', icon: 'car' };
     }
 
     // ----------------------------------------------------
@@ -2972,7 +2890,7 @@
     }
 
     function formatRateLabel(item) {
-      if (item.serviceType === 'HOTEL' || item.serviceType === 'YACHT') {
+      if (item.serviceType === 'HOTEL') {
         return `${formatMoney(item.hotelDetails.pricePerNight)} <span style="font-size:0.75rem;color:var(--text-gray);">/ night</span>`;
       }
       if (item.serviceType === 'CAR_RENTAL') {
@@ -3099,7 +3017,7 @@
       let rateDisplay = '';
       let dateFieldsHtml = '';
 
-      if (listing.serviceType === 'HOTEL' || listing.serviceType === 'YACHT') {
+      if (listing.serviceType === 'HOTEL') {
         rateDisplay = `${formatMoney(listing.hotelDetails.pricePerNight)} <span style="font-size: 0.9rem; color: var(--text-gray)">/ night</span>`;
         dateFieldsHtml = `
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
@@ -3220,7 +3138,7 @@
           </div>
 
           <!-- Category Specific Highlights -->
-          ${listing.serviceType === 'HOTEL' || listing.serviceType === 'YACHT' ? `
+          ${listing.serviceType === 'HOTEL' ? `
             <div class="glass" style="padding: 2.2rem; border-radius: var(--radius-xl);">
               <h3 class="font-serif" style="font-size: 1.5rem; margin-bottom: 1.2rem;">Included Amenities & White-Glove Perks</h3>
               <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
@@ -3407,7 +3325,7 @@
       let baseTotal = 0;
       const start = document.getElementById('book-start-date')?.value;
 
-      if (listing.serviceType === 'HOTEL' || listing.serviceType === 'YACHT' || listing.serviceType === 'CAR_RENTAL') {
+      if (listing.serviceType === 'HOTEL' || listing.serviceType === 'CAR_RENTAL') {
         const end = document.getElementById('book-end-date')?.value;
         if (start && end) {
           const diffDays = Math.ceil(Math.abs(new Date(end).getTime() - new Date(start).getTime()) / (1000 * 60 * 60 * 24)) || 1;
@@ -3468,7 +3386,7 @@
       let timeSlot = null;
       let totalCost = 0;
 
-      if (listing.serviceType === 'HOTEL' || listing.serviceType === 'YACHT' || listing.serviceType === 'CAR_RENTAL') {
+      if (listing.serviceType === 'HOTEL' || listing.serviceType === 'CAR_RENTAL') {
         end = document.getElementById('book-end-date')?.value || start;
         const diffDays = Math.ceil(Math.abs(new Date(end).getTime() - new Date(start).getTime()) / (1000 * 60 * 60 * 24)) || 1;
         const rate = (listing.serviceType === 'CAR_RENTAL') ? listing.carDetails.pricePerDay : listing.hotelDetails.pricePerNight;
@@ -3752,7 +3670,6 @@
                     <option value="CAR_RENTAL">Exotic Car (Self-Drive)</option>
                     <option value="PRIVATE_DRIVER">Chauffeur / Limousine Service</option>
                     <option value="RESTAURANT">Michelin Gastronomy Table</option>
-                    <option value="YACHT">Superyacht / Private Jet</option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -4019,7 +3936,7 @@
         reviews: []
       };
 
-      if (type === 'HOTEL' || type === 'YACHT') {
+      if (type === 'HOTEL') {
         record.hotelDetails = { pricePerNight: price, roomType: 'Luxury Suite', amenities: ['WiFi', 'Air Conditioning', 'Butler Service'], capacity: 4 };
       } else if (type === 'CAR_RENTAL') {
         record.carDetails = { pricePerDay: price, isRental: true, carType: 'Supercar', capacity: 2, transmission: 'Automatic', fuelType: 'V8' };
@@ -4221,11 +4138,11 @@
         address: 'Quai Antoine 1er, Port Hercule',
         phone: '+377 98 98 22 00',
         website: 'https://aether-partner.com',
-        category: 'Supercars, Yachts & Private Drivers',
-        portfolioScale: '14 Supercars & 4 Yachts',
+        category: 'Executive Car Rentals & Chauffeur Fleet',
+        portfolioScale: '18 Luxury SUVs (BMW xDrive, Mercedes GLE, Toyota Land Cruiser V8) & 12 City Cruisers (Toyota Yaris & Vitz)',
         assetValuation: 38500000,
         coverageZones: ['Monaco', 'Nice', 'Cannes', 'Saint-Tropez'],
-        proposalPitch: 'Providing ultra-high-net-worth VIP clients with bespoke yacht charters and chauffeured exotic supercars.',
+        proposalPitch: 'Providing VIP executive transport and self-drive rentals with top-maintained BMW xDrive SUVs, Mercedes-Benz GLEs, and bulletproof Toyota Land Cruiser V8s for corporate and leisure clients across Ghana.',
         commercialLicense: { number: 'MON-LUX-2024-8874', status: 'VERIFIED_ACTIVE', authority: 'Monaco Maritime Directorate', expiry: '2028-12-31' },
         insurance: { carrier: 'Lloyd\'s of London Marine & Luxury Auto', policyNumber: 'LLD-882194-X', coverageAmount: 50000000, expiry: '2027-06-30' },
         safetyAuditScore: 96,
@@ -4367,7 +4284,7 @@
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; font-size: 0.88rem; margin-bottom: 1.5rem;">
           <div>
             <span style="color: var(--text-muted); font-size: 0.78rem; display: block;">Accredited Legal Entity</span>
-            <strong style="color: #fff; font-size: 1rem;">${app.companyName || 'Rossi Supercars & Riva Yachting Group Ltd.'}</strong>
+            <strong style="color: #fff; font-size: 1rem;">${app.companyName || 'Gold Coast Prestige Motors & Chauffeur Services Ltd.'}</strong>
           </div>
           <div>
             <span style="color: var(--text-muted); font-size: 0.78rem; display: block;">Registration Reference</span>
@@ -4628,7 +4545,7 @@
         if (role === 'PARTNER') {
           const compName = document.getElementById('auth-partner-company').value || (lastName + ' Luxury Services SARL');
           const phone = document.getElementById('auth-partner-phone').value || '+377 98 98 00 00';
-          const cat = document.getElementById('auth-partner-category').value || 'Supercars, Yachts & Private Drivers';
+          const cat = document.getElementById('auth-partner-category').value || 'Executive Cars & Chauffeur Services';
           const regions = (document.getElementById('auth-partner-regions').value || 'Monaco, Paris, Dubai').split(',').map(r => r.trim());
           const scale = document.getElementById('auth-partner-scale').value || 'Verified Luxury Assets';
           const val = parseFloat(document.getElementById('auth-partner-valuation').value) || 25000000;
