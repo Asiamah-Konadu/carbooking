@@ -1,0 +1,121 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String     @id @default(uuid())
+  email        String     @unique
+  passwordHash String
+  firstName    String
+  lastName     String
+  phoneNumber  String?
+  role         String     @default("CUSTOMER") // "CUSTOMER", "PARTNER", "ADMIN"
+  status       String     @default("APPROVED") // "PENDING", "APPROVED", "REJECTED"
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  bookings     Booking[]
+  listings     Listing[]  // Listings managed by this user
+  reviews      Review[]
+}
+
+model Listing {
+  id            String         @id @default(uuid())
+  title         String
+  description   String
+  serviceType   String         // "HOTEL", "CAR_RENTAL", "PRIVATE_DRIVER", "RESTAURANT"
+  status        String         @default("PENDING") // "PENDING", "APPROVED", "REJECTED"
+  address       String
+  city          String
+  country       String
+  latitude      Float?
+  longitude     Float?
+  coverImage    String
+  images        String         // JSON string array of image URLs
+  rating        Float          @default(0.0)
+  ownerId       String
+  owner         User           @relation(fields: [ownerId], references: [id])
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  // Service-Specific details
+  hotelDetails   HotelDetails?
+  carDetails     CarDetails?
+  diningDetails  DiningDetails?
+  bookings       Booking[]
+  reviews        Review[]
+}
+
+model HotelDetails {
+  id            String   @id @default(uuid())
+  listingId     String   @unique
+  listing       Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  roomType      String   // e.g., Deluxe King, Double Queen
+  amenities     String   // JSON string array of amenities, e.g. ["WiFi", "Pool"]
+  pricePerNight Float
+  capacity      Int      // Max guests per room
+  totalRooms    Int      // Available rooms inventory
+}
+
+model CarDetails {
+  id             String   @id @default(uuid())
+  listingId      String   @unique
+  listing        Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  carType        String   // e.g., Sedan, SUV, Tesla Model Y
+  isRental       Boolean  @default(true) // true = Self-drive rental, false = Private driver
+  driverName     String?  // Only populated if isRental is false
+  driverLicense  String?  // Only populated if isRental is false
+  pricePerDay    Float?   // For rentals
+  pricePerHour   Float?   // For private drivers
+  capacity       Int      // Passengers
+  transmission   String?  // Automatic, Manual
+  fuelType       String?  // Electric, Hybrid, Gas
+}
+
+model DiningDetails {
+  id              String   @id @default(uuid())
+  listingId       String   @unique
+  listing         Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  cuisineType     String   // e.g., Italian, Japanese, Steakhouse
+  averageCost     Float    // Average price for two people
+  availableSlots  String   // JSON string array of slots, e.g. ["12:00", "18:00"]
+  seatingCapacity Int      // Max capacity per slot
+}
+
+model Booking {
+  id              String        @id @default(uuid())
+  customerId      String
+  customer        User          @relation(fields: [customerId], references: [id])
+  listingId       String
+  listing         Listing       @relation(fields: [listingId], references: [id])
+  status          String        @default("PENDING") // "PENDING", "CONFIRMED", "CANCELLED", "COMPLETED"
+  totalPrice      Float
+  
+  // Dynamic details based on service type
+  startDate       DateTime      // Check-in date, Rental pickup, Reservation date
+  endDate         DateTime?     // Check-out date, Rental drop-off (null for Restaurant/Hourly Driver)
+  timeSlot        String?       // Specific time (e.g., "19:00" for Restaurant, "10:00" for Driver booking)
+  guestCount      Int           // Number of guests / passengers
+  specialNotes    String?
+  
+  paymentStatus   String        @default("UNPAID") // "UNPAID", "PAID", "REFUNDED"
+  stripeSessionId String?
+  
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model Review {
+  id         String   @id @default(uuid())
+  listingId  String
+  listing    Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  rating     Int      // 1 to 5 stars
+  comment    String
+  createdAt  DateTime @default(now())
+}
